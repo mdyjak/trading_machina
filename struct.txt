@@ -1,0 +1,70 @@
+pythonProject/
+├── __pycache__/
+├── app/
+│   ├── __pycache__/
+│   │   ├── __init__.cpython-312.pyc
+│   │   └── main.cpython-312.pyc
+│   ├── config/
+│   │   ├── __pycache__/
+│   │   │   ├── __init__.cpython-312.pyc
+│   │   │   └── settings.cpython-312.pyc
+│   │   ├── __init__.py
+│   │   └── settings.py
+│   ├── data/
+│   │   ├── __pycache__/
+│   │   │   ├── __init__.cpython-312.pyc
+│   │   │   ├── data_fetcher.cpython-312.pyc
+│   │   │   └── exchange_manager.cpython-312.pyc
+│   │   ├── __init__.py
+│   │   ├── data_fetcher.py
+│   │   └── exchange_manager.py
+│   ├── gui/
+│   │   ├── __pycache__/
+│   │   │   ├── __init__.cpython-312.pyc
+│   │   │   ├── chart_widget.cpython-312.pyc
+│   │   │   ├── collapsible_panel.cpython-312.pyc
+│   │   │   ├── control_panel.cpython-312.pyc
+│   │   │   ├── info_panel.cpython-312.pyc
+│   │   │   └── main_window.cpython-312.pyc
+│   │   ├── chart/
+│   │   │   ├── __pycache__/
+│   │   │   │   ├── __init__.cpython-312.pyc
+│   │   │   │   ├── base.cpython-312.pyc
+│   │   │   │   ├── events.cpython-312.pyc
+│   │   │   │   └── plotters.cpython-312.pyc
+│   │   │   ├── __init__.py
+│   │   │   ├── base.py
+│   │   │   ├── events.py
+│   │   │   └── plotters.py
+│   │   ├── __init__.py
+│   │   ├── chart_widget.py
+│   │   ├── collapsible_panel.py
+│   │   ├── control_panel.py
+│   │   ├── info_panel.py
+│   │   ├── main_window.py
+│   │   └── simple_chart_widget.py
+│   ├── __init__.py
+│   └── main.py
+├── indicators/
+│   ├── __pycache__/
+│   │   ├── __init__.cpython-312.pyc
+│   │   ├── base.cpython-312.pyc
+│   │   ├── cci_arrows.cpython-312.pyc
+│   │   ├── manager.cpython-312.pyc
+│   │   └── tma.cpython-312.pyc
+│   ├── __init__.py
+│   ├── base.py
+│   ├── cci_arrows.py
+│   ├── manager.py
+│   └── tma.py
+├── logs/
+│   └── trading_platform.log
+├── utils/
+│   ├── __pycache__/
+│   │   ├── __init__.cpython-312.pyc
+│   │   └── helpers.cpython-312.pyc
+│   ├── __init__.py
+│   └── helpers.py
+├── __init__.py
+├── run.py
+└── struct.txt
