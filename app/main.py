@@ -11,6 +11,8 @@ import sys
 from pathlib import Path
 from typing import Optional
 
+from indicators import create_ema_crossover_indicator, EMACrossoverIndicator
+
 # Dodaj ścieżkę do indicators i utils
 project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
@@ -22,6 +24,7 @@ from .config.settings import AppSettings
 from indicators.manager import IndicatorManager
 from indicators.tma import TMAIndicator, create_tma_indicator
 from indicators.cci_arrows import CCIArrowsIndicator, create_cci_arrows_indicator
+from indicators.smi_arrows import SMIArrowsIndicator, create_smi_arrows_indicator
 
 logger = logging.getLogger(__name__)
 
@@ -62,6 +65,8 @@ class TradingPlatform:
         # Zarejestruj klasy wskaźników
         self.indicator_manager.register_indicator_class('TMA', TMAIndicator)
         self.indicator_manager.register_indicator_class('CCI_Arrows', CCIArrowsIndicator)
+        self.indicator_manager.register_indicator_class('EMA_Crossover', EMACrossoverIndicator)
+        self.indicator_manager.register_indicator_class('SMI_Arrows', SMIArrowsIndicator)
 
         # Dodaj domyślny TMA
         self.indicator_manager.add_indicator(
@@ -86,7 +91,34 @@ class TradingPlatform:
             min_bars_between_signals=3
         )
 
-        logger.info("Indicators setup completed - TMA + CCI Arrows")
+        # Dodaj domyślny EMA Crossover
+        self.indicator_manager.add_indicator(
+            name='EMA_Crossover_Main',
+            indicator_class_name='EMA_Crossover',
+            fast_ema_period=12,
+            slow_ema_period=26,
+            signal_ema_period=9,
+            use_signal_line=True,
+            crossover_confirmation=2,
+            price_type='close'
+        )
+
+        # Dodaj domyślny SMI Arrows
+        self.indicator_manager.add_indicator(
+            name='SMI_Arrows_Main',
+            indicator_class_name='SMI_Arrows',
+            smi_period=10,
+            first_smoothing=3,
+            second_smoothing=3,
+            signal_smoothing=3,
+            overbought_level=40,
+            oversold_level=-40,
+            arrow_sensitivity='medium',
+            use_divergence=True,
+            min_bars_between_signals=3
+        )
+
+        logger.info("Indicators setup completed - TMA + CCI Arrows + EMA Crossover + SMI Arrows")  # ✅ ZMIEŃ
 
     def _connect_default_exchange(self):
         """Łączy z domyślną giełdą"""
@@ -188,6 +220,34 @@ class TradingPlatform:
                 name='CCI_Arrows_Main',
                 indicator_class_name='CCI_Arrows',
                 **new_cci.get_settings()
+            )
+
+        # Aktualizuj ustawienia EMA Crossover dla nowego timeframe
+        ema_indicator = self.indicator_manager.get_indicator('EMA_Crossover_Main')
+        if ema_indicator:
+            # Stwórz nową konfigurację EMA dla timeframe
+            new_ema = create_ema_crossover_indicator(timeframe, 'balanced', 'EMA_Crossover_Main')
+
+            # Usuń stary i dodaj nowy
+            self.indicator_manager.remove_indicator('EMA_Crossover_Main')
+            self.indicator_manager.add_indicator(
+                name='EMA_Crossover_Main',
+                indicator_class_name='EMA_Crossover',
+                **new_ema.get_settings()
+            )
+
+        # Aktualizuj ustawienia SMI Arrows dla nowego timeframe
+        smi_indicator = self.indicator_manager.get_indicator('SMI_Arrows_Main')
+        if smi_indicator:
+            # Stwórz nową konfigurację SMI dla timeframe
+            new_smi = create_smi_arrows_indicator(timeframe, 'medium', 'SMI_Arrows_Main')
+
+            # Usuń stary i dodaj nowy
+            self.indicator_manager.remove_indicator('SMI_Arrows_Main')
+            self.indicator_manager.add_indicator(
+                name='SMI_Arrows_Main',
+                indicator_class_name='SMI_Arrows',
+                **new_smi.get_settings()
             )
 
         self.refresh_data()

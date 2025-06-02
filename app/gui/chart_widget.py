@@ -16,6 +16,7 @@ import logging
 from ..config.settings import COLORS
 from .collapsible_panel import CollapsibleLegend
 from .chart.base import ChartDataManager, ChartLayoutManager, ChartTooltipBuilder, ChartFormatter, ChartTitleBuilder
+from .chart.legends import ChartLegendManager
 from .chart.plotters import CandlestickPlotter, VolumePlotter, TMAPlotter, CCIPlotter, GridPlotter
 from .chart.events import ChartEventHandler, ChartZoomHandler, ChartExportHandler, ChartInteractionHandler
 
@@ -80,6 +81,9 @@ class ModularChartWidget:
         self._setup_chart()
 
         logger.info("ModularChartWidget initialized")
+
+        # Enhanced legend manager
+        self.legend_manager = ChartLegendManager(COLORS)
 
     def _create_widget(self):
         """Tworzy główny widget z toolbar"""
@@ -276,6 +280,10 @@ class ModularChartWidget:
         # Add title
         self.title_builder.build_title(self.axes['price'], indicators, self.app)
 
+        # Setup legends
+        if self.display_config['show_legend']:
+            self._setup_enhanced_legends(indicators)
+
     def _setup_legend(self, legend_key: str, ax, legend_items: List):
         """Konfiguruje legendę dla osi"""
         if legend_key not in self.legends:
@@ -289,6 +297,35 @@ class ModularChartWidget:
         # Update legend visibility
         if self.display_config['show_legend']:
             self.legends[legend_key]._update_legend()
+
+    def _setup_enhanced_legends(self, indicators: Dict):
+        """Konfiguruje enhanced legendy"""
+        try:
+            # Price chart legend
+            if self.axes['price']:
+                self.legend_manager.setup_price_legend(
+                    self.axes['price'],
+                    indicators,
+                    self.display_config['show_legend']
+                )
+
+            # Volume legend
+            if self.axes['volume'] and self.display_config['show_volume']:
+                self.legend_manager.setup_volume_legend(
+                    self.axes['volume'],
+                    self.display_config['show_legend']
+                )
+
+            # CCI legend
+            if self.axes['cci'] and self.display_config['show_cci']:
+                self.legend_manager.setup_cci_legend(
+                    self.axes['cci'],
+                    indicators,
+                    self.display_config['show_legend']
+                )
+
+        except Exception as e:
+            logger.error(f"Error setting up enhanced legends: {e}")
 
     # === ZOOM CONTROLS ===
     def zoom_in(self):
@@ -431,9 +468,13 @@ class ModularChartWidget:
             self.app.main_window.show_status(message)
 
     def toggle_legend(self):
-        """Public method dla toggle legend (używane w event handlerach)"""
+        """Public method dla toggle legend"""
         self.legend_var.set(not self.legend_var.get())
         self._on_legend_toggle()
+
+        # Również toggle w legend manager
+        self.legend_manager.toggle_all_legends()
+        self.canvas.draw_idle()
 
     def toggle_grid(self):
         """Public method dla toggle grid"""

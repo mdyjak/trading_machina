@@ -34,7 +34,7 @@ class EnhancedMainWindow:
 
         # Layout state
         self.layout_config = {
-            'sidebar_width': 350,
+            'sidebar_width': 400,
             'sidebar_collapsed': False,
             'info_panel_height': 80,
             'show_quick_actions': True

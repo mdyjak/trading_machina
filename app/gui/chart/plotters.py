@@ -548,3 +548,281 @@ class FillPlotter:
             fill = ax.bar(x, vol, color=color, alpha=alpha, width=0.8)
             fills.append(fill)
         return fills
+
+class EMAPlotter:
+    """
+    Rysowanie wskaźnika EMA Crossover
+    """
+
+    def __init__(self, colors_config: Dict):
+        self.colors = colors_config
+        self.legend_items = []
+
+    def plot(self, ax, ema_result: Dict, df_len: int) -> List[Tuple]:
+        """Rysuje EMA Crossover na osi"""
+        if ax is None:
+            return []
+
+        try:
+            valid_from = ema_result.get('valid_from', 26)
+            if valid_from >= df_len:
+                return []
+
+            x_data = list(range(valid_from, df_len))
+            if not x_data:
+                return []
+
+            self.legend_items = []
+
+            # Linie EMA
+            self._plot_ema_lines(ax, ema_result, x_data)
+
+            # Obszary trendu
+            self._plot_trend_areas(ax, ema_result, x_data)
+
+            # Sygnały crossover
+            self._plot_crossover_signals(ax, ema_result, x_data)
+
+            return self.legend_items
+
+        except Exception as e:
+            logger.error(f"Error plotting EMA: {e}")
+            return []
+
+    def _plot_ema_lines(self, ax, ema_result: Dict, x_data: List[int]):
+        """Rysuje linie EMA"""
+        fast_ema = ema_result['fast_ema']
+        slow_ema = ema_result['slow_ema']
+        signal_ema = ema_result['signal_ema']
+
+        # Fast EMA
+        fast_y = [fast_ema[i] for i in x_data if i < len(fast_ema)]
+        if len(fast_y) == len(x_data):
+            fast_line = ax.plot(x_data, fast_y, color='#FFD700',
+                                linewidth=2.5, alpha=0.9, zorder=3)[0]
+            self.legend_items.append((fast_line, 'Fast EMA'))
+
+        # Slow EMA
+        slow_y = [slow_ema[i] for i in x_data if i < len(slow_ema)]
+        if len(slow_y) == len(x_data):
+            slow_line = ax.plot(x_data, slow_y, color='#87CEEB',
+                                linewidth=2.5, alpha=0.9, zorder=3)[0]
+            self.legend_items.append((slow_line, 'Slow EMA'))
+
+        # Signal EMA (jeśli używana)
+        if np.any(signal_ema > 0):
+            signal_y = [signal_ema[i] for i in x_data if i < len(signal_ema)]
+            if len(signal_y) == len(x_data):
+                signal_line = ax.plot(x_data, signal_y, color='#DDA0DD',
+                                      linestyle='--', linewidth=2, alpha=0.8, zorder=2)[0]
+                self.legend_items.append((signal_line, 'Signal EMA'))
+
+    def _plot_trend_areas(self, ax, ema_result: Dict, x_data: List[int]):
+        """Rysuje obszary trendu"""
+        bullish_areas = ema_result.get('bullish_areas', [])
+        bearish_areas = ema_result.get('bearish_areas', [])
+
+        # Bullish areas
+        for start, end in bullish_areas:
+            if start < len(x_data) and end < len(x_data):
+                ax.axvspan(start, end, alpha=0.1, color='#00FF88', zorder=1)
+
+        # Bearish areas
+        for start, end in bearish_areas:
+            if start < len(x_data) and end < len(x_data):
+                ax.axvspan(start, end, alpha=0.1, color='#FF6B6B', zorder=1)
+
+    def _plot_crossover_signals(self, ax, ema_result: Dict, x_data: List[int]):
+        """Rysuje sygnały crossover"""
+        buy_signals = []
+        sell_signals = []
+
+        for i in x_data:
+            if i < len(ema_result['buy_signals']) and ema_result['buy_signals'][i] > 0:
+                buy_signals.append((i, ema_result['buy_signals'][i]))
+
+            if i < len(ema_result['sell_signals']) and ema_result['sell_signals'][i] > 0:
+                sell_signals.append((i, ema_result['sell_signals'][i]))
+
+        # Buy signals
+        if buy_signals:
+            x_buy, y_buy = zip(*buy_signals)
+            buy_scatter = ax.scatter(x_buy, y_buy, marker='^',
+                                     color='#00FF88', s=150,
+                                     alpha=0.9, zorder=5, edgecolors='white',
+                                     linewidth=1.5)
+            self.legend_items.append((buy_scatter, 'EMA Buy'))
+
+        # Sell signals
+        if sell_signals:
+            x_sell, y_sell = zip(*sell_signals)
+            sell_scatter = ax.scatter(x_sell, y_sell, marker='v',
+                                      color='#FF4444', s=150,
+                                      alpha=0.9, zorder=5, edgecolors='white',
+                                      linewidth=1.5)
+            self.legend_items.append((sell_scatter, 'EMA Sell'))
+
+class SMIPlotter:
+    """
+    Rysowanie wskaźnika SMI Arrows
+    """
+
+    def __init__(self, colors_config: Dict):
+        self.colors = colors_config
+        self.legend_items = []
+
+    def plot(self, ax, smi_result: Dict, df_len: int) -> List[Tuple]:
+        """Rysuje SMI na osi"""
+        if ax is None:
+            return []
+
+        try:
+            valid_from = smi_result.get('valid_from', 20)
+            if valid_from >= df_len:
+                return []
+
+            ax.set_facecolor(self.colors['bg_secondary'])
+            ax.tick_params(colors=self.colors['text_primary'], labelsize=8)
+
+            x_data = list(range(valid_from, df_len))
+            if not x_data:
+                return []
+
+            self.legend_items = []
+
+            # Główna linia SMI
+            self._plot_smi_line(ax, smi_result, x_data)
+
+            # Signal line
+            self._plot_signal_line(ax, smi_result, x_data)
+
+            # Poziomy referencyjne
+            self._plot_smi_levels(ax, smi_result)
+
+            # Sygnały
+            self._plot_smi_signals(ax, smi_result, x_data)
+
+            # Formatowanie osi
+            self._format_smi_axis(ax, smi_result, x_data, df_len)
+
+            return self.legend_items
+
+        except Exception as e:
+            logger.error(f"Error plotting SMI: {e}")
+            return []
+
+    def _plot_smi_line(self, ax, smi_result: Dict, x_data: List[int]):
+        """Rysuje główną linię SMI"""
+        smi_values = smi_result['smi']
+        smi_line = [smi_values[i] for i in x_data if i < len(smi_values)]
+
+        if len(smi_line) == len(x_data):
+            line = ax.plot(x_data, smi_line, color='#FF6B35',  # Orange-Red
+                           linewidth=2.8, alpha=0.95, zorder=3)[0]
+            self.legend_items.append((line, 'SMI'))
+
+    def _plot_signal_line(self, ax, smi_result: Dict, x_data: List[int]):
+        """Rysuje signal line SMI"""
+        signal_line = smi_result['signal_line']
+        signal_data = [signal_line[i] for i in x_data if i < len(signal_line)]
+
+        if len(signal_data) == len(x_data):
+            line = ax.plot(x_data, signal_data, color='#9B59B6',  # Purple
+                           linestyle='--', linewidth=2, alpha=0.8, zorder=2)[0]
+            self.legend_items.append((line, 'SMI Signal'))
+
+    def _plot_smi_levels(self, ax, smi_result: Dict):
+        """Rysuje poziomy referencyjne SMI"""
+        levels = smi_result.get('levels', {})
+        overbought = levels.get('overbought', 40)
+        oversold = levels.get('oversold', -40)
+
+        ob_line = ax.axhline(y=overbought, color='#E67E22', linestyle=':',  # Dark Orange
+                             alpha=0.8, linewidth=1.8, zorder=2)
+        os_line = ax.axhline(y=oversold, color='#16A085', linestyle=':',  # Teal
+                             alpha=0.8, linewidth=1.8, zorder=2)
+        zero_line = ax.axhline(y=0, color='#7F8C8D', linestyle='-',  # Gray
+                               alpha=0.5, linewidth=1.2)
+
+        self.legend_items.extend([
+            (ob_line, f'Overbought ({overbought})'),
+            (os_line, f'Oversold ({oversold})')
+        ])
+
+    def _plot_smi_signals(self, ax, smi_result: Dict, x_data: List[int]):
+        """Rysuje sygnały SMI"""
+        smi_values = smi_result['smi']
+
+        buy_signals = []
+        sell_signals = []
+        bull_div = []
+        bear_div = []
+
+        for i in x_data:
+            if i >= len(smi_result['buy_arrows']):
+                continue
+
+            smi_value = smi_values[i] if i < len(smi_values) else 0
+
+            if smi_result['buy_arrows'][i] > 0:
+                buy_signals.append((i, smi_value))
+
+            if smi_result['sell_arrows'][i] > 0:
+                sell_signals.append((i, smi_value))
+
+            if smi_result['bullish_divergence'][i] > 0:
+                bull_div.append((i, smi_value))
+
+            if smi_result['bearish_divergence'][i] > 0:
+                bear_div.append((i, smi_value))
+
+        # Rysuj sygnały grupowo z nowymi symbolami
+        if buy_signals:
+            x_buy, y_buy = zip(*buy_signals)
+            buy_scatter = ax.scatter(x_buy, y_buy, marker='D',  # Diamond
+                                     color='#27AE60', s=140,  # Emerald Green
+                                     alpha=0.95, zorder=5, edgecolors='white',
+                                     linewidth=1.8)
+            self.legend_items.append((buy_scatter, 'SMI Buy'))
+
+        if sell_signals:
+            x_sell, y_sell = zip(*sell_signals)
+            sell_scatter = ax.scatter(x_sell, y_sell, marker='s',  # Square
+                                      color='#C0392B', s=140,  # Dark Red
+                                      alpha=0.95, zorder=5, edgecolors='white',
+                                      linewidth=1.8)
+            self.legend_items.append((sell_scatter, 'SMI Sell'))
+
+        if bull_div:
+            x_bull, y_bull = zip(*bull_div)
+            bull_scatter = ax.scatter(x_bull, y_bull, marker='P',  # Plus filled
+                                      color='#3498DB', s=120,  # Blue
+                                      alpha=0.85, zorder=4)
+            self.legend_items.append((bull_scatter, 'Bullish Div'))
+
+        if bear_div:
+            x_bear, y_bear = zip(*bear_div)
+            bear_scatter = ax.scatter(x_bear, y_bear, marker='X',  # X filled
+                                      color='#E74C3C', s=120,  # Red
+                                      alpha=0.85, zorder=4)
+            self.legend_items.append((bear_scatter, 'Bearish Div'))
+
+    def _format_smi_axis(self, ax, smi_result: Dict, x_data: List[int], df_len: int):
+        """Formatuje oś SMI"""
+        ax.set_xlim(-1, df_len)
+
+        # Inteligentne skalowanie Y
+        smi_values = smi_result['smi']
+        smi_line = [smi_values[i] for i in x_data if i < len(smi_values)]
+
+        if smi_line:
+            levels = smi_result.get('levels', {})
+            overbought = levels.get('overbought', 40)
+            oversold = levels.get('oversold', -40)
+
+            smi_min = min(smi_line)
+            smi_max = max(smi_line)
+            margin = max(15, (smi_max - smi_min) * 0.1)
+
+            ax.set_ylim(min(smi_min - margin, oversold - 20),
+                        max(smi_max + margin, overbought + 20))

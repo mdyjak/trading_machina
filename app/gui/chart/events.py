@@ -93,11 +93,18 @@ class ChartEventHandler:
                 's': chart_controller.save_chart,
                 '+': chart_controller.zoom_in,
                 '-': chart_controller.zoom_out,
+                'ctrl+l': lambda: chart_controller.legend_manager.toggle_all_legends(),
                 'escape': lambda: self._cancel_operations()
             }
 
-            if event.key in key_handlers:
-                key_handlers[event.key]()
+            # Handle Ctrl combinations
+            if hasattr(event, 'key') and 'ctrl+' in event.key:
+                key = event.key
+            else:
+                key = event.key
+
+            if key in key_handlers:
+                key_handlers[key]()
 
         except Exception as e:
             logger.error(f"Error in key press handler: {e}")

@@ -5,7 +5,7 @@ Składany panel - widget z możliwością zwijania/rozwijania
 
 import tkinter as tk
 from tkinter import ttk
-from typing import Optional, Callable
+from typing import Optional, Callable, List, Tuple
 import logging
 
 logger = logging.getLogger(__name__)
@@ -207,10 +207,6 @@ class TabbedCollapsiblePanel:
 
 
 class CollapsibleLegend:
-    """
-    Składana legenda dla wykresów
-    """
-
     def __init__(self, ax, title: str = "Legenda", position: str = 'upper right'):
         self.ax = ax
         self.title = title
@@ -218,40 +214,90 @@ class CollapsibleLegend:
         self.expanded = True
         self.legend_items = []
         self.legend_obj = None
+        self.font_size = 8
 
-    def add_item(self, handle, label: str):
-        """Dodaje element do legendy"""
-        self.legend_items.append((handle, label))
+    def clear_and_rebuild(self, items: List):
+        """Czyści i odbudowuje legendę"""
+        self.legend_items = []
+        self.add_multiple_items(items)
+
+    def add_multiple_items(self, items: List):
+        """Dodaje wiele elementów naraz"""
+        for item in items:
+            if len(item) >= 2:
+                handle, label = item[0], item[1]
+                color = item[2] if len(item) > 2 else '#FFFFFF'
+                # Nie sprawdzaj duplikatów - po prostu dodaj
+                self.legend_items.append((handle, label, color))
+
+        # Zaktualizuj legendę po dodaniu wszystkich
         self._update_legend()
+
+    def _update_legend(self):
+        """Aktualizuje legendę z enhanced styling"""
+        # Usuń starą legendę
+        if self.legend_obj:
+            try:
+                self.legend_obj.remove()
+            except:
+                pass
+            self.legend_obj = None
+
+        # Twórz nową tylko jeśli expanded i są elementy
+        if self.expanded and self.legend_items:
+            try:
+                handles, labels = [], []
+
+                for item in self.legend_items:
+                    # Twórz fake handle dla każdego elementu
+                    import matplotlib.lines as mlines
+                    color = item[2] if len(item) > 2 and item[2] else '#FFFFFF'
+
+                    # Różne markery dla różnych typów
+                    if 'Signal' in item[1]:
+                        marker = '^' if 'Buy' in item[1] else 'v'
+                        handle = mlines.Line2D([], [], color=color, marker=marker,
+                                               markersize=6, linestyle='None')
+                    elif 'EMA' in item[1] or 'TMA' in item[1]:
+                        handle = mlines.Line2D([], [], color=color, linewidth=2)
+                    else:
+                        handle = mlines.Line2D([], [], color=color, marker='o',
+                                               markersize=4, linestyle='None')
+
+                    handles.append(handle)
+                    labels.append(item[1])
+
+                # Stwórz legendę z lepszymi ustawieniami
+                self.legend_obj = self.ax.legend(
+                    handles, labels,
+                    loc=self.position,
+                    fontsize=self.font_size,
+                    framealpha=0.85,
+                    fancybox=True,
+                    shadow=False,
+                    borderpad=0.5,
+                    columnspacing=1.0,
+                    handlelength=2.0,
+                    handletextpad=0.8,
+                    frameon=True,
+                    facecolor='#2b2b2b',
+                    edgecolor='#404040',
+                    ncol=1
+                )
+
+                # ✅ Ustaw z-order żeby legenda była na wierzchu
+                if self.legend_obj:
+                    self.legend_obj.set_zorder(1000)
+
+            except Exception as e:
+                import logging
+                logging.error(f"Error creating legend: {e}")
+                self.legend_obj = None
 
     def toggle(self):
         """Przełącza widoczność legendy"""
         self.expanded = not self.expanded
         self._update_legend()
-
-    def _update_legend(self):
-        """Aktualizuje legendę"""
-        if self.legend_obj:
-            self.legend_obj.remove()
-
-        if self.expanded and self.legend_items:
-            handles, labels = zip(*self.legend_items)
-            self.legend_obj = self.ax.legend(
-                handles, labels,
-                loc=self.position,
-                framealpha=0.8,
-                fancybox=True,
-                shadow=True
-            )
-        else:
-            self.legend_obj = None
-
-    def clear(self):
-        """Czyści legendę"""
-        self.legend_items = []
-        if self.legend_obj:
-            self.legend_obj.remove()
-            self.legend_obj = None
 
 
 class ExpandableSection:

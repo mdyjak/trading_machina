@@ -1,12 +1,6 @@
 # 📁 app/gui/chart/__init__.py
 """
 Chart Components Package
-
-Modularny system wykresów:
-- Base components (data, layout, tooltip, formatter)
-- Plotters (candlestick, volume, indicators)
-- Event handlers (zoom, export, interaction)
-- Main widget (controller)
 """
 
 from .base import (
@@ -17,11 +11,15 @@ from .base import (
     ChartTitleBuilder
 )
 
+from .legends import ChartLegendManager
+
 from .plotters import (
     CandlestickPlotter,
     VolumePlotter,
     TMAPlotter,
     CCIPlotter,
+    EMAPlotter,
+    SMIPlotter,
     SignalPlotter,
     GridPlotter,
     LevelPlotter,
@@ -42,12 +40,15 @@ __all__ = [
     'ChartTooltipBuilder',
     'ChartFormatter',
     'ChartTitleBuilder',
+    'ChartLegendManager',
 
     # Plotters
     'CandlestickPlotter',
     'VolumePlotter',
     'TMAPlotter',
     'CCIPlotter',
+    'EMAPlotter',
+    'SMIPlotter',
     'SignalPlotter',
     'GridPlotter',
     'LevelPlotter',

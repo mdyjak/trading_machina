@@ -25,16 +25,19 @@ pythonProject/
 │   │   │   ├── collapsible_panel.cpython-312.pyc
 │   │   │   ├── control_panel.cpython-312.pyc
 │   │   │   ├── info_panel.cpython-312.pyc
-│   │   │   └── main_window.cpython-312.pyc
+│   │   │   ├── main_window.cpython-312.pyc
+│   │   │   └── simple_chart_widget.cpython-312.pyc
 │   │   ├── chart/
 │   │   │   ├── __pycache__/
 │   │   │   │   ├── __init__.cpython-312.pyc
 │   │   │   │   ├── base.cpython-312.pyc
 │   │   │   │   ├── events.cpython-312.pyc
+│   │   │   │   ├── legends.cpython-312.pyc
 │   │   │   │   └── plotters.cpython-312.pyc
 │   │   │   ├── __init__.py
 │   │   │   ├── base.py
 │   │   │   ├── events.py
+│   │   │   ├── legends.py
 │   │   │   └── plotters.py
 │   │   ├── __init__.py
 │   │   ├── chart_widget.py
@@ -49,13 +52,21 @@ pythonProject/
 │   ├── __pycache__/
 │   │   ├── __init__.cpython-312.pyc
 │   │   ├── base.cpython-312.pyc
+│   │   ├── bollinger_professional.cpython-312.pyc
 │   │   ├── cci_arrows.cpython-312.pyc
+│   │   ├── ema_crossover.cpython-312.pyc
 │   │   ├── manager.cpython-312.pyc
+│   │   ├── rsi_professional.cpython-312.pyc
+│   │   ├── smi_arrows.cpython-312.pyc
 │   │   └── tma.cpython-312.pyc
 │   ├── __init__.py
 │   ├── base.py
+│   ├── bollinger_professional.py
 │   ├── cci_arrows.py
+│   ├── ema_crossover.py
 │   ├── manager.py
+│   ├── rsi_professional.py
+│   ├── smi_arrows.py
 │   └── tma.py
 ├── logs/
 │   └── trading_platform.log

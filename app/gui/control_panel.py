@@ -48,6 +48,22 @@ class ControlPanel:
         self.cci_oversold_var = tk.StringVar(value='-100')
         self.cci_sensitivity_var = tk.StringVar(value='medium')
 
+        # Zmienne GUI - EMA
+        self.ema_enabled_var = tk.BooleanVar(value=True)
+        self.ema_fast_var = tk.StringVar(value='12')
+        self.ema_slow_var = tk.StringVar(value='26')
+        self.ema_signal_var = tk.StringVar(value='9')
+        self.ema_use_signal_var = tk.BooleanVar(value=True)
+
+        # Zmienne GUI - SMI
+        self.smi_enabled_var = tk.BooleanVar(value=True)
+        self.smi_period_var = tk.StringVar(value='10')
+        self.smi_smooth1_var = tk.StringVar(value='3')
+        self.smi_smooth2_var = tk.StringVar(value='3')
+        self.smi_overbought_var = tk.StringVar(value='40')
+        self.smi_oversold_var = tk.StringVar(value='-40')
+        self.smi_sensitivity_var = tk.StringVar(value='medium')
+
         # Panele składane
         self.panels = {}
 
@@ -92,55 +108,64 @@ class ControlPanel:
 
     def _create_basic_controls(self, parent):
         """Tworzy podstawowe kontrolki"""
-        # Rząd 1: Giełda, Symbol, Timeframe
+        # Rząd 1: Giełda, Symbol
         row1 = ttk.Frame(parent)
         row1.pack(fill=tk.X, pady=2)
 
         # Giełda
         ttk.Label(row1, text="Giełda:", font=('Arial', 9, 'bold')).pack(side=tk.LEFT, padx=5)
         exchange_combo = ttk.Combobox(row1, textvariable=self.exchange_var,
-                                      values=list(EXCHANGES.keys()), width=10, state='readonly')
+                                      values=list(EXCHANGES.keys()), width=12, state='readonly')
         exchange_combo.pack(side=tk.LEFT, padx=5)
         exchange_combo.bind('<<ComboboxSelected>>', self._on_exchange_change)
 
         # Symbol
-        ttk.Label(row1, text="Symbol:", font=('Arial', 9, 'bold')).pack(side=tk.LEFT, padx=(15, 5))
+        ttk.Label(row1, text="Symbol:", font=('Arial', 9, 'bold')).pack(side=tk.LEFT, padx=(20, 5))
         symbol_combo = ttk.Combobox(row1, textvariable=self.symbol_var,
-                                    values=POPULAR_SYMBOLS, width=12)
+                                    values=POPULAR_SYMBOLS, width=15)
         symbol_combo.pack(side=tk.LEFT, padx=5)
         symbol_combo.bind('<<ComboboxSelected>>', self._on_symbol_change)
         symbol_combo.bind('<Return>', self._on_symbol_change)
 
-        # Timeframe
-        ttk.Label(row1, text="TF:", font=('Arial', 9, 'bold')).pack(side=tk.LEFT, padx=(15, 5))
-        timeframe_combo = ttk.Combobox(row1, textvariable=self.timeframe_var,
-                                       values=list(TIMEFRAMES.keys()), width=6, state='readonly')
+        # Timeframe (osobno)
+        row2 = ttk.Frame(parent)
+        row2.pack(fill=tk.X, pady=(8, 2))  # więcej odstępu od góry
+
+        # Timeframe - wyśrodkowany lub z lewej
+        ttk.Label(row2, text="Timeframe:", font=('Arial', 9, 'bold')).pack(side=tk.LEFT, padx=5)
+        timeframe_combo = ttk.Combobox(row2, textvariable=self.timeframe_var,
+                                       values=list(TIMEFRAMES.keys()), width=8, state='readonly')
         timeframe_combo.pack(side=tk.LEFT, padx=5)
         timeframe_combo.bind('<<ComboboxSelected>>', self._on_timeframe_change)
 
-        # Rząd 2: Parametry i kontrolki
-        row2 = ttk.Frame(parent)
-        row2.pack(fill=tk.X, pady=5)
+        # Separator wizualny (opcjonalny)
+        separator_frame = ttk.Frame(parent)
+        separator_frame.pack(fill=tk.X, pady=5)
+        ttk.Separator(separator_frame, orient='horizontal').pack(fill=tk.X)
+
+        # Parametry i kontrolki (poprzedni row2)
+        row3 = ttk.Frame(parent)
+        row3.pack(fill=tk.X, pady=5)
 
         # Limit świec
-        ttk.Label(row2, text="Świece:", font=('Arial', 8)).pack(side=tk.LEFT, padx=5)
-        limit_spin = ttk.Spinbox(row2, from_=50, to=1000, increment=50,
+        ttk.Label(row3, text="Świece:", font=('Arial', 8)).pack(side=tk.LEFT, padx=5)
+        limit_spin = ttk.Spinbox(row3, from_=50, to=1000, increment=50,
                                  textvariable=self.limit_var, width=6)
         limit_spin.pack(side=tk.LEFT, padx=5)
 
         # Interwał refresh
-        ttk.Label(row2, text="Refresh:", font=('Arial', 8)).pack(side=tk.LEFT, padx=(10, 5))
-        interval_spin = ttk.Spinbox(row2, from_=1, to=60, increment=1,
+        ttk.Label(row3, text="Refresh:", font=('Arial', 8)).pack(side=tk.LEFT, padx=(15, 5))
+        interval_spin = ttk.Spinbox(row3, from_=1, to=60, increment=1,
                                     textvariable=self.interval_var, width=4)
         interval_spin.pack(side=tk.LEFT, padx=5)
-        ttk.Label(row2, text="s", font=('Arial', 8)).pack(side=tk.LEFT)
+        ttk.Label(row3, text="s", font=('Arial', 8)).pack(side=tk.LEFT)
 
         # Auto-refresh
-        ttk.Checkbutton(row2, text="Auto", variable=self.auto_refresh_var,
-                        command=self._on_auto_refresh_toggle).pack(side=tk.LEFT, padx=15)
+        ttk.Checkbutton(row3, text="Auto", variable=self.auto_refresh_var,
+                        command=self._on_auto_refresh_toggle).pack(side=tk.LEFT, padx=10)
 
         # Refresh button
-        ttk.Button(row2, text="🔄", command=self._on_refresh, width=4).pack(side=tk.LEFT, padx=5)
+        ttk.Button(row3, text="🔄", command=self._on_refresh, width=4).pack(side=tk.LEFT, padx=4)
 
     def _create_view_controls(self, parent):
         """Tworzy kontrolki widoku"""
@@ -181,6 +206,14 @@ class ControlPanel:
         # === CCI SEKCJA ===
         cci_section = ExpandableSection(parent, "📊 CCI Arrows (Commodity Channel Index)", True)
         self._create_cci_controls(cci_section.get_content_frame())
+
+        # === EMA SEKCJA ===
+        ema_section = ExpandableSection(parent, "📉 EMA Crossover (Exponential Moving Average)", True)
+        self._create_ema_controls(ema_section.get_content_frame())
+
+        # === SMI SEKCJA ===
+        smi_section = ExpandableSection(parent, "📊 SMI Arrows (Stochastic Momentum Index)", True)
+        self._create_smi_controls(smi_section.get_content_frame())
 
         # === PLACEHOLDER DLA KOLEJNYCH WSKAŹNIKÓW ===
         placeholder_section = ExpandableSection(parent, "⚡ Kolejne wskaźniki (wkrótce...)", False)
@@ -282,6 +315,125 @@ class ControlPanel:
                    command=lambda: self._load_cci_preset('standard')).pack(side=tk.LEFT, padx=2)
         ttk.Button(presets_row, text="Smooth",
                    command=lambda: self._load_cci_preset('smooth')).pack(side=tk.LEFT, padx=2)
+
+    def _create_ema_controls(self, parent):
+        """Tworzy kontrolki EMA Crossover"""
+        # Włączenie EMA
+        control_row = ttk.Frame(parent)
+        control_row.pack(fill=tk.X, pady=2)
+
+        ttk.Checkbutton(control_row, text="Włącz EMA Crossover", variable=self.ema_enabled_var,
+                        command=self._on_ema_toggle).pack(side=tk.LEFT)
+
+        # Parametry EMA - rząd 1
+        params_row1 = ttk.Frame(parent)
+        params_row1.pack(fill=tk.X, pady=2)
+
+        # Fast EMA
+        ttk.Label(params_row1, text="Fast:", font=('Arial', 8)).pack(side=tk.LEFT, padx=5)
+        fast_spin = ttk.Spinbox(params_row1, from_=5, to=50, textvariable=self.ema_fast_var,
+                                width=4, command=self._on_ema_settings_change)
+        fast_spin.pack(side=tk.LEFT, padx=2)
+
+        # Slow EMA
+        ttk.Label(params_row1, text="Slow:", font=('Arial', 8)).pack(side=tk.LEFT, padx=(10, 5))
+        slow_spin = ttk.Spinbox(params_row1, from_=10, to=100, textvariable=self.ema_slow_var,
+                                width=4, command=self._on_ema_settings_change)
+        slow_spin.pack(side=tk.LEFT, padx=2)
+
+        # Signal EMA
+        ttk.Label(params_row1, text="Signal:", font=('Arial', 8)).pack(side=tk.LEFT, padx=(10, 5))
+        signal_spin = ttk.Spinbox(params_row1, from_=3, to=30, textvariable=self.ema_signal_var,
+                                  width=4, command=self._on_ema_settings_change)
+        signal_spin.pack(side=tk.LEFT, padx=2)
+
+        # Parametry EMA - rząd 2
+        params_row2 = ttk.Frame(parent)
+        params_row2.pack(fill=tk.X, pady=2)
+
+        # Use Signal Line
+        ttk.Checkbutton(params_row2, text="Użyj Signal Line", variable=self.ema_use_signal_var,
+                        command=self._on_ema_settings_change).pack(side=tk.LEFT, padx=5)
+
+        # Presety EMA
+        presets_row = ttk.Frame(parent)
+        presets_row.pack(fill=tk.X, pady=2)
+
+        ttk.Label(presets_row, text="Presety:", font=('Arial', 8)).pack(side=tk.LEFT, padx=5)
+        ttk.Button(presets_row, text="Fast",
+                   command=lambda: self._load_ema_preset('aggressive')).pack(side=tk.LEFT, padx=2)
+        ttk.Button(presets_row, text="Standard",
+                   command=lambda: self._load_ema_preset('balanced')).pack(side=tk.LEFT, padx=2)
+        ttk.Button(presets_row, text="Smooth",
+                   command=lambda: self._load_ema_preset('conservative')).pack(side=tk.LEFT, padx=2)
+
+    def _create_smi_controls(self, parent):
+        """Tworzy kontrolki SMI"""
+        # Włączenie SMI
+        control_row = ttk.Frame(parent)
+        control_row.pack(fill=tk.X, pady=2)
+
+        ttk.Checkbutton(control_row, text="Włącz SMI Arrows", variable=self.smi_enabled_var,
+                        command=self._on_smi_toggle).pack(side=tk.LEFT)
+
+        # Parametry SMI - rząd 1
+        params_row1 = ttk.Frame(parent)
+        params_row1.pack(fill=tk.X, pady=2)
+
+        # Okres
+        ttk.Label(params_row1, text="Okres:", font=('Arial', 8)).pack(side=tk.LEFT, padx=5)
+        period_spin = ttk.Spinbox(params_row1, from_=5, to=20, textvariable=self.smi_period_var,
+                                  width=4, command=self._on_smi_settings_change)
+        period_spin.pack(side=tk.LEFT, padx=2)
+
+        # Smoothing 1
+        ttk.Label(params_row1, text="Smooth1:", font=('Arial', 8)).pack(side=tk.LEFT, padx=(10, 5))
+        smooth1_spin = ttk.Spinbox(params_row1, from_=1, to=10, textvariable=self.smi_smooth1_var,
+                                   width=4, command=self._on_smi_settings_change)
+        smooth1_spin.pack(side=tk.LEFT, padx=2)
+
+        # Smoothing 2
+        ttk.Label(params_row1, text="Smooth2:", font=('Arial', 8)).pack(side=tk.LEFT, padx=(10, 5))
+        smooth2_spin = ttk.Spinbox(params_row1, from_=1, to=10, textvariable=self.smi_smooth2_var,
+                                   width=4, command=self._on_smi_settings_change)
+        smooth2_spin.pack(side=tk.LEFT, padx=2)
+
+        # Parametry SMI - rząd 2 (poziomy)
+        params_row2 = ttk.Frame(parent)
+        params_row2.pack(fill=tk.X, pady=2)
+
+        # Overbought
+        ttk.Label(params_row2, text="OB:", font=('Arial', 8)).pack(side=tk.LEFT, padx=5)
+        ob_spin = ttk.Spinbox(params_row2, from_=20, to=80, increment=5,
+                              textvariable=self.smi_overbought_var, width=4,
+                              command=self._on_smi_settings_change)
+        ob_spin.pack(side=tk.LEFT, padx=2)
+
+        # Oversold
+        ttk.Label(params_row2, text="OS:", font=('Arial', 8)).pack(side=tk.LEFT, padx=(10, 5))
+        os_spin = ttk.Spinbox(params_row2, from_=-80, to=-20, increment=5,
+                              textvariable=self.smi_oversold_var, width=4,
+                              command=self._on_smi_settings_change)
+        os_spin.pack(side=tk.LEFT, padx=2)
+
+        # Czułość
+        ttk.Label(params_row2, text="Sens:", font=('Arial', 8)).pack(side=tk.LEFT, padx=(10, 5))
+        sens_combo = ttk.Combobox(params_row2, textvariable=self.smi_sensitivity_var,
+                                  values=['low', 'medium', 'high'], width=8, state='readonly')
+        sens_combo.pack(side=tk.LEFT, padx=2)
+        sens_combo.bind('<<ComboboxSelected>>', self._on_smi_settings_change)
+
+        # Presety SMI
+        presets_row = ttk.Frame(parent)
+        presets_row.pack(fill=tk.X, pady=2)
+
+        ttk.Label(presets_row, text="Presety:", font=('Arial', 8)).pack(side=tk.LEFT, padx=5)
+        ttk.Button(presets_row, text="Fast",
+                   command=lambda: self._load_smi_preset('fast')).pack(side=tk.LEFT, padx=2)
+        ttk.Button(presets_row, text="Standard",
+                   command=lambda: self._load_smi_preset('standard')).pack(side=tk.LEFT, padx=2)
+        ttk.Button(presets_row, text="Smooth",
+                   command=lambda: self._load_smi_preset('smooth')).pack(side=tk.LEFT, padx=2)
 
     # Event handlers - podstawowe
     def _on_exchange_change(self, event=None):
@@ -428,6 +580,86 @@ class ControlPanel:
             self.cci_oversold_var.set(str(preset['oversold']))
             self.cci_sensitivity_var.set(preset['sensitivity'])
             self._on_cci_settings_change()
+
+    def _on_ema_toggle(self):
+        """Obsługa EMA toggle"""
+        enabled = self.ema_enabled_var.get()
+        self.app.toggle_indicator('EMA_Crossover_Main', enabled)
+
+    def _on_ema_settings_change(self):
+        """Obsługa zmiany ustawień EMA"""
+        try:
+            new_fast = int(self.ema_fast_var.get())
+            new_slow = int(self.ema_slow_var.get())
+            new_signal = int(self.ema_signal_var.get())
+            use_signal = self.ema_use_signal_var.get()
+
+            self.app.update_indicator_settings('EMA_Crossover_Main',
+                                               fast_ema_period=new_fast,
+                                               slow_ema_period=new_slow,
+                                               signal_ema_period=new_signal,
+                                               use_signal_line=use_signal)
+        except ValueError as e:
+            logger.error(f"Invalid EMA settings: {e}")
+
+    def _load_ema_preset(self, preset_name: str):
+        """Ładuje preset EMA"""
+        presets = {
+            'aggressive': {'fast': 8, 'slow': 21, 'signal': 7, 'use_signal': True},
+            'balanced': {'fast': 12, 'slow': 26, 'signal': 9, 'use_signal': True},
+            'conservative': {'fast': 18, 'slow': 39, 'signal': 11, 'use_signal': True}
+        }
+
+        if preset_name in presets:
+            preset = presets[preset_name]
+            self.ema_fast_var.set(str(preset['fast']))
+            self.ema_slow_var.set(str(preset['slow']))
+            self.ema_signal_var.set(str(preset['signal']))
+            self.ema_use_signal_var.set(preset['use_signal'])
+            self._on_ema_settings_change()
+
+    def _on_smi_toggle(self):
+        """Obsługa SMI toggle"""
+        enabled = self.smi_enabled_var.get()
+        self.app.toggle_indicator('SMI_Arrows_Main', enabled)
+
+    def _on_smi_settings_change(self, event=None):
+        """Obsługa zmiany ustawień SMI"""
+        try:
+            new_period = int(self.smi_period_var.get())
+            new_smooth1 = int(self.smi_smooth1_var.get())
+            new_smooth2 = int(self.smi_smooth2_var.get())
+            new_overbought = int(self.smi_overbought_var.get())
+            new_oversold = int(self.smi_oversold_var.get())
+            new_sensitivity = self.smi_sensitivity_var.get()
+
+            self.app.update_indicator_settings('SMI_Arrows_Main',
+                                               smi_period=new_period,
+                                               first_smoothing=new_smooth1,
+                                               second_smoothing=new_smooth2,
+                                               overbought_level=new_overbought,
+                                               oversold_level=new_oversold,
+                                               arrow_sensitivity=new_sensitivity)
+        except ValueError as e:
+            logger.error(f"Invalid SMI settings: {e}")
+
+    def _load_smi_preset(self, preset_name: str):
+        """Ładuje preset SMI"""
+        presets = {
+            'fast': {'period': 8, 'smooth1': 2, 'smooth2': 2, 'ob': 35, 'os': -35, 'sens': 'high'},
+            'standard': {'period': 10, 'smooth1': 3, 'smooth2': 3, 'ob': 40, 'os': -40, 'sens': 'medium'},
+            'smooth': {'period': 14, 'smooth1': 5, 'smooth2': 5, 'ob': 45, 'os': -45, 'sens': 'low'}
+        }
+
+        if preset_name in presets:
+            preset = presets[preset_name]
+            self.smi_period_var.set(str(preset['period']))
+            self.smi_smooth1_var.set(str(preset['smooth1']))
+            self.smi_smooth2_var.set(str(preset['smooth2']))
+            self.smi_overbought_var.set(str(preset['ob']))
+            self.smi_oversold_var.set(str(preset['os']))
+            self.smi_sensitivity_var.set(preset['sens'])
+            self._on_smi_settings_change()
 
     # Utility methods
     def collapse_all_panels(self):

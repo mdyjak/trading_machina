@@ -55,6 +55,14 @@ class InfoPanel:
         self.cci_status_var = tk.StringVar(value="---")
         self.cci_value_var = tk.StringVar(value="0")
 
+        # EMA status
+        self.ema_status_var = tk.StringVar(value="---")
+        self.ema_values_var = tk.StringVar(value="12/26")
+
+        # SMI status
+        self.smi_status_var = tk.StringVar(value="---")
+        self.smi_value_var = tk.StringVar(value="0")
+
         self._create_widget()
         logger.info("InfoPanel initialized")
 
@@ -129,6 +137,37 @@ class InfoPanel:
                                          font=('Arial', 8))
         self.cci_value_label.pack(side=tk.LEFT, padx=2)
 
+        # EMA Status
+        # Separator
+        ttk.Separator(indicators_row, orient='vertical').pack(side=tk.LEFT, padx=10, fill=tk.Y)
+
+        # EMA Status
+        ttk.Label(indicators_row, text="EMA:", font=('Arial', 9)).pack(side=tk.LEFT, padx=5)
+        self.ema_status_label = ttk.Label(indicators_row, textvariable=self.ema_status_var,
+                                          font=('Arial', 9, 'bold'))
+        self.ema_status_label.pack(side=tk.LEFT, padx=5)
+
+        # EMA Values
+        ttk.Label(indicators_row, text="Val:", font=('Arial', 8)).pack(side=tk.LEFT, padx=5)
+        self.ema_values_label = ttk.Label(indicators_row, textvariable=self.ema_values_var,
+                                          font=('Arial', 8))
+        self.ema_values_label.pack(side=tk.LEFT, padx=2)
+
+        # Separator
+        ttk.Separator(indicators_row, orient='vertical').pack(side=tk.LEFT, padx=10, fill=tk.Y)
+
+        # SMI Status
+        ttk.Label(indicators_row, text="SMI:", font=('Arial', 9)).pack(side=tk.LEFT, padx=5)
+        self.smi_status_label = ttk.Label(indicators_row, textvariable=self.smi_status_var,
+                                          font=('Arial', 9, 'bold'))
+        self.smi_status_label.pack(side=tk.LEFT, padx=5)
+
+        # SMI Value
+        ttk.Label(indicators_row, text="Val:", font=('Arial', 8)).pack(side=tk.LEFT, padx=5)
+        self.smi_value_label = ttk.Label(indicators_row, textvariable=self.smi_value_var,
+                                         font=('Arial', 8))
+        self.smi_value_label.pack(side=tk.LEFT, padx=2)
+
     def _create_status_row(self):
         """Tworzy rząd ze statusem"""
         status_row = ttk.Frame(self.widget)
@@ -187,6 +226,8 @@ class InfoPanel:
         """Aktualizuje status wszystkich wskaźników"""
         self._update_tma_status()
         self._update_cci_status()
+        self._update_ema_status()
+        self._update_smi_status()
 
     def _update_tma_status(self):
         """Aktualizuje status TMA"""
@@ -314,6 +355,153 @@ class InfoPanel:
             logger.error(f"Error updating CCI status: {e}")
             self.cci_status_var.set("---")
             self.cci_value_var.set("0")
+
+    def _update_ema_status(self):
+        """Aktualizuje status EMA Crossover"""
+        try:
+            if not hasattr(self.app, 'get_indicator_manager'):
+                self.ema_status_var.set("---")
+                self.ema_values_var.set("12/26")
+                return
+
+            indicator_manager = self.app.get_indicator_manager()
+            ema_indicator = indicator_manager.get_indicator('EMA_Crossover_Main')
+
+            if ema_indicator and ema_indicator.enabled:
+                # Pobierz ostatnie wyniki
+                results = indicator_manager.get_results('EMA_Crossover_Main')
+                if results:
+                    signals = ema_indicator.get_latest_signal(results)
+
+                    signal = signals.get('signal', 'none')
+                    trend = signals.get('trend', 'neutral')
+                    signal_age = signals.get('signal_age', 0)
+                    strength = signals.get('strength', 0)
+
+                    # Określ status i kolor
+                    if signal == 'buy' and signal_age <= 3:
+                        status_text = "🡱 BUY"
+                        color = COLORS['accent_green']
+                    elif signal == 'sell' and signal_age <= 3:
+                        status_text = "🡳 SELL"
+                        color = COLORS['accent_red']
+                    elif trend == 'bullish':
+                        status_text = "↗ UP"
+                        color = COLORS['accent_green']
+                    elif trend == 'bearish':
+                        status_text = "↘ DOWN"
+                        color = COLORS['accent_red']
+                    else:
+                        status_text = "→ FLAT"
+                        color = 'gray'
+
+                    # Dodaj siłę trendu
+                    if strength > 0.7:
+                        status_text += " 💪"
+                    elif strength < 0.3:
+                        status_text += " 📉"
+
+                    self.ema_status_var.set(status_text)
+                    self.ema_status_label.configure(foreground=color)
+
+                    # Wartości EMA
+                    fast_ema = signals.get('fast_ema', 0)
+                    slow_ema = signals.get('slow_ema', 0)
+                    self.ema_values_var.set(f"{fast_ema:.1f}/{slow_ema:.1f}")
+                    self.ema_values_label.configure(foreground=COLORS['text_primary'])
+
+                else:
+                    self.ema_status_var.set("CALC...")
+                    self.ema_values_var.set("12/26")
+                    self.ema_status_label.configure(foreground='orange')
+                    self.ema_values_label.configure(foreground='orange')
+            else:
+                self.ema_status_var.set("OFF")
+                self.ema_values_var.set("12/26")
+                self.ema_status_label.configure(foreground='gray')
+                self.ema_values_label.configure(foreground='gray')
+
+        except Exception as e:
+            logger.error(f"Error updating EMA status: {e}")
+            self.ema_status_var.set("---")
+            self.ema_values_var.set("12/26")
+
+    def _update_smi_status(self):
+        """Aktualizuje status SMI Arrows"""
+        try:
+            if not hasattr(self.app, 'get_indicator_manager'):
+                self.smi_status_var.set("---")
+                self.smi_value_var.set("0")
+                return
+
+            indicator_manager = self.app.get_indicator_manager()
+            smi_indicator = indicator_manager.get_indicator('SMI_Arrows_Main')
+
+            if smi_indicator and smi_indicator.enabled:
+                # Pobierz ostatnie wyniki
+                results = indicator_manager.get_results('SMI_Arrows_Main')
+                if results:
+                    signals = smi_indicator.get_latest_signal(results)
+
+                    signal = signals.get('signal', 'none')
+                    trend = signals.get('trend', 'neutral')
+                    smi_value = signals.get('smi_value', 0)
+                    signal_age = signals.get('signal_age', 0)
+
+                    # Aktualizuj wartość SMI
+                    self.smi_value_var.set(f"{smi_value:.1f}")
+
+                    # Określ status i kolor
+                    if signal == 'buy' and signal_age <= 5:
+                        status_text = "🡱 BUY"
+                        color = COLORS['accent_green']
+                    elif signal == 'sell' and signal_age <= 5:
+                        status_text = "🡳 SELL"
+                        color = COLORS['accent_red']
+                    elif trend == 'overbought':
+                        status_text = "OB"
+                        color = COLORS['accent_red']
+                    elif trend == 'oversold':
+                        status_text = "OS"
+                        color = COLORS['accent_green']
+                    elif trend == 'bullish':
+                        status_text = "↗ UP"
+                        color = COLORS['accent_green']
+                    elif trend == 'bearish':
+                        status_text = "↘ DOWN"
+                        color = COLORS['accent_red']
+                    else:
+                        status_text = "NEUTRAL"
+                        color = 'gray'
+
+                    # Dodaj oznaczenie dywergencji
+                    if signals.get('divergence', False):
+                        status_text += " ⚡"
+
+                    self.smi_status_var.set(status_text)
+                    self.smi_status_label.configure(foreground=color)
+
+                    # Kolor wartości SMI
+                    if smi_value > 40:
+                        self.smi_value_label.configure(foreground=COLORS['accent_red'])
+                    elif smi_value < -40:
+                        self.smi_value_label.configure(foreground=COLORS['accent_green'])
+                    else:
+                        self.smi_value_label.configure(foreground=COLORS['text_primary'])
+
+                else:
+                    self.smi_status_var.set("CALC...")
+                    self.smi_value_var.set("0")
+                    self.smi_status_label.configure(foreground='orange')
+            else:
+                self.smi_status_var.set("OFF")
+                self.smi_value_var.set("0")
+                self.smi_status_label.configure(foreground='gray')
+
+        except Exception as e:
+            logger.error(f"Error updating SMI status: {e}")
+            self.smi_status_var.set("---")
+            self.smi_value_var.set("0")
 
     def set_status(self, message: str):
         """Ustawia status"""
