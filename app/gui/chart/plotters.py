@@ -826,3 +826,310 @@ class SMIPlotter:
 
             ax.set_ylim(min(smi_min - margin, oversold - 20),
                         max(smi_max + margin, overbought + 20))
+
+class RSIPlotter:
+    """
+    Rysowanie wskaźnika RSI Professional
+    """
+
+    def __init__(self, colors_config: Dict):
+        self.colors = colors_config
+        self.legend_items = []
+
+    def plot(self, ax, rsi_result: Dict, df_len: int) -> List[Tuple]:
+        """Rysuje RSI na osi"""
+        if ax is None:
+            return []
+
+        try:
+            valid_from = rsi_result.get('valid_from', 15)
+            if valid_from >= df_len:
+                return []
+
+            ax.set_facecolor(self.colors['bg_secondary'])
+            ax.tick_params(colors=self.colors['text_primary'], labelsize=8)
+
+            x_data = list(range(valid_from, df_len))
+            if not x_data:
+                return []
+
+            self.legend_items = []
+
+            # Główna linia RSI
+            self._plot_rsi_line(ax, rsi_result, x_data)
+
+            # Poziomy referencyjne
+            self._plot_rsi_levels(ax, rsi_result)
+
+            # Sygnały
+            self._plot_rsi_signals(ax, rsi_result, x_data)
+
+            # Formatowanie osi
+            self._format_rsi_axis(ax, rsi_result, x_data, df_len)
+
+            return self.legend_items
+
+        except Exception as e:
+            logger.error(f"Error plotting RSI: {e}")
+            return []
+
+    def _plot_rsi_line(self, ax, rsi_result: Dict, x_data: List[int]):
+        """Rysuje główną linię RSI"""
+        rsi_values = rsi_result['rsi']
+        rsi_line = [rsi_values[i] for i in x_data if i < len(rsi_values) and not np.isnan(rsi_values[i])]
+        x_clean = [x_data[i] for i in range(len(x_data)) if i < len(rsi_values) and not np.isnan(rsi_values[x_data[i]])]
+
+        if len(rsi_line) == len(x_clean) and len(rsi_line) > 0:
+            line = ax.plot(x_clean, rsi_line, color='#FFD700',
+                           linewidth=2.5, alpha=0.9, zorder=3)[0]
+            self.legend_items.append((line, 'RSI'))
+
+    def _plot_rsi_levels(self, ax, rsi_result: Dict):
+        """Rysuje poziomy referencyjne RSI"""
+        levels = rsi_result.get('levels', {})
+        overbought = levels.get('overbought', 70)
+        oversold = levels.get('oversold', 30)
+        extreme_ob = levels.get('extreme_overbought', 80)
+        extreme_os = levels.get('extreme_oversold', 20)
+
+        # Standard levels
+        ob_line = ax.axhline(y=overbought, color='#FF6B6B', linestyle='--',
+                             alpha=0.8, linewidth=1.5, zorder=2)
+        os_line = ax.axhline(y=oversold, color='#4ECDC4', linestyle='--',
+                             alpha=0.8, linewidth=1.5, zorder=2)
+
+        # Extreme levels
+        ext_ob_line = ax.axhline(y=extreme_ob, color='#CC0000', linestyle=':',
+                                 alpha=0.9, linewidth=1.8, zorder=2)
+        ext_os_line = ax.axhline(y=extreme_os, color='#00CC00', linestyle=':',
+                                 alpha=0.9, linewidth=1.8, zorder=2)
+
+        # Midline
+        mid_line = ax.axhline(y=50, color='#999999', linestyle='-',
+                              alpha=0.6, linewidth=1)
+
+        self.legend_items.extend([
+            (ob_line, f'Overbought ({overbought})'),
+            (os_line, f'Oversold ({oversold})'),
+            (ext_ob_line, f'Extreme OB ({extreme_ob})'),
+            (ext_os_line, f'Extreme OS ({extreme_os})')
+        ])
+
+    def _plot_rsi_signals(self, ax, rsi_result: Dict, x_data: List[int]):
+        """Rysuje sygnały RSI"""
+        rsi_values = rsi_result['rsi']
+
+        buy_signals = []
+        sell_signals = []
+        bull_div = []
+        bear_div = []
+
+        for i in x_data:
+            if i >= len(rsi_result['buy_arrows']):
+                continue
+
+            rsi_value = rsi_values[i] if i < len(rsi_values) and not np.isnan(rsi_values[i]) else None
+            if rsi_value is None:
+                continue
+
+            if rsi_result['buy_arrows'][i] > 0:
+                buy_signals.append((i, rsi_value))
+
+            if rsi_result['sell_arrows'][i] > 0:
+                sell_signals.append((i, rsi_value))
+
+            if rsi_result['bullish_divergence'][i] > 0:
+                bull_div.append((i, rsi_value))
+
+            if rsi_result['bearish_divergence'][i] > 0:
+                bear_div.append((i, rsi_value))
+
+        # Rysuj sygnały grupowo
+        if buy_signals:
+            x_buy, y_buy = zip(*buy_signals)
+            buy_scatter = ax.scatter(x_buy, y_buy, marker='^',
+                                     color=self.colors['accent_green'], s=150,
+                                     alpha=0.9, zorder=5, edgecolors='white',
+                                     linewidth=1.5)
+            self.legend_items.append((buy_scatter, 'RSI Buy'))
+
+        if sell_signals:
+            x_sell, y_sell = zip(*sell_signals)
+            sell_scatter = ax.scatter(x_sell, y_sell, marker='v',
+                                      color=self.colors['accent_red'], s=150,
+                                      alpha=0.9, zorder=5, edgecolors='white',
+                                      linewidth=1.5)
+            self.legend_items.append((sell_scatter, 'RSI Sell'))
+
+        if bull_div:
+            x_bull, y_bull = zip(*bull_div)
+            bull_scatter = ax.scatter(x_bull, y_bull, marker='o',
+                                      color=self.colors['accent_blue'], s=100,
+                                      alpha=0.8, zorder=4)
+            self.legend_items.append((bull_scatter, 'Bullish Divergence'))
+
+        if bear_div:
+            x_bear, y_bear = zip(*bear_div)
+            bear_scatter = ax.scatter(x_bear, y_bear, marker='o',
+                                      color=self.colors['accent_pink'], s=100,
+                                      alpha=0.8, zorder=4)
+            self.legend_items.append((bear_scatter, 'Bearish Divergence'))
+
+    def _format_rsi_axis(self, ax, rsi_result: Dict, x_data: List[int], df_len: int):
+        """Formatuje oś RSI"""
+        ax.set_xlim(-1, df_len)
+        ax.set_ylim(0, 100)  # RSI zawsze 0-100
+        ax.set_ylabel('RSI', color=self.colors['text_primary'])
+
+
+class BollingerPlotter:
+    """
+    Rysowanie wskaźnika Bollinger Bands Professional
+    """
+
+    def __init__(self, colors_config: Dict):
+        self.colors = colors_config
+        self.legend_items = []
+
+    def plot(self, ax, bb_result: Dict, df_len: int) -> List[Tuple]:
+        """Rysuje Bollinger Bands na osi"""
+        if ax is None:
+            return []
+
+        try:
+            valid_from = bb_result.get('valid_from', 20)
+            if valid_from >= df_len:
+                return []
+
+            x_data = list(range(valid_from, df_len))
+            if not x_data:
+                return []
+
+            self.legend_items = []
+
+            # Pasma Bollinger
+            self._plot_bollinger_bands(ax, bb_result, x_data)
+
+            # Fill między pasmami
+            self._plot_band_fill(ax, bb_result, x_data)
+
+            # Sygnały
+            self._plot_bollinger_signals(ax, bb_result, x_data)
+
+            return self.legend_items
+
+        except Exception as e:
+            logger.error(f"Error plotting Bollinger Bands: {e}")
+            return []
+
+    def _plot_bollinger_bands(self, ax, bb_result: Dict, x_data: List[int]):
+        """Rysuje pasma Bollinger"""
+        upper_band = bb_result['upper_band']
+        middle_band = bb_result['middle_band']
+        lower_band = bb_result['lower_band']
+
+        # Upper Band
+        upper_y = [upper_band[i] for i in x_data if i < len(upper_band) and not np.isnan(upper_band[i])]
+        upper_x = [x_data[i] for i in range(len(x_data)) if i < len(upper_band) and not np.isnan(upper_band[x_data[i]])]
+
+        if len(upper_y) > 0:
+            upper_line = ax.plot(upper_x, upper_y, color='#FF6B6B',
+                                 linewidth=1.5, alpha=0.8, zorder=3)[0]
+            self.legend_items.append((upper_line, 'Upper Band'))
+
+        # Middle Band (SMA)
+        middle_y = [middle_band[i] for i in x_data if i < len(middle_band) and not np.isnan(middle_band[i])]
+        middle_x = [x_data[i] for i in range(len(x_data)) if i < len(middle_band) and not np.isnan(middle_band[x_data[i]])]
+
+        if len(middle_y) > 0:
+            middle_line = ax.plot(middle_x, middle_y, color='#FFD700',
+                                  linewidth=2, alpha=0.9, zorder=3)[0]
+            self.legend_items.append((middle_line, 'Middle Band (SMA)'))
+
+        # Lower Band
+        lower_y = [lower_band[i] for i in x_data if i < len(lower_band) and not np.isnan(lower_band[i])]
+        lower_x = [x_data[i] for i in range(len(x_data)) if i < len(lower_band) and not np.isnan(lower_band[x_data[i]])]
+
+        if len(lower_y) > 0:
+            lower_line = ax.plot(lower_x, lower_y, color='#4ECDC4',
+                                 linewidth=1.5, alpha=0.8, zorder=3)[0]
+            self.legend_items.append((lower_line, 'Lower Band'))
+
+    def _plot_band_fill(self, ax, bb_result: Dict, x_data: List[int]):
+        """Wypełnia obszar między pasmami"""
+        upper_band = bb_result['upper_band']
+        lower_band = bb_result['lower_band']
+
+        # Przygotuj dane do fill_between
+        valid_indices = []
+        upper_values = []
+        lower_values = []
+
+        for i in x_data:
+            if (i < len(upper_band) and i < len(lower_band) and
+                    not np.isnan(upper_band[i]) and not np.isnan(lower_band[i])):
+                valid_indices.append(i)
+                upper_values.append(upper_band[i])
+                lower_values.append(lower_band[i])
+
+        if len(valid_indices) > 0:
+            ax.fill_between(valid_indices, upper_values, lower_values,
+                            alpha=0.1, color='#E3F2FD', zorder=1)
+
+    def _plot_bollinger_signals(self, ax, bb_result: Dict, x_data: List[int]):
+        """Rysuje sygnały Bollinger Bands"""
+        # Touch signals
+        upper_touch_signals = []
+        lower_touch_signals = []
+        upper_breakout_signals = []
+        lower_breakout_signals = []
+
+        for i in x_data:
+            # Upper touches (sell setup)
+            if (i < len(bb_result['upper_touch']) and
+                bb_result['upper_touch'][i] > 0):
+                upper_touch_signals.append((i, bb_result['upper_touch'][i]))
+
+            # Lower touches (buy setup)
+            if (i < len(bb_result['lower_touch']) and
+                bb_result['lower_touch'][i] > 0):
+                lower_touch_signals.append((i, bb_result['lower_touch'][i]))
+
+            # Upper breakouts (strong sell)
+            if (i < len(bb_result['upper_breakout']) and
+                bb_result['upper_breakout'][i] > 0):
+                upper_breakout_signals.append((i, bb_result['upper_breakout'][i]))
+
+            # Lower breakouts (strong buy)
+            if (i < len(bb_result['lower_breakout']) and
+                bb_result['lower_breakout'][i] > 0):
+                lower_breakout_signals.append((i, bb_result['lower_breakout'][i]))
+
+        # Plot signals
+        if upper_touch_signals:
+            x_touch, y_touch = zip(*upper_touch_signals)
+            touch_scatter = ax.scatter(x_touch, y_touch, marker='o',
+                                       color='#FF9800', s=80,
+                                       alpha=0.8, zorder=5, edgecolors='white')
+            self.legend_items.append((touch_scatter, 'Upper Touch'))
+
+        if lower_touch_signals:
+            x_touch, y_touch = zip(*lower_touch_signals)
+            touch_scatter = ax.scatter(x_touch, y_touch, marker='o',
+                                       color='#4CAF50', s=80,
+                                       alpha=0.8, zorder=5, edgecolors='white')
+            self.legend_items.append((touch_scatter, 'Lower Touch'))
+
+        if upper_breakout_signals:
+            x_break, y_break = zip(*upper_breakout_signals)
+            break_scatter = ax.scatter(x_break, y_break, marker='v',
+                                       color='#F44336', s=120,
+                                       alpha=0.9, zorder=6, edgecolors='white')
+            self.legend_items.append((break_scatter, 'Upper Breakout'))
+
+        if lower_breakout_signals:
+            x_break, y_break = zip(*lower_breakout_signals)
+            break_scatter = ax.scatter(x_break, y_break, marker='^',
+                                       color='#2196F3', s=120,
+                                       alpha=0.9, zorder=6, edgecolors='white')
+            self.legend_items.append((break_scatter, 'Lower Breakout'))

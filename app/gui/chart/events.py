@@ -233,6 +233,11 @@ class ChartZoomHandler:
                     margin = max(50, (cci_max - cci_min) * 0.1)
                     ax.set_ylim(cci_min - margin, cci_max + margin)
 
+            # Reset Y dla RSI axis
+            if 'rsi' in axes_dict and axes_dict['rsi']:
+                ax = axes_dict['rsi']
+                ax.set_ylim(0, 100)  # RSI zawsze 0-100
+
         except Exception as e:
             logger.error(f"Error resetting zoom: {e}")
 
@@ -340,6 +345,29 @@ class ChartExportHandler:
                     export_df['CCI'] = self._align_series(
                         cci_data['cci'], export_df.index
                     )
+
+            # Dodaj RSI
+            if 'RSI_Professional_Main' in indicators:
+                rsi_data = indicators['RSI_Professional_Main']
+                if 'rsi' in rsi_data:
+                    export_df['RSI'] = self._align_series(
+                        rsi_data['rsi'], export_df.index
+                    )
+
+            # Dodaj Bollinger Bands
+            if 'Bollinger_Professional_Main' in indicators:
+                bb_data = indicators['Bollinger_Professional_Main']
+                for bb_key, col_name in [
+                    ('upper_band', 'BB_Upper'),
+                    ('middle_band', 'BB_Middle'),
+                    ('lower_band', 'BB_Lower'),
+                    ('bbw', 'BB_Width'),
+                    ('percent_b', 'BB_PercentB')
+                ]:
+                    if bb_key in bb_data:
+                        export_df[col_name] = self._align_series(
+                            bb_data[bb_key], export_df.index
+                        )
 
             # Export w odpowiednim formacie
             if filename.endswith('.xlsx'):

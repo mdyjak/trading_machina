@@ -25,6 +25,8 @@ from indicators.manager import IndicatorManager
 from indicators.tma import TMAIndicator, create_tma_indicator
 from indicators.cci_arrows import CCIArrowsIndicator, create_cci_arrows_indicator
 from indicators.smi_arrows import SMIArrowsIndicator, create_smi_arrows_indicator
+from indicators.rsi_professional import RSIProfessionalIndicator, create_rsi_professional_indicator
+from indicators.bollinger_professional import BollingerBandsProfessional, create_bollinger_professional_indicator
 
 logger = logging.getLogger(__name__)
 
@@ -67,6 +69,8 @@ class TradingPlatform:
         self.indicator_manager.register_indicator_class('CCI_Arrows', CCIArrowsIndicator)
         self.indicator_manager.register_indicator_class('EMA_Crossover', EMACrossoverIndicator)
         self.indicator_manager.register_indicator_class('SMI_Arrows', SMIArrowsIndicator)
+        self.indicator_manager.register_indicator_class('RSI_Professional', RSIProfessionalIndicator)
+        self.indicator_manager.register_indicator_class('Bollinger_Professional', BollingerBandsProfessional)
 
         # Dodaj domyślny TMA
         self.indicator_manager.add_indicator(
@@ -118,7 +122,34 @@ class TradingPlatform:
             min_bars_between_signals=3
         )
 
-        logger.info("Indicators setup completed - TMA + CCI Arrows + EMA Crossover + SMI Arrows")  # ✅ ZMIEŃ
+        # Dodaj domyślny RSI Professional
+        self.indicator_manager.add_indicator(
+            name='RSI_Professional_Main',
+            indicator_class_name='RSI_Professional',
+            rsi_period=14,
+            overbought_level=70,
+            oversold_level=30,
+            extreme_overbought=80,
+            extreme_oversold=20,
+            signal_sensitivity='medium',
+            use_divergence=True,
+            min_bars_between_signals=3
+        )
+
+        # Dodaj domyślny Bollinger Bands Professional
+        self.indicator_manager.add_indicator(
+            name='Bollinger_Professional_Main',
+            indicator_class_name='Bollinger_Professional',
+            bb_period=20,
+            bb_std_dev=2.0,
+            ma_type='sma',
+            squeeze_threshold=0.1,
+            expansion_threshold=0.25,
+            touch_sensitivity=0.02,
+            use_percent_b=True
+        )
+
+        logger.info("Indicators setup completed - TMA + CCI + EMA + SMI + RSI + Bollinger")
 
     def _connect_default_exchange(self):
         """Łączy z domyślną giełdą"""
@@ -248,6 +279,35 @@ class TradingPlatform:
                 name='SMI_Arrows_Main',
                 indicator_class_name='SMI_Arrows',
                 **new_smi.get_settings()
+            )
+
+        # Aktualizuj ustawienia RSI Professional dla nowego timeframe
+        rsi_indicator = self.indicator_manager.get_indicator('RSI_Professional_Main')
+        if rsi_indicator:
+            # Stwórz nową konfigurację RSI dla timeframe
+            new_rsi = create_rsi_professional_indicator(timeframe, 'medium', 'RSI_Professional_Main')
+
+            # Usuń stary i dodaj nowy
+            self.indicator_manager.remove_indicator('RSI_Professional_Main')
+            self.indicator_manager.add_indicator(
+                name='RSI_Professional_Main',
+                indicator_class_name='RSI_Professional',
+                **new_rsi.get_settings()
+            )
+
+        # Aktualizuj ustawienia Bollinger Professional dla nowego timeframe
+        bollinger_indicator = self.indicator_manager.get_indicator('Bollinger_Professional_Main')
+        if bollinger_indicator:
+            # Stwórz nową konfigurację Bollinger dla timeframe
+            new_bollinger = create_bollinger_professional_indicator(timeframe, 'medium',
+                                                                    'Bollinger_Professional_Main')
+
+            # Usuń stary i dodaj nowy
+            self.indicator_manager.remove_indicator('Bollinger_Professional_Main')
+            self.indicator_manager.add_indicator(
+                name='Bollinger_Professional_Main',
+                indicator_class_name='Bollinger_Professional',
+                **new_bollinger.get_settings()
             )
 
         self.refresh_data()

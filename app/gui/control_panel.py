@@ -64,6 +64,23 @@ class ControlPanel:
         self.smi_oversold_var = tk.StringVar(value='-40')
         self.smi_sensitivity_var = tk.StringVar(value='medium')
 
+        # Zmienne GUI - RSI
+        self.rsi_enabled_var = tk.BooleanVar(value=True)
+        self.rsi_period_var = tk.StringVar(value='14')
+        self.rsi_overbought_var = tk.StringVar(value='70')
+        self.rsi_oversold_var = tk.StringVar(value='30')
+        self.rsi_extreme_ob_var = tk.StringVar(value='80')
+        self.rsi_extreme_os_var = tk.StringVar(value='20')
+        self.rsi_sensitivity_var = tk.StringVar(value='medium')
+
+        # Zmienne GUI - Bollinger
+        self.bollinger_enabled_var = tk.BooleanVar(value=True)
+        self.bollinger_period_var = tk.StringVar(value='20')
+        self.bollinger_std_dev_var = tk.StringVar(value='2.0')
+        self.bollinger_ma_type_var = tk.StringVar(value='sma')
+        self.bollinger_squeeze_var = tk.StringVar(value='0.1')
+        self.bollinger_expansion_var = tk.StringVar(value='0.25')
+
         # Panele składane
         self.panels = {}
 
@@ -215,6 +232,15 @@ class ControlPanel:
         smi_section = ExpandableSection(parent, "📊 SMI Arrows (Stochastic Momentum Index)", True)
         self._create_smi_controls(smi_section.get_content_frame())
 
+        # === RSI SEKCJA ===
+        rsi_section = ExpandableSection(parent, "📊 RSI Professional (Relative Strength Index)", True)
+        self._create_rsi_controls(rsi_section.get_content_frame())
+
+        # === BOLLINGER SEKCJA ===
+        bollinger_section = ExpandableSection(parent, "📈 Bollinger Bands Professional", True)
+        self._create_bollinger_controls(bollinger_section.get_content_frame())
+
+        #DO WYJEBANIA
         # === PLACEHOLDER DLA KOLEJNYCH WSKAŹNIKÓW ===
         placeholder_section = ExpandableSection(parent, "⚡ Kolejne wskaźniki (wkrótce...)", False)
         placeholder_frame = placeholder_section.get_content_frame()
@@ -434,6 +460,230 @@ class ControlPanel:
                    command=lambda: self._load_smi_preset('standard')).pack(side=tk.LEFT, padx=2)
         ttk.Button(presets_row, text="Smooth",
                    command=lambda: self._load_smi_preset('smooth')).pack(side=tk.LEFT, padx=2)
+
+    def _create_rsi_controls(self, parent):
+        """Tworzy kontrolki RSI Professional"""
+        # Włączenie RSI
+        control_row = ttk.Frame(parent)
+        control_row.pack(fill=tk.X, pady=2)
+
+        ttk.Checkbutton(control_row, text="Włącz RSI Professional", variable=self.rsi_enabled_var,
+                        command=self._on_rsi_toggle).pack(side=tk.LEFT)
+
+        # Parametry RSI - rząd 1
+        params_row1 = ttk.Frame(parent)
+        params_row1.pack(fill=tk.X, pady=2)
+
+        # Okres
+        ttk.Label(params_row1, text="Okres:", font=('Arial', 8)).pack(side=tk.LEFT, padx=5)
+        period_spin = ttk.Spinbox(params_row1, from_=8, to=30, textvariable=self.rsi_period_var,
+                                  width=4, command=self._on_rsi_settings_change)
+        period_spin.pack(side=tk.LEFT, padx=2)
+
+        # Czułość
+        ttk.Label(params_row1, text="Czułość:", font=('Arial', 8)).pack(side=tk.LEFT, padx=(10, 5))
+        sens_combo = ttk.Combobox(params_row1, textvariable=self.rsi_sensitivity_var,
+                                  values=['low', 'medium', 'high'], width=8, state='readonly')
+        sens_combo.pack(side=tk.LEFT, padx=2)
+        sens_combo.bind('<<ComboboxSelected>>', self._on_rsi_settings_change)
+
+        # Parametry RSI - rząd 2 (poziomy standard)
+        params_row2 = ttk.Frame(parent)
+        params_row2.pack(fill=tk.X, pady=2)
+
+        # Overbought
+        ttk.Label(params_row2, text="OB:", font=('Arial', 8)).pack(side=tk.LEFT, padx=5)
+        ob_spin = ttk.Spinbox(params_row2, from_=60, to=90, increment=5,
+                              textvariable=self.rsi_overbought_var, width=4,
+                              command=self._on_rsi_settings_change)
+        ob_spin.pack(side=tk.LEFT, padx=2)
+
+        # Oversold
+        ttk.Label(params_row2, text="OS:", font=('Arial', 8)).pack(side=tk.LEFT, padx=(10, 5))
+        os_spin = ttk.Spinbox(params_row2, from_=10, to=40, increment=5,
+                              textvariable=self.rsi_oversold_var, width=4,
+                              command=self._on_rsi_settings_change)
+        os_spin.pack(side=tk.LEFT, padx=2)
+
+        # Parametry RSI - rząd 3 (poziomy ekstremalne)
+        params_row3 = ttk.Frame(parent)
+        params_row3.pack(fill=tk.X, pady=2)
+
+        # Extreme Overbought
+        ttk.Label(params_row3, text="Extr OB:", font=('Arial', 8)).pack(side=tk.LEFT, padx=5)
+        ext_ob_spin = ttk.Spinbox(params_row3, from_=75, to=95, increment=5,
+                                  textvariable=self.rsi_extreme_ob_var, width=4,
+                                  command=self._on_rsi_settings_change)
+        ext_ob_spin.pack(side=tk.LEFT, padx=2)
+
+        # Extreme Oversold
+        ttk.Label(params_row3, text="Extr OS:", font=('Arial', 8)).pack(side=tk.LEFT, padx=(10, 5))
+        ext_os_spin = ttk.Spinbox(params_row3, from_=5, to=25, increment=5,
+                                  textvariable=self.rsi_extreme_os_var, width=4,
+                                  command=self._on_rsi_settings_change)
+        ext_os_spin.pack(side=tk.LEFT, padx=2)
+
+        # Presety RSI
+        presets_row = ttk.Frame(parent)
+        presets_row.pack(fill=tk.X, pady=2)
+
+        ttk.Label(presets_row, text="Presety:", font=('Arial', 8)).pack(side=tk.LEFT, padx=5)
+        ttk.Button(presets_row, text="Conservative",
+                   command=lambda: self._load_rsi_preset('conservative')).pack(side=tk.LEFT, padx=2)
+        ttk.Button(presets_row, text="Standard",
+                   command=lambda: self._load_rsi_preset('standard')).pack(side=tk.LEFT, padx=2)
+        ttk.Button(presets_row, text="Aggressive",
+                   command=lambda: self._load_rsi_preset('aggressive')).pack(side=tk.LEFT, padx=2)
+
+    def _create_bollinger_controls(self, parent):
+        """Tworzy kontrolki Bollinger Bands Professional"""
+        # Włączenie Bollinger
+        control_row = ttk.Frame(parent)
+        control_row.pack(fill=tk.X, pady=2)
+
+        ttk.Checkbutton(control_row, text="Włącz Bollinger Bands", variable=self.bollinger_enabled_var,
+                        command=self._on_bollinger_toggle).pack(side=tk.LEFT)
+
+        # Parametry Bollinger - rząd 1
+        params_row1 = ttk.Frame(parent)
+        params_row1.pack(fill=tk.X, pady=2)
+
+        # Okres
+        ttk.Label(params_row1, text="Okres:", font=('Arial', 8)).pack(side=tk.LEFT, padx=5)
+        period_spin = ttk.Spinbox(params_row1, from_=10, to=50, textvariable=self.bollinger_period_var,
+                                  width=4, command=self._on_bollinger_settings_change)
+        period_spin.pack(side=tk.LEFT, padx=2)
+
+        # Standard Deviation
+        ttk.Label(params_row1, text="Std Dev:", font=('Arial', 8)).pack(side=tk.LEFT, padx=(10, 5))
+        std_spin = ttk.Spinbox(params_row1, from_=1.0, to=3.0, increment=0.1,
+                               textvariable=self.bollinger_std_dev_var, width=4,
+                               command=self._on_bollinger_settings_change)
+        std_spin.pack(side=tk.LEFT, padx=2)
+
+        # MA Type
+        ttk.Label(params_row1, text="MA:", font=('Arial', 8)).pack(side=tk.LEFT, padx=(10, 5))
+        ma_combo = ttk.Combobox(params_row1, textvariable=self.bollinger_ma_type_var,
+                                values=['sma', 'ema', 'wma'], width=6, state='readonly')
+        ma_combo.pack(side=tk.LEFT, padx=2)
+        ma_combo.bind('<<ComboboxSelected>>', self._on_bollinger_settings_change)
+
+        # Parametry Bollinger - rząd 2 (squeeze/expansion)
+        params_row2 = ttk.Frame(parent)
+        params_row2.pack(fill=tk.X, pady=2)
+
+        # Squeeze Threshold
+        ttk.Label(params_row2, text="Squeeze:", font=('Arial', 8)).pack(side=tk.LEFT, padx=5)
+        squeeze_spin = ttk.Spinbox(params_row2, from_=0.05, to=0.3, increment=0.01,
+                                   textvariable=self.bollinger_squeeze_var, width=6,
+                                   command=self._on_bollinger_settings_change)
+        squeeze_spin.pack(side=tk.LEFT, padx=2)
+
+        # Expansion Threshold
+        ttk.Label(params_row2, text="Expansion:", font=('Arial', 8)).pack(side=tk.LEFT, padx=(10, 5))
+        expansion_spin = ttk.Spinbox(params_row2, from_=0.1, to=0.5, increment=0.01,
+                                     textvariable=self.bollinger_expansion_var, width=6,
+                                     command=self._on_bollinger_settings_change)
+        expansion_spin.pack(side=tk.LEFT, padx=2)
+
+        # Presety Bollinger
+        presets_row = ttk.Frame(parent)
+        presets_row.pack(fill=tk.X, pady=2)
+
+        ttk.Label(presets_row, text="Presety:", font=('Arial', 8)).pack(side=tk.LEFT, padx=5)
+        ttk.Button(presets_row, text="Conservative",
+                   command=lambda: self._load_bollinger_preset('conservative')).pack(side=tk.LEFT, padx=2)
+        ttk.Button(presets_row, text="Standard",
+                   command=lambda: self._load_bollinger_preset('standard')).pack(side=tk.LEFT, padx=2)
+        ttk.Button(presets_row, text="Aggressive",
+                   command=lambda: self._load_bollinger_preset('aggressive')).pack(side=tk.LEFT, padx=2)
+
+        # Event handlers - RSI
+
+    def _on_rsi_toggle(self):
+        """Obsługa RSI toggle"""
+        enabled = self.rsi_enabled_var.get()
+        self.app.toggle_indicator('RSI_Professional_Main', enabled)
+
+    def _on_rsi_settings_change(self, event=None):
+        """Obsługa zmiany ustawień RSI"""
+        try:
+            new_period = int(self.rsi_period_var.get())
+            new_overbought = int(self.rsi_overbought_var.get())
+            new_oversold = int(self.rsi_oversold_var.get())
+            new_extreme_ob = int(self.rsi_extreme_ob_var.get())
+            new_extreme_os = int(self.rsi_extreme_os_var.get())
+            new_sensitivity = self.rsi_sensitivity_var.get()
+
+            self.app.update_indicator_settings('RSI_Professional_Main',
+                                               rsi_period=new_period,
+                                               overbought_level=new_overbought,
+                                               oversold_level=new_oversold,
+                                               extreme_overbought=new_extreme_ob,
+                                               extreme_oversold=new_extreme_os,
+                                               signal_sensitivity=new_sensitivity)
+        except ValueError as e:
+            logger.error(f"Invalid RSI settings: {e}")
+
+    def _load_rsi_preset(self, preset_name: str):
+        """Ładuje preset RSI"""
+        presets = {
+            'conservative': {'period': 14, 'ob': 75, 'os': 25, 'ext_ob': 85, 'ext_os': 15, 'sens': 'low'},
+            'standard': {'period': 14, 'ob': 70, 'os': 30, 'ext_ob': 80, 'ext_os': 20, 'sens': 'medium'},
+            'aggressive': {'period': 14, 'ob': 65, 'os': 35, 'ext_ob': 75, 'ext_os': 25, 'sens': 'high'}
+        }
+
+        if preset_name in presets:
+            preset = presets[preset_name]
+            self.rsi_period_var.set(str(preset['period']))
+            self.rsi_overbought_var.set(str(preset['ob']))
+            self.rsi_oversold_var.set(str(preset['os']))
+            self.rsi_extreme_ob_var.set(str(preset['ext_ob']))
+            self.rsi_extreme_os_var.set(str(preset['ext_os']))
+            self.rsi_sensitivity_var.set(preset['sens'])
+            self._on_rsi_settings_change()
+
+        # Event handlers - Bollinger
+
+    def _on_bollinger_toggle(self):
+        """Obsługa Bollinger toggle"""
+        enabled = self.bollinger_enabled_var.get()
+        self.app.toggle_indicator('Bollinger_Professional_Main', enabled)
+
+    def _on_bollinger_settings_change(self, event=None):
+        """Obsługa zmiany ustawień Bollinger"""
+        try:
+            new_period = int(self.bollinger_period_var.get())
+            new_std_dev = float(self.bollinger_std_dev_var.get())
+            new_ma_type = self.bollinger_ma_type_var.get()
+            new_squeeze = float(self.bollinger_squeeze_var.get())
+            new_expansion = float(self.bollinger_expansion_var.get())
+
+            self.app.update_indicator_settings('Bollinger_Professional_Main',
+                                               bb_period=new_period,
+                                               bb_std_dev=new_std_dev,
+                                               ma_type=new_ma_type,
+                                               squeeze_threshold=new_squeeze,
+                                               expansion_threshold=new_expansion)
+        except ValueError as e:
+            logger.error(f"Invalid Bollinger settings: {e}")
+
+    def _load_bollinger_preset(self, preset_name: str):
+        """Ładuje preset Bollinger"""
+        presets = {
+            'conservative': {'period': 20, 'std': 2.2, 'ma': 'sma', 'squeeze': 0.12, 'expansion': 0.2},
+            'standard': {'period': 20, 'std': 2.0, 'ma': 'sma', 'squeeze': 0.1, 'expansion': 0.25},
+            'aggressive': {'period': 20, 'std': 1.8, 'ma': 'ema', 'squeeze': 0.08, 'expansion': 0.3}
+        }
+
+        if preset_name in presets:
+            preset = presets[preset_name]
+            self.bollinger_period_var.set(str(preset['period']))
+            self.bollinger_std_dev_var.set(str(preset['std']))
+            self.bollinger_ma_type_var.set(preset['ma'])
+            self.bollinger_squeeze_var.set(str(preset['squeeze']))
+            self.bollinger_expansion_var.set(str(preset['expansion']))
+            self._on_bollinger_settings_change()
 
     # Event handlers - podstawowe
     def _on_exchange_change(self, event=None):

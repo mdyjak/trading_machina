@@ -46,6 +46,8 @@ class SimpleChartWidget:
         self.show_indicators = True
         self.show_cci = True
         self.show_smi = True
+        self.show_rsi = True
+        self.show_bollinger = True
 
         # Legend manager
         from .chart.legends import ChartLegendManager
@@ -58,6 +60,7 @@ class SimpleChartWidget:
         self._setup_chart()
 
         logger.info("SimpleChartWidget initialized")
+
 
     def _create_widget(self):
         """Tworzy prosty widget wykresu"""
@@ -92,6 +95,14 @@ class SimpleChartWidget:
         smi_var = tk.BooleanVar(value=True)
         ttk.Checkbutton(toolbar, text="SMI", variable=smi_var,
                         command=lambda: self._toggle_smi(smi_var.get())).pack(side=tk.LEFT, padx=5)
+
+        rsi_var = tk.BooleanVar(value=True)
+        ttk.Checkbutton(toolbar, text="RSI", variable=rsi_var,
+                        command=lambda: self._toggle_rsi(rsi_var.get())).pack(side=tk.LEFT, padx=5)
+
+        bollinger_var = tk.BooleanVar(value=True)
+        ttk.Checkbutton(toolbar, text="Bollinger", variable=bollinger_var,
+                        command=lambda: self._toggle_bollinger(bollinger_var.get())).pack(side=tk.LEFT, padx=5)
 
         grid_var = tk.BooleanVar(value=True)
         ttk.Checkbutton(toolbar, text="Grid", variable=grid_var,
@@ -165,6 +176,10 @@ class SimpleChartWidget:
                 subplots_count += 1
                 height_ratios.append(1)
 
+            if self.show_rsi and 'RSI_Professional_Main' in self.current_indicators:
+                subplots_count += 1
+                height_ratios.append(1)
+
             # Stwórz grid
             gs = self.fig.add_gridspec(subplots_count, 1, height_ratios=height_ratios, hspace=0.1)
 
@@ -190,8 +205,15 @@ class SimpleChartWidget:
             # SMI subplot
             if self.show_smi and 'SMI_Arrows_Main' in self.current_indicators:
                 self.ax_smi = self.fig.add_subplot(gs[subplot_idx], sharex=self.ax_price)
+                subplot_idx += 1
             else:
                 self.ax_smi = None
+
+            # RSI subplot
+            if self.show_rsi and 'RSI_Professional_Main' in self.current_indicators:
+                self.ax_rsi = self.fig.add_subplot(gs[subplot_idx], sharex=self.ax_price)
+            else:
+                self.ax_rsi = None
 
             # Rysuj komponenty
             self._plot_candlesticks()
@@ -208,6 +230,12 @@ class SimpleChartWidget:
 
             if self.show_smi and self.ax_smi is not None:
                 self._plot_smi_arrows()
+
+            if self.show_rsi and self.ax_rsi is not None:
+                self._plot_rsi_professional()
+
+            if self.show_bollinger:
+                self._plot_bollinger_bands()
 
             self._format_axes()
             self._add_title()
@@ -359,6 +387,56 @@ class SimpleChartWidget:
 
                 if smi_legend:
                     smi_legend.set_zorder(1000)
+
+            # === RSI LEGEND ===
+            if self.ax_rsi and self.show_rsi and 'RSI_Professional_Main' in self.current_indicators:
+                rsi_settings = self.current_indicators['RSI_Professional_Main'].get('settings', {})
+                rsi_period = rsi_settings.get('rsi_period', 14)
+
+                rsi_elements = [
+                    mlines.Line2D([0], [0], color='#FFD700', lw=2.5, label=f'RSI({rsi_period})'),
+                    mlines.Line2D([0], [0], color='#FF6B6B', lw=1.5, linestyle='--', label='Overbought'),
+                    mlines.Line2D([0], [0], color='#4ECDC4', lw=1.5, linestyle='--', label='Oversold'),
+                    mlines.Line2D([0], [0], color='#CC0000', lw=1.8, linestyle=':', label='Extreme OB'),
+                    mlines.Line2D([0], [0], color='#00CC00', lw=1.8, linestyle=':', label='Extreme OS'),
+                    mlines.Line2D([0], [0], marker='^', color='#00FF88', markersize=6,
+                                  linestyle='None', label='RSI Buy'),
+                    mlines.Line2D([0], [0], marker='v', color='#FF4444', markersize=6,
+                                  linestyle='None', label='RSI Sell'),
+                ]
+
+                rsi_legend = self.ax_rsi.legend(
+                    handles=rsi_elements,
+                    loc='upper right',
+                    fontsize=8,
+                    framealpha=0.9,
+                    facecolor='#2b2b2b',
+                    edgecolor='#404040'
+                )
+
+                if rsi_legend:
+                    rsi_legend.set_zorder(1000)
+
+            # === BOLLINGER LEGEND ===
+            if self.ax_price and self.show_bollinger and 'Bollinger_Professional_Main' in self.current_indicators:
+                bb_settings = self.current_indicators['Bollinger_Professional_Main'].get('settings', {})
+                bb_period = bb_settings.get('bb_period', 20)
+                bb_std = bb_settings.get('bb_std_dev', 2.0)
+
+                # Dodaj Bollinger do price legend (razem z TMA/EMA)
+                bollinger_elements = [
+                    mlines.Line2D([0], [0], color='#FF6B6B', lw=1.5, label=f'BB Upper ({bb_std}σ)'),
+                    mlines.Line2D([0], [0], color='#FFD700', lw=2, label=f'BB Middle (SMA{bb_period})'),
+                    mlines.Line2D([0], [0], color='#4ECDC4', lw=1.5, label=f'BB Lower ({bb_std}σ)'),
+                    mlines.Line2D([0], [0], marker='o', color='#FF9800', markersize=6,
+                                  linestyle='None', label='BB Touch'),
+                    mlines.Line2D([0], [0], marker='s', color='#F44336', markersize=6,
+                                  linestyle='None', label='BB Breakout'),
+                ]
+
+                # Rozszerz istniejące legend_elements o Bollinger
+                if legend_elements:  # Jeśli już istnieją elementy TMA/EMA
+                    legend_elements.extend(bollinger_elements)
 
         except Exception as e:
             logger.error(f"Error adding persistent legends: {e}")
@@ -687,6 +765,175 @@ class SimpleChartWidget:
         except Exception as e:
             logger.error(f"Error plotting SMI arrows: {e}")
 
+    def _plot_rsi_professional(self):
+        """Rysuje RSI Professional"""
+        if 'RSI_Professional_Main' not in self.current_indicators or self.ax_rsi is None:
+            return
+
+        try:
+            rsi_result = self.current_indicators['RSI_Professional_Main']
+            valid_from = rsi_result.get('valid_from', 15)
+            df_len = len(self.current_df)
+
+            if valid_from >= df_len:
+                return
+
+            self.ax_rsi.set_facecolor(COLORS['bg_secondary'])
+
+            if self.show_grid:
+                self.ax_rsi.grid(True, alpha=0.3, color=COLORS['grid_color'])
+
+            self.ax_rsi.tick_params(colors=COLORS['text_primary'], labelsize=8)
+
+            x_data = list(range(valid_from, df_len))
+            if not x_data:
+                return
+
+            # Główna linia RSI (z filtrowaniem NaN)
+            rsi_values = rsi_result['rsi']
+            rsi_clean = []
+            x_clean = []
+
+            for i, x in enumerate(x_data):
+                if x < len(rsi_values) and not np.isnan(rsi_values[x]):
+                    rsi_clean.append(rsi_values[x])
+                    x_clean.append(x)
+
+            if len(rsi_clean) > 0:
+                self.ax_rsi.plot(x_clean, rsi_clean, color='#FFD700',
+                                 linewidth=2.5, alpha=0.95, zorder=3)
+
+            # Poziomy referencyjne
+            levels = rsi_result.get('levels', {})
+            overbought = levels.get('overbought', 70)
+            oversold = levels.get('oversold', 30)
+            extreme_ob = levels.get('extreme_overbought', 80)
+            extreme_os = levels.get('extreme_oversold', 20)
+
+            self.ax_rsi.axhline(y=overbought, color='#FF6B6B', linestyle='--',
+                                alpha=0.8, linewidth=1.5)
+            self.ax_rsi.axhline(y=oversold, color='#4ECDC4', linestyle='--',
+                                alpha=0.8, linewidth=1.5)
+            self.ax_rsi.axhline(y=extreme_ob, color='#CC0000', linestyle=':',
+                                alpha=0.9, linewidth=1.8)
+            self.ax_rsi.axhline(y=extreme_os, color='#00CC00', linestyle=':',
+                                alpha=0.9, linewidth=1.8)
+            self.ax_rsi.axhline(y=50, color='#999999', linestyle='-',
+                                alpha=0.6, linewidth=1.2)
+
+            # Sygnały
+            for i in x_data:
+                if i >= len(rsi_result['buy_arrows']):
+                    continue
+
+                rsi_value = rsi_values[i] if i < len(rsi_values) and not np.isnan(rsi_values[i]) else None
+                if rsi_value is None:
+                    continue
+
+                if rsi_result['buy_arrows'][i] > 0:
+                    self.ax_rsi.scatter(i, rsi_value, marker='^',
+                                        color=COLORS['accent_green'], s=140,
+                                        alpha=0.9, zorder=5, edgecolors='white',
+                                        linewidth=1.8)
+
+                if rsi_result['sell_arrows'][i] > 0:
+                    self.ax_rsi.scatter(i, rsi_value, marker='v',
+                                        color=COLORS['accent_red'], s=140,
+                                        alpha=0.9, zorder=5, edgecolors='white',
+                                        linewidth=1.8)
+
+            self.ax_rsi.set_ylabel('RSI', color=COLORS['text_primary'])
+            self.ax_rsi.set_xlim(-1, df_len)
+            self.ax_rsi.set_ylim(0, 100)
+
+        except Exception as e:
+            logger.error(f"Error plotting RSI Professional: {e}")
+
+    def _plot_bollinger_bands(self):
+        """Rysuje Bollinger Bands na głównym wykresie cenowym"""
+        if 'Bollinger_Professional_Main' not in self.current_indicators:
+            return
+
+        try:
+            bb_result = self.current_indicators['Bollinger_Professional_Main']
+            valid_from = bb_result.get('valid_from', 20)
+            df_len = len(self.current_df)
+
+            if valid_from >= df_len:
+                return
+
+            x_data = list(range(valid_from, df_len))
+            if not x_data:
+                return
+
+            upper_band = bb_result['upper_band']
+            middle_band = bb_result['middle_band']
+            lower_band = bb_result['lower_band']
+
+
+            # Przygotuj dane z filtrowaniem NaN
+            upper_clean = []
+            middle_clean = []
+            lower_clean = []
+            x_clean = []
+
+            for i, x in enumerate(x_data):
+                if (x < len(upper_band) and x < len(middle_band) and x < len(lower_band) and
+                        not np.isnan(upper_band[x]) and not np.isnan(middle_band[x]) and not np.isnan(lower_band[x])):
+                    upper_clean.append(upper_band[x])
+                    middle_clean.append(middle_band[x])
+                    lower_clean.append(lower_band[x])
+                    x_clean.append(x)
+
+            if len(x_clean) == 0:
+                return
+
+            # Rysuj pasma
+            self.ax_price.plot(x_clean, upper_clean, color='#FF6B6B',
+                               linewidth=1.5, alpha=0.8, label='BB Upper')
+            self.ax_price.plot(x_clean, middle_clean, color='#FFD700',
+                               linewidth=2, alpha=0.9, label='BB Middle')
+            self.ax_price.plot(x_clean, lower_clean, color='#4ECDC4',
+                               linewidth=1.5, alpha=0.8, label='BB Lower')
+
+            # Fill między pasmami
+            self.ax_price.fill_between(x_clean, upper_clean, lower_clean,
+                                       alpha=0.1, color='#E3F2FD', zorder=1)
+
+            # Sygnały
+            prices = self._get_price_data(self.current_df)
+            for i in x_data:
+                # Upper touches (orange circles)
+                if (i < len(bb_result['upper_touch']) and
+                        bb_result['upper_touch'][i] > 0):
+                    self.ax_price.scatter(i, bb_result['upper_touch'][i],
+                                          marker='o', color='#FF9800', s=80,
+                                          alpha=0.8, edgecolors='white')
+
+                # Lower touches (green circles)
+                if (i < len(bb_result['lower_touch']) and
+                        bb_result['lower_touch'][i] > 0):
+                    self.ax_price.scatter(i, bb_result['lower_touch'][i],
+                                          marker='o', color='#4CAF50', s=80,
+                                          alpha=0.8, edgecolors='white')
+
+                # Upper breakouts (red squares)
+                if (i < len(bb_result['upper_breakout']) and
+                        bb_result['upper_breakout'][i] > 0):
+                    self.ax_price.scatter(i, bb_result['upper_breakout'][i],
+                                          marker='s', color='#F44336', s=100,
+                                          alpha=0.9, edgecolors='white')
+
+                # Lower breakouts (blue squares)
+                if (i < len(bb_result['lower_breakout']) and
+                        bb_result['lower_breakout'][i] > 0):
+                    self.ax_price.scatter(i, bb_result['lower_breakout'][i],
+                                          marker='s', color='#2196F3', s=100,
+                                          alpha=0.9, edgecolors='white')
+
+        except Exception as e:
+            logger.error(f"Error plotting Bollinger Bands: {e}")
+
     def _format_axes(self):
         """Formatuje osie wykresu"""
         if self.current_df.empty:
@@ -734,6 +981,11 @@ class SimpleChartWidget:
         if self.ax_cci is not None:
             self.ax_cci.set_xlim(-1, len(df))
 
+        # RSI axis formatting
+        if self.ax_rsi is not None:
+            self.ax_rsi.set_xlim(-1, len(df))
+            self.ax_rsi.set_ylim(0, 100)  # RSI zawsze 0-100
+
     def _add_title(self):
         """Dodaje tytuł wykresu"""
         try:
@@ -746,6 +998,10 @@ class SimpleChartWidget:
                 title += ' | TMA'
             if 'CCI_Arrows_Main' in self.current_indicators:
                 title += ' | CCI'
+            if 'RSI_Professional_Main' in self.current_indicators:
+                title += ' | RSI'
+            if 'Bollinger_Professional_Main' in self.current_indicators:
+                title += ' | BB'
 
             self.ax_price.set_title(title, color=COLORS['text_primary'],
                                     fontsize=14, fontweight='bold', pad=20)
@@ -878,6 +1134,16 @@ class SimpleChartWidget:
     def _toggle_smi(self, show: bool):
         """Przełącza SMI"""
         self.show_smi = show
+        self._plot_chart()
+
+    def _toggle_rsi(self, show: bool):
+        """Przełącza RSI"""
+        self.show_rsi = show
+        self._plot_chart()
+
+    def _toggle_bollinger(self, show: bool):
+        """Przełącza Bollinger Bands"""
+        self.show_bollinger = show
         self._plot_chart()
 
     def _toggle_grid(self, show: bool):

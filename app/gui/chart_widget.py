@@ -17,7 +17,7 @@ from ..config.settings import COLORS
 from .collapsible_panel import CollapsibleLegend
 from .chart.base import ChartDataManager, ChartLayoutManager, ChartTooltipBuilder, ChartFormatter, ChartTitleBuilder
 from .chart.legends import ChartLegendManager
-from .chart.plotters import CandlestickPlotter, VolumePlotter, TMAPlotter, CCIPlotter, GridPlotter
+from .chart.plotters import CandlestickPlotter, VolumePlotter, TMAPlotter, CCIPlotter, RSIPlotter, BollingerPlotter, GridPlotter
 from .chart.events import ChartEventHandler, ChartZoomHandler, ChartExportHandler, ChartInteractionHandler
 
 logger = logging.getLogger(__name__)
@@ -47,6 +47,8 @@ class ModularChartWidget:
         self.tma_plotter = TMAPlotter(COLORS)
         self.cci_plotter = CCIPlotter(COLORS)
         self.grid_plotter = GridPlotter(COLORS)
+        self.rsi_plotter = RSIPlotter(COLORS)
+        self.bollinger_plotter = BollingerPlotter(COLORS)
 
         # === EVENT HANDLERS ===
         self.event_handler = ChartEventHandler(
@@ -61,7 +63,7 @@ class ModularChartWidget:
         # === MATPLOTLIB COMPONENTS ===
         self.fig = None
         self.canvas = None
-        self.axes = {'price': None, 'volume': None, 'cci': None}
+        self.axes = {'price': None, 'volume': None, 'cci': None, 'rsi': None}
 
         # === DISPLAY STATE ===
         self.display_config = {
@@ -71,7 +73,9 @@ class ModularChartWidget:
             'show_cci': True,
             'show_legend': True,
             'show_tma': True,
-            'show_cci_arrows': True
+            'show_cci_arrows': True,
+            'show_rsi': True,
+            'show_bollinger': True
         }
 
         # === LEGENDS ===
@@ -134,11 +138,17 @@ class ModularChartWidget:
 
         self.tma_var = tk.BooleanVar(value=True)
         self.cci_arrows_var = tk.BooleanVar(value=True)
+        self.rsi_var = tk.BooleanVar(value=True)
+        self.bollinger_var = tk.BooleanVar(value=True)
 
         ttk.Checkbutton(indicators_frame, text="TMA", variable=self.tma_var,
                         command=self._on_tma_toggle).pack(side=tk.LEFT)
         ttk.Checkbutton(indicators_frame, text="CCI", variable=self.cci_arrows_var,
                         command=self._on_cci_arrows_toggle).pack(side=tk.LEFT)
+        ttk.Checkbutton(indicators_frame, text="RSI", variable=self.rsi_var,
+                        command=self._on_rsi_toggle).pack(side=tk.LEFT)
+        ttk.Checkbutton(indicators_frame, text="BB", variable=self.bollinger_var,
+                        command=self._on_bollinger_toggle).pack(side=tk.LEFT)
 
         # === EXPORT SECTION ===
         export_frame = ttk.LabelFrame(toolbar_frame, text="💾 Eksport", padding=2)
@@ -191,7 +201,9 @@ class ModularChartWidget:
             active_subplots = self.layout_manager.calculate_layout(
                 self.display_config['show_volume'],
                 self.display_config['show_cci'],
-                'CCI_Arrows_Main' in indicators
+                'CCI_Arrows_Main' in indicators,
+                self.display_config['show_rsi'],
+                'RSI_Professional_Main' in indicators
             )
 
             if not active_subplots:
@@ -204,6 +216,8 @@ class ModularChartWidget:
             self._plot_price_chart(df, indicators)
             self._plot_volume_chart(df)
             self._plot_cci_chart(indicators, len(df))
+            self._plot_rsi_chart(indicators, len(df))
+            self._plot_bollinger_chart(df, indicators)
 
             # Format and finalize
             self._finalize_chart(df, indicators)
@@ -220,7 +234,7 @@ class ModularChartWidget:
                                    height_ratios=height_ratios, hspace=0.05)
 
         # Reset axes
-        self.axes = {'price': None, 'volume': None, 'cci': None}
+        self.axes = {'price': None, 'volume': None, 'cci': None, 'rsi': None}
 
         # Create axes
         for i, subplot_info in enumerate(active_subplots):
@@ -232,6 +246,8 @@ class ModularChartWidget:
                 self.axes['volume'] = self.fig.add_subplot(gs[i], sharex=self.axes['price'])
             elif subplot_type == 'cci':
                 self.axes['cci'] = self.fig.add_subplot(gs[i], sharex=self.axes['price'])
+            elif subplot_type == 'rsi':
+                self.axes['rsi'] = self.fig.add_subplot(gs[i], sharex=self.axes['price'])
 
     def _plot_price_chart(self, df: pd.DataFrame, indicators: Dict):
         """Rysuje wykres cenowy z wskaźnikami"""
@@ -271,6 +287,37 @@ class ModularChartWidget:
             legend_items = self.cci_plotter.plot(self.axes['cci'], indicators['CCI_Arrows_Main'], df_len)
             if legend_items and self.display_config['show_legend']:
                 self._setup_legend('cci', self.axes['cci'], legend_items)
+
+    def _plot_rsi_chart(self, indicators: Dict, df_len: int):
+        """Rysuje wykres RSI"""
+        if (self.axes['rsi'] is None or
+                not self.display_config['show_rsi'] or
+                'RSI_Professional_Main' not in indicators):
+            return
+
+        # Grid first
+        self.grid_plotter.plot_grid(self.axes['rsi'], self.display_config['show_grid'])
+
+        # RSI indicator
+        legend_items = self.rsi_plotter.plot(self.axes['rsi'], indicators['RSI_Professional_Main'], df_len)
+        if legend_items and self.display_config['show_legend']:
+            self._setup_legend('rsi', self.axes['rsi'], legend_items)
+
+    def _plot_bollinger_chart(self, df: pd.DataFrame, indicators: Dict):
+        """Rysuje Bollinger Bands na wykresie cenowym"""
+        if (self.axes['price'] is None or
+                not self.display_config['show_bollinger'] or
+                'Bollinger_Professional_Main' not in indicators):
+            return
+
+        # Bollinger indicator (na main price chart)
+        legend_items = self.bollinger_plotter.plot(self.axes['price'], indicators['Bollinger_Professional_Main'],
+                                                   len(df))
+        if legend_items and self.display_config['show_legend']:
+            # Dodaj do price legend (nie twórz osobnej)
+            if 'price' in self.legends:
+                for handle, label in legend_items:
+                    self.legends['price'].add_item(handle, label)
 
     def _finalize_chart(self, df: pd.DataFrame, indicators: Dict):
         """Finalizuje wykres - formatowanie i tytuł"""
@@ -320,6 +367,22 @@ class ModularChartWidget:
             if self.axes['cci'] and self.display_config['show_cci']:
                 self.legend_manager.setup_cci_legend(
                     self.axes['cci'],
+                    indicators,
+                    self.display_config['show_legend']
+                )
+
+            # RSI legend
+            if self.axes.get('rsi') and self.display_config['show_rsi']:
+                self.legend_manager.setup_rsi_legend(
+                    self.axes['rsi'],
+                    indicators,
+                    self.display_config['show_legend']
+                )
+
+            # Bollinger legend (na price chart)
+            if self.axes['price'] and self.display_config['show_bollinger']:
+                self.legend_manager.setup_bollinger_legend(
+                    self.axes['price'],
                     indicators,
                     self.display_config['show_legend']
                 )
@@ -404,6 +467,18 @@ class ModularChartWidget:
         self.display_config['show_cci_arrows'] = self.cci_arrows_var.get()
         if hasattr(self.app, 'toggle_indicator'):
             self.app.toggle_indicator('CCI_Arrows_Main', self.display_config['show_cci_arrows'])
+
+    def _on_rsi_toggle(self):
+        """Toggle RSI indicator"""
+        self.display_config['show_rsi'] = self.rsi_var.get()
+        if hasattr(self.app, 'toggle_indicator'):
+            self.app.toggle_indicator('RSI_Professional_Main', self.display_config['show_rsi'])
+
+    def _on_bollinger_toggle(self):
+        """Toggle Bollinger indicator"""
+        self.display_config['show_bollinger'] = self.bollinger_var.get()
+        if hasattr(self.app, 'toggle_indicator'):
+            self.app.toggle_indicator('Bollinger_Professional_Main', self.display_config['show_bollinger'])
 
     # === EXPORT FUNCTIONS ===
     def save_chart(self):

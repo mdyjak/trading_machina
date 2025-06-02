@@ -70,11 +70,13 @@ class ChartLayoutManager:
         self.subplot_config = {
             'price': {'height': 3, 'enabled': True},
             'volume': {'height': 1, 'enabled': True},
-            'cci': {'height': 1, 'enabled': True}
+            'cci': {'height': 1, 'enabled': True},
+            'rsi': {'height': 1, 'enabled': True}
         }
 
     def calculate_layout(self, show_volume: bool, show_cci: bool,
-                         has_cci_data: bool) -> List[Dict]:
+                         has_cci_data: bool, show_rsi: bool = False,
+                         has_rsi_data: bool = False) -> List[Dict]:
         """Oblicza dynamiczny layout subplotów"""
         active_subplots = []
 
@@ -97,6 +99,14 @@ class ChartLayoutManager:
             active_subplots.append({
                 'type': 'cci',
                 'height': self.subplot_config['cci']['height']
+            })
+
+        # RSI
+        if (show_rsi and has_rsi_data and
+                self.subplot_config.get('rsi', {}).get('enabled', True)):
+            active_subplots.append({
+                'type': 'rsi',
+                'height': self.subplot_config.get('rsi', {}).get('height', 1)
             })
 
         return active_subplots
@@ -251,6 +261,10 @@ class ChartFormatter:
         if 'cci' in axes_dict and axes_dict['cci']:
             self._format_cci_axis(axes_dict['cci'], df)
 
+        # Format RSI axis
+        if 'rsi' in axes_dict and axes_dict['rsi']:
+            self._format_rsi_axis(axes_dict['rsi'], df)
+
     def _format_x_axes(self, axes_dict: Dict, df: pd.DataFrame, app_ref=None):
         """Formatuje osie X dla wszystkich subplotów"""
         df_len = len(df)
@@ -337,6 +351,19 @@ class ChartFormatter:
         ax.set_ylabel('CCI', color=self.colors['text_primary'],
                       fontweight='bold', fontsize=10)
 
+    def _format_rsi_axis(self, ax, df: pd.DataFrame):
+        """Formatuje oś RSI"""
+        ax.set_xlim(-1, len(df))
+        ax.set_ylim(0, 100)  # RSI zawsze 0-100
+        ax.set_ylabel('RSI', color=self.colors['text_primary'],
+                      fontweight='bold', fontsize=10)
+
+        # Dodaj horizontal grid lines dla kluczowych poziomów RSI
+        for level in [20, 30, 50, 70, 80]:
+            alpha = 0.3 if level == 50 else 0.2
+            ax.axhline(y=level, color=self.colors['grid_color'],
+                       linestyle=':', alpha=alpha, linewidth=0.5)
+
 
 class ChartTitleBuilder:
     """
@@ -377,6 +404,17 @@ class ChartTitleBuilder:
                 cci_settings = indicators['CCI_Arrows_Main'].get('settings', {})
                 cci_period = cci_settings.get('cci_period', 14)
                 indicators_info.append(f'CCI({cci_period})')
+
+            if 'RSI_Professional_Main' in indicators:
+                rsi_settings = indicators['RSI_Professional_Main'].get('settings', {})
+                rsi_period = rsi_settings.get('rsi_period', 14)
+                indicators_info.append(f'RSI({rsi_period})')
+
+            if 'Bollinger_Professional_Main' in indicators:
+                bb_settings = indicators['Bollinger_Professional_Main'].get('settings', {})
+                bb_period = bb_settings.get('bb_period', 20)
+                bb_std = bb_settings.get('bb_std_dev', 2.0)
+                indicators_info.append(f'BB({bb_period},{bb_std})')
 
             if indicators_info:
                 main_title += f' | {", ".join(indicators_info)}'

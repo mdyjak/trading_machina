@@ -63,6 +63,14 @@ class InfoPanel:
         self.smi_status_var = tk.StringVar(value="---")
         self.smi_value_var = tk.StringVar(value="0")
 
+        # RSI status
+        self.rsi_status_var = tk.StringVar(value="---")
+        self.rsi_value_var = tk.StringVar(value="50")
+
+        # Bollinger status
+        self.bollinger_status_var = tk.StringVar(value="---")
+        self.bollinger_position_var = tk.StringVar(value="Middle")
+
         self._create_widget()
         logger.info("InfoPanel initialized")
 
@@ -168,6 +176,36 @@ class InfoPanel:
                                          font=('Arial', 8))
         self.smi_value_label.pack(side=tk.LEFT, padx=2)
 
+        # Separator
+        ttk.Separator(indicators_row, orient='vertical').pack(side=tk.LEFT, padx=10, fill=tk.Y)
+
+        # RSI Status
+        ttk.Label(indicators_row, text="RSI:", font=('Arial', 9)).pack(side=tk.LEFT, padx=5)
+        self.rsi_status_label = ttk.Label(indicators_row, textvariable=self.rsi_status_var,
+                                          font=('Arial', 9, 'bold'))
+        self.rsi_status_label.pack(side=tk.LEFT, padx=5)
+
+        # RSI Value
+        ttk.Label(indicators_row, text="Val:", font=('Arial', 8)).pack(side=tk.LEFT, padx=5)
+        self.rsi_value_label = ttk.Label(indicators_row, textvariable=self.rsi_value_var,
+                                         font=('Arial', 8))
+        self.rsi_value_label.pack(side=tk.LEFT, padx=2)
+
+        # Separator
+        ttk.Separator(indicators_row, orient='vertical').pack(side=tk.LEFT, padx=10, fill=tk.Y)
+
+        # Bollinger Status
+        ttk.Label(indicators_row, text="BB:", font=('Arial', 9)).pack(side=tk.LEFT, padx=5)
+        self.bollinger_status_label = ttk.Label(indicators_row, textvariable=self.bollinger_status_var,
+                                                font=('Arial', 9, 'bold'))
+        self.bollinger_status_label.pack(side=tk.LEFT, padx=5)
+
+        # Bollinger Position
+        ttk.Label(indicators_row, text="Pos:", font=('Arial', 8)).pack(side=tk.LEFT, padx=5)
+        self.bollinger_position_label = ttk.Label(indicators_row, textvariable=self.bollinger_position_var,
+                                                  font=('Arial', 8))
+        self.bollinger_position_label.pack(side=tk.LEFT, padx=2)
+
     def _create_status_row(self):
         """Tworzy rząd ze statusem"""
         status_row = ttk.Frame(self.widget)
@@ -228,6 +266,8 @@ class InfoPanel:
         self._update_cci_status()
         self._update_ema_status()
         self._update_smi_status()
+        self._update_rsi_status()
+        self._update_bollinger_status()
 
     def _update_tma_status(self):
         """Aktualizuje status TMA"""
@@ -502,6 +542,178 @@ class InfoPanel:
             logger.error(f"Error updating SMI status: {e}")
             self.smi_status_var.set("---")
             self.smi_value_var.set("0")
+
+    def _update_rsi_status(self):
+        """Aktualizuje status RSI Professional"""
+        try:
+            if not hasattr(self.app, 'get_indicator_manager'):
+                self.rsi_status_var.set("---")
+                self.rsi_value_var.set("50")
+                return
+
+            indicator_manager = self.app.get_indicator_manager()
+            rsi_indicator = indicator_manager.get_indicator('RSI_Professional_Main')
+
+            if rsi_indicator and rsi_indicator.enabled:
+                # Pobierz ostatnie wyniki
+                results = indicator_manager.get_results('RSI_Professional_Main')
+                if results:
+                    signals = rsi_indicator.get_latest_signal(results)
+
+                    signal = signals.get('signal', 'none')
+                    zone = signals.get('zone', 'neutral')
+                    rsi_value = signals.get('rsi_value', 50)
+                    signal_age = signals.get('signal_age', 0)
+
+                    # Aktualizuj wartość RSI
+                    self.rsi_value_var.set(f"{rsi_value:.0f}")
+
+                    # Określ status i kolor
+                    if signal == 'buy' and signal_age <= 5:
+                        status_text = "🡱 BUY"
+                        color = COLORS['accent_green']
+                    elif signal == 'sell' and signal_age <= 5:
+                        status_text = "🡳 SELL"
+                        color = COLORS['accent_red']
+                    elif zone == 'extreme_overbought':
+                        status_text = "EXTR OB"
+                        color = COLORS['accent_red']
+                    elif zone == 'extreme_oversold':
+                        status_text = "EXTR OS"
+                        color = COLORS['accent_green']
+                    elif zone == 'overbought':
+                        status_text = "OB"
+                        color = COLORS['accent_red']
+                    elif zone == 'oversold':
+                        status_text = "OS"
+                        color = COLORS['accent_green']
+                    elif zone == 'bullish':
+                        status_text = "↗ UP"
+                        color = COLORS['accent_green']
+                    elif zone == 'bearish':
+                        status_text = "↘ DOWN"
+                        color = COLORS['accent_red']
+                    else:
+                        status_text = "NEUTRAL"
+                        color = 'gray'
+
+                    # Dodaj oznaczenie dywergencji
+                    if signals.get('divergence', False):
+                        status_text += " ⚡"
+
+                    self.rsi_status_var.set(status_text)
+                    self.rsi_status_label.configure(foreground=color)
+
+                    # Kolor wartości RSI
+                    if rsi_value >= 80:
+                        self.rsi_value_label.configure(foreground=COLORS['accent_red'])
+                    elif rsi_value <= 20:
+                        self.rsi_value_label.configure(foreground=COLORS['accent_green'])
+                    elif rsi_value >= 70:
+                        self.rsi_value_label.configure(foreground='orange')
+                    elif rsi_value <= 30:
+                        self.rsi_value_label.configure(foreground='lightgreen')
+                    else:
+                        self.rsi_value_label.configure(foreground=COLORS['text_primary'])
+
+                else:
+                    self.rsi_status_var.set("CALC...")
+                    self.rsi_value_var.set("50")
+                    self.rsi_status_label.configure(foreground='orange')
+                    self.rsi_value_label.configure(foreground='orange')
+            else:
+                self.rsi_status_var.set("OFF")
+                self.rsi_value_var.set("50")
+                self.rsi_status_label.configure(foreground='gray')
+                self.rsi_value_label.configure(foreground='gray')
+
+        except Exception as e:
+            logger.error(f"Error updating RSI status: {e}")
+            self.rsi_status_var.set("---")
+            self.rsi_value_var.set("50")
+
+    def _update_bollinger_status(self):
+        """Aktualizuje status Bollinger Bands Professional"""
+        try:
+            if not hasattr(self.app, 'get_indicator_manager'):
+                self.bollinger_status_var.set("---")
+                self.bollinger_position_var.set("Middle")
+                return
+
+            indicator_manager = self.app.get_indicator_manager()
+            bollinger_indicator = indicator_manager.get_indicator('Bollinger_Professional_Main')
+
+            if bollinger_indicator and bollinger_indicator.enabled:
+                # Pobierz ostatnie wyniki
+                results = indicator_manager.get_results('Bollinger_Professional_Main')
+                if results:
+                    signals = bollinger_indicator.get_latest_signal(results)
+
+                    signal = signals.get('signal', 'none')
+                    band_position = signals.get('band_position', 'middle')
+                    squeeze = signals.get('squeeze', False)
+                    expansion = signals.get('expansion', False)
+                    signal_age = signals.get('signal_age', 0)
+
+                    # Aktualizuj pozycję w pasmach
+                    position_text = band_position.replace('_', ' ').title()
+                    self.bollinger_position_var.set(position_text)
+
+                    # Określ status i kolor
+                    if signal == 'strong_buy' and signal_age <= 3:
+                        status_text = "🡱 STR BUY"
+                        color = COLORS['accent_green']
+                    elif signal == 'strong_sell' and signal_age <= 3:
+                        status_text = "🡳 STR SELL"
+                        color = COLORS['accent_red']
+                    elif signal == 'buy_setup' and signal_age <= 5:
+                        status_text = "🔵 BUY SETUP"
+                        color = COLORS['accent_green']
+                    elif signal == 'sell_setup' and signal_age <= 5:
+                        status_text = "🔴 SELL SETUP"
+                        color = COLORS['accent_red']
+                    elif squeeze:
+                        status_text = "🤏 SQUEEZE"
+                        color = COLORS['accent_gold']
+                    elif expansion:
+                        status_text = "📈 EXPANSION"
+                        color = COLORS['accent_blue']
+                    elif band_position == 'upper':
+                        status_text = "⬆️ UPPER"
+                        color = COLORS['accent_red']
+                    elif band_position == 'lower':
+                        status_text = "⬇️ LOWER"
+                        color = COLORS['accent_green']
+                    else:
+                        status_text = "➡️ MIDDLE"
+                        color = 'gray'
+
+                    self.bollinger_status_var.set(status_text)
+                    self.bollinger_status_label.configure(foreground=color)
+
+                    # Kolor pozycji
+                    if 'upper' in band_position:
+                        self.bollinger_position_label.configure(foreground=COLORS['accent_red'])
+                    elif 'lower' in band_position:
+                        self.bollinger_position_label.configure(foreground=COLORS['accent_green'])
+                    else:
+                        self.bollinger_position_label.configure(foreground=COLORS['text_primary'])
+
+                else:
+                    self.bollinger_status_var.set("CALC...")
+                    self.bollinger_position_var.set("Middle")
+                    self.bollinger_status_label.configure(foreground='orange')
+                    self.bollinger_position_label.configure(foreground='orange')
+            else:
+                self.bollinger_status_var.set("OFF")
+                self.bollinger_position_var.set("Middle")
+                self.bollinger_status_label.configure(foreground='gray')
+                self.bollinger_position_label.configure(foreground='gray')
+
+        except Exception as e:
+            logger.error(f"Error updating Bollinger status: {e}")
+            self.bollinger_status_var.set("---")
+            self.bollinger_position_var.set("Middle")
 
     def set_status(self, message: str):
         """Ustawia status"""

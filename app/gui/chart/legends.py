@@ -145,6 +145,63 @@ class ChartLegendManager:
         if legend_items:
             self.legends['smi'].clear_and_rebuild(legend_items)
 
+    def setup_rsi_legend(self, ax, indicators: Dict, show_legend: bool = True):
+        """Konfiguruje legendę dla RSI"""
+        if not show_legend or 'RSI_Professional_Main' not in indicators:
+            return
+
+        from ..collapsible_panel import CollapsibleLegend
+
+        rsi_settings = indicators['RSI_Professional_Main'].get('settings', {})
+        rsi_period = rsi_settings.get('rsi_period', 14)
+        overbought = rsi_settings.get('overbought_level', 70)
+        oversold = rsi_settings.get('oversold_level', 30)
+
+        legend_items = [
+            (None, f"RSI({rsi_period})", '#FFD700'),
+            (None, f"Overbought ({overbought})", '#FF6B6B'),
+            (None, f"Oversold ({oversold})", '#4ECDC4'),
+            (None, "Midline (50)", '#999999'),
+            (None, "RSI Buy Signal", self.colors['accent_green']),
+            (None, "RSI Sell Signal", self.colors['accent_red']),
+            (None, "Bullish Div", self.colors['accent_blue']),
+            (None, "Bearish Div", self.colors['accent_pink'])
+        ]
+
+        if 'rsi' not in self.legends:
+            self.legends['rsi'] = CollapsibleLegend(ax, "RSI Professional", 'upper right')
+
+        if legend_items:
+            self.legends['rsi'].clear_and_rebuild(legend_items)
+
+    def setup_bollinger_legend(self, ax, indicators: Dict, show_legend: bool = True):
+        """Konfiguruje legendę dla Bollinger Bands"""
+        if not show_legend or 'Bollinger_Professional_Main' not in indicators:
+            return
+
+        from ..collapsible_panel import CollapsibleLegend
+
+        bb_settings = indicators['Bollinger_Professional_Main'].get('settings', {})
+        bb_period = bb_settings.get('bb_period', 20)
+        bb_std = bb_settings.get('bb_std_dev', 2.0)
+
+        legend_items = [
+            (None, f"Upper Band ({bb_period}, +{bb_std}σ)", '#FF6B6B'),
+            (None, f"Middle Band (SMA {bb_period})", '#FFD700'),
+            (None, f"Lower Band ({bb_period}, -{bb_std}σ)", '#4ECDC4'),
+            (None, "Upper Touch", '#FF9800'),
+            (None, "Lower Touch", '#4CAF50'),
+            (None, "Upper Breakout", '#F44336'),
+            (None, "Lower Breakout", '#2196F3'),
+            (None, "Band Fill", '#E3F2FD')
+        ]
+
+        if 'bollinger' not in self.legends:
+            self.legends['bollinger'] = CollapsibleLegend(ax, "Bollinger Bands", 'upper left')
+
+        if legend_items:
+            self.legends['bollinger'].clear_and_rebuild(legend_items)
+
     def toggle_all_legends(self):
         """Przełącza wszystkie legendy"""
         for legend in self.legends.values():
