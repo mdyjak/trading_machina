@@ -2,7 +2,7 @@
 """
 Panel informacyjny - statystyki rynkowe i wskaźniki
 """
-
+import colorsys
 import tkinter as tk
 from tkinter import ttk
 from datetime import datetime
@@ -99,7 +99,7 @@ class InfoPanel:
         # Cena
         ttk.Label(left_info, text="Cena:", font=('Arial', 11, 'bold')).pack(side=tk.LEFT)
         price_label = ttk.Label(left_info, textvariable=self.price_var,
-                                font=('Arial', 16, 'bold'), foreground=COLORS['text_primary'])
+                                font=('Arial', 16, 'bold'), foreground='#B900CD')
         price_label.pack(side=tk.LEFT, padx=10)
 
         # Zmiana ceny

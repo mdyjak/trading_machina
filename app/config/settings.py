@@ -20,7 +20,7 @@ class ExchangeConfig:
 class AppSettings:
     """Główne ustawienia aplikacji"""
     # GUI
-    window_title: str = "Professional Trading Platform - MT5 Style"
+    window_title: str = "HUSTLER 3.0"
     window_size: tuple = (1800, 1000)
     theme: str = "dark"
 
@@ -89,9 +89,9 @@ POPULAR_SYMBOLS = [
 
 # Kolory dla dark theme
 COLORS = {
-    'bg_primary': '#2b2b2b',
-    'bg_secondary': '#1e1e1e',
-    'text_primary': '#ffffff',
+    'bg_primary': '#1a1a1a',
+    'bg_secondary': '#0d1117',
+    'text_primary': '#F1B95D',
     'text_secondary': '#cccccc',
     'accent_green': '#00ff88',
     'accent_red': '#ff4444',

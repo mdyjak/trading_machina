@@ -10,7 +10,21 @@ import logging
 import traceback
 from pathlib import Path
 
-# Dodaj ścieżki do PYTHONPATH
+# Fix dla PyInstaller
+if getattr(sys, 'frozen', False):
+    # Running in PyInstaller bundle
+    application_path = sys._MEIPASS
+else:
+    # Running in normal Python environment
+    application_path = os.path.dirname(os.path.abspath(__file__))
+
+# Dodaj ścieżki
+sys.path.insert(0, application_path)
+sys.path.insert(0, os.path.join(application_path, 'app'))
+sys.path.insert(0, os.path.join(application_path, 'indicators'))
+sys.path.insert(0, os.path.join(application_path, 'utils'))
+
+# Fix dla PyInstaller
 project_root = Path(__file__).parent
 sys.path.insert(0, str(project_root))
 
@@ -75,13 +89,13 @@ def main():
     try:
         # Sprawdź dependencies
         if not check_dependencies():
-            input("Naciśnij Enter aby zakończyć...")
+            print("Aplikacja zakończona.")
             return
 
         check_ccxt()
         setup_logging()
 
-        print("🚀 Uruchamianie Professional Trading Platform...")
+        print("🚀 HUSTLER 3.0")
         print("📊 Obsługiwane giełdy: Binance, Bybit, OKX, Kraken, Coinbase, KuCoin")
         print("⏰ Timeframes: M1, M5, M15, M30, H1, H4, D1, W1")
         print("📈 Wskaźniki: TMA + CCI + EMA + SMI + RSI + Bollinger Bands")
@@ -137,7 +151,7 @@ def main():
         print("4. Spróbuj uruchomić z uprawnieniami administratora")
         print("5. Sprawdź log w folderze logs/")
 
-        input("\nNaciśnij Enter aby zakończyć...")
+        print("Aplikacja zakończona.")
 
     finally:
         print("\n🔚 Zamykanie aplikacji...")

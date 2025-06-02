@@ -9509,3 +9509,1256 @@ AttributeError: 'QuickActionsPanel' object has no attribute 'get_widget'
 2025-06-02 19:20:58,229 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
 2025-06-02 19:21:02,546 - app.main - INFO - Auto-refresh stopped
 2025-06-02 19:21:03,555 - app.main - INFO - Application closed
+2025-06-02 19:23:34,417 - root - WARNING - TA-Lib not available. Using custom implementation.
+2025-06-02 19:23:34,417 - root - WARNING - pandas-ta not available. Using custom implementation.
+2025-06-02 19:23:34,446 - indicators.manager - INFO - IndicatorManager initialized
+2025-06-02 19:23:34,947 - app.gui.control_panel - INFO - Enhanced ControlPanel initialized
+2025-06-02 19:23:34,987 - app.gui.info_panel - INFO - InfoPanel initialized
+2025-06-02 19:23:34,996 - app.gui.simple_chart_widget - INFO - Simple chart setup completed
+2025-06-02 19:23:34,996 - app.gui.simple_chart_widget - INFO - SimpleChartWidget initialized
+2025-06-02 19:23:35,015 - app.gui.main_window - INFO - EnhancedMainWindow initialized
+2025-06-02 19:23:35,015 - indicators.manager - INFO - Registered indicator class: TMA
+2025-06-02 19:23:35,015 - indicators.manager - INFO - Registered indicator class: CCI_Arrows
+2025-06-02 19:23:35,015 - indicators.manager - INFO - Registered indicator class: EMA_Crossover
+2025-06-02 19:23:35,015 - indicators.manager - INFO - Registered indicator class: SMI_Arrows
+2025-06-02 19:23:35,015 - indicators.manager - INFO - Registered indicator class: RSI_Professional
+2025-06-02 19:23:35,015 - indicators.manager - INFO - Registered indicator class: Bollinger_Professional
+2025-06-02 19:23:35,015 - indicators.base - INFO - Initialized indicator: TMA_Main
+2025-06-02 19:23:35,015 - indicators.tma - INFO - TMA Indicator created: {'half_length': 12, 'atr_period': 100, 'atr_multiplier': 2.0, 'angle_threshold': 4, 'price_type': 'weighted', 'symbol_type': 'crypto'}
+2025-06-02 19:23:35,015 - indicators.manager - INFO - Added indicator: TMA_Main (TMA)
+2025-06-02 19:23:35,015 - indicators.base - INFO - Initialized indicator: CCI_Arrows_Main
+2025-06-02 19:23:35,015 - indicators.cci_arrows - INFO - CCI Arrows Indicator created: {'cci_period': 14, 'overbought_level': 100, 'oversold_level': -100, 'extreme_level': 200, 'arrow_sensitivity': 'medium', 'use_divergence': True, 'min_bars_between_signals': 3, 'price_type': 'typical'}
+2025-06-02 19:23:35,015 - indicators.manager - INFO - Added indicator: CCI_Arrows_Main (CCI_Arrows)
+2025-06-02 19:23:35,015 - indicators.base - INFO - Initialized indicator: EMA_Crossover_Main
+2025-06-02 19:23:35,015 - indicators.ema_crossover - INFO - EMA Crossover Indicator created: {'fast_ema_period': 12, 'slow_ema_period': 26, 'signal_ema_period': 9, 'min_separation': 0.0005, 'use_signal_line': True, 'trend_strength_bars': 5, 'crossover_confirmation': 2, 'price_type': 'close'}
+2025-06-02 19:23:35,015 - indicators.manager - INFO - Added indicator: EMA_Crossover_Main (EMA_Crossover)
+2025-06-02 19:23:35,015 - indicators.base - INFO - Initialized indicator: SMI_Arrows_Main
+2025-06-02 19:23:35,015 - indicators.smi_arrows - INFO - SMI Arrows Indicator created: {'smi_period': 10, 'first_smoothing': 3, 'second_smoothing': 3, 'signal_smoothing': 3, 'overbought_level': 40, 'oversold_level': -40, 'extreme_level': 60, 'arrow_sensitivity': 'medium', 'use_divergence': True, 'min_bars_between_signals': 3, 'price_type': 'close'}
+2025-06-02 19:23:35,015 - indicators.manager - INFO - Added indicator: SMI_Arrows_Main (SMI_Arrows)
+2025-06-02 19:23:35,015 - indicators.base - INFO - Initialized indicator: RSI_Professional_Main
+2025-06-02 19:23:35,016 - indicators.rsi_professional - INFO - RSI Professional Indicator created: {'rsi_period': 14, 'overbought_level': 70, 'oversold_level': 30, 'extreme_overbought': 80, 'extreme_oversold': 20, 'signal_sensitivity': 'medium', 'use_divergence': True, 'min_bars_between_signals': 3, 'price_type': 'close', 'smoothing_method': 'wilder', 'precision_digits': 6}
+2025-06-02 19:23:35,016 - indicators.manager - INFO - Added indicator: RSI_Professional_Main (RSI_Professional)
+2025-06-02 19:23:35,016 - indicators.base - INFO - Initialized indicator: Bollinger_Professional_Main
+2025-06-02 19:23:35,016 - indicators.bollinger_professional - INFO - Using custom implementation for Bollinger Bands calculation
+2025-06-02 19:23:35,016 - indicators.bollinger_professional - INFO - Bollinger Bands Professional created: {'bb_period': 20, 'bb_std_dev': 2.0, 'ma_type': 'sma', 'calculation_method': 'auto', 'price_type': 'close', 'squeeze_threshold': 0.1, 'expansion_threshold': 0.25, 'touch_sensitivity': 0.02, 'breakout_confirmation': 2, 'use_percent_b': True, 'dynamic_periods': False, 'min_periods': 10, 'max_periods': 50, 'precision_digits': 6}, Method: custom
+2025-06-02 19:23:35,016 - indicators.manager - INFO - Added indicator: Bollinger_Professional_Main (Bollinger_Professional)
+2025-06-02 19:23:35,016 - app.main - INFO - Indicators setup completed - TMA + CCI + EMA + SMI + RSI + Bollinger
+2025-06-02 19:23:38,223 - app.data.exchange_manager - INFO - Connected to Binance (3693 markets)
+2025-06-02 19:23:38,223 - app.main - INFO - Connected to default exchange: Binance
+2025-06-02 19:23:38,223 - app.main - INFO - TradingPlatform initialized
+2025-06-02 19:23:38,780 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:23:38,791 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:23:38,793 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:23:38,803 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 5 buy signals, 1 sell signals
+2025-06-02 19:23:38,818 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:23:38,824 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:23:39,234 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:23:39,500 - app.main - INFO - Auto-refresh started
+2025-06-02 19:23:40,171 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:23:40,183 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:23:40,185 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:23:40,194 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 5 buy signals, 1 sell signals
+2025-06-02 19:23:40,209 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:23:40,216 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:23:40,650 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:23:46,428 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:23:46,438 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:23:46,441 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:23:46,450 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 5 buy signals, 1 sell signals
+2025-06-02 19:23:46,466 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:23:46,475 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:23:46,828 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:23:52,707 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:23:52,718 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:23:52,720 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:23:52,728 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 5 buy signals, 1 sell signals
+2025-06-02 19:23:52,743 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:23:52,749 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:23:53,083 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:23:58,845 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:23:58,856 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:23:58,858 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:23:58,867 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 5 buy signals, 1 sell signals
+2025-06-02 19:23:58,881 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:23:58,889 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:23:59,391 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:24:05,164 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:24:05,176 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:24:05,179 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:24:05,186 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 5 buy signals, 1 sell signals
+2025-06-02 19:24:05,202 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:24:05,208 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:24:05,638 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:24:11,396 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:24:11,406 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:24:11,410 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:24:11,419 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 5 buy signals, 1 sell signals
+2025-06-02 19:24:11,433 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:24:11,439 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:24:11,870 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:24:17,633 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:24:17,643 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:24:17,646 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:24:17,654 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 5 buy signals, 1 sell signals
+2025-06-02 19:24:17,668 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:24:17,675 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:24:18,003 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:24:23,770 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:24:23,780 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:24:23,783 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:24:23,791 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 5 buy signals, 1 sell signals
+2025-06-02 19:24:23,805 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:24:23,812 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:24:24,268 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:24:30,032 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:24:30,043 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:24:30,046 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:24:30,054 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 5 buy signals, 1 sell signals
+2025-06-02 19:24:30,069 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:24:30,076 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:24:30,519 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:24:36,285 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:24:36,296 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:24:36,299 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:24:36,307 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 5 buy signals, 1 sell signals
+2025-06-02 19:24:36,325 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:24:36,331 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:24:36,785 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:24:42,558 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:24:42,568 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:24:42,571 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:24:42,578 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 5 buy signals, 1 sell signals
+2025-06-02 19:24:42,593 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:24:42,599 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:24:42,928 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:24:48,798 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:24:48,809 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:24:48,811 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:24:48,820 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 5 buy signals, 1 sell signals
+2025-06-02 19:24:48,834 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:24:48,840 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:24:49,170 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:24:54,934 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:24:54,945 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:24:54,948 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:24:54,956 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 5 buy signals, 1 sell signals
+2025-06-02 19:24:54,970 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:24:54,978 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:24:55,450 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:25:01,213 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:25:01,223 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:25:01,225 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:25:01,233 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 5 buy signals, 1 sell signals
+2025-06-02 19:25:01,249 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:25:01,255 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:25:01,711 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:25:07,472 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:25:07,481 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:25:07,484 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:25:07,492 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 5 buy signals, 1 sell signals
+2025-06-02 19:25:07,506 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:25:07,513 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:25:07,859 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:25:11,508 - indicators.base - INFO - SMI_Arrows_Main: Ustawienia zaktualizowane: {'smi_period': 10, 'first_smoothing': 3, 'second_smoothing': 2, 'overbought_level': 40, 'oversold_level': -40, 'arrow_sensitivity': 'medium'}
+2025-06-02 19:25:12,050 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:25:12,060 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:25:12,063 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:25:12,072 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 5 buy signals, 1 sell signals
+2025-06-02 19:25:12,087 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:25:12,094 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:25:12,416 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:25:12,624 - indicators.base - INFO - SMI_Arrows_Main: Ustawienia zaktualizowane: {'smi_period': 10, 'first_smoothing': 3, 'second_smoothing': 1, 'overbought_level': 40, 'oversold_level': -40, 'arrow_sensitivity': 'medium'}
+2025-06-02 19:25:13,167 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:25:13,178 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:25:13,181 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:25:13,188 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 6 buy signals, 2 sell signals
+2025-06-02 19:25:13,203 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:25:13,210 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:25:13,665 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:25:14,422 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:25:14,433 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:25:14,436 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:25:14,445 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 6 buy signals, 2 sell signals
+2025-06-02 19:25:14,461 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:25:14,468 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:25:14,938 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:25:20,704 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:25:20,714 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:25:20,717 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:25:20,724 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 6 buy signals, 2 sell signals
+2025-06-02 19:25:20,739 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:25:20,745 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:25:21,181 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:25:26,942 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:25:26,953 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:25:26,956 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:25:26,963 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 6 buy signals, 2 sell signals
+2025-06-02 19:25:26,978 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:25:26,986 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:25:27,340 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:25:33,116 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:25:33,127 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:25:33,130 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:25:33,138 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 6 buy signals, 2 sell signals
+2025-06-02 19:25:33,151 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:25:33,158 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:25:33,620 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:25:39,400 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:25:39,414 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:25:39,418 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:25:39,429 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 6 buy signals, 2 sell signals
+2025-06-02 19:25:39,452 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:25:39,464 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:25:40,036 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:25:45,836 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:25:45,848 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:25:45,853 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:25:45,865 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 6 buy signals, 2 sell signals
+2025-06-02 19:25:45,881 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:25:45,887 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:25:46,431 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:25:50,421 - app.main - INFO - Auto-refresh stopped
+2025-06-02 19:25:51,805 - app.main - INFO - Application closed
+2025-06-02 19:26:31,334 - root - WARNING - TA-Lib not available. Using custom implementation.
+2025-06-02 19:26:31,335 - root - WARNING - pandas-ta not available. Using custom implementation.
+2025-06-02 19:26:31,354 - indicators.manager - INFO - IndicatorManager initialized
+2025-06-02 19:26:31,843 - app.gui.control_panel - INFO - Enhanced ControlPanel initialized
+2025-06-02 19:26:31,883 - app.gui.info_panel - INFO - InfoPanel initialized
+2025-06-02 19:26:31,892 - app.gui.simple_chart_widget - INFO - Simple chart setup completed
+2025-06-02 19:26:31,893 - app.gui.simple_chart_widget - INFO - SimpleChartWidget initialized
+2025-06-02 19:26:31,910 - app.gui.main_window - INFO - EnhancedMainWindow initialized
+2025-06-02 19:26:31,910 - indicators.manager - INFO - Registered indicator class: TMA
+2025-06-02 19:26:31,910 - indicators.manager - INFO - Registered indicator class: CCI_Arrows
+2025-06-02 19:26:31,910 - indicators.manager - INFO - Registered indicator class: EMA_Crossover
+2025-06-02 19:26:31,910 - indicators.manager - INFO - Registered indicator class: SMI_Arrows
+2025-06-02 19:26:31,910 - indicators.manager - INFO - Registered indicator class: RSI_Professional
+2025-06-02 19:26:31,910 - indicators.manager - INFO - Registered indicator class: Bollinger_Professional
+2025-06-02 19:26:31,910 - indicators.base - INFO - Initialized indicator: TMA_Main
+2025-06-02 19:26:31,910 - indicators.tma - INFO - TMA Indicator created: {'half_length': 12, 'atr_period': 100, 'atr_multiplier': 2.0, 'angle_threshold': 4, 'price_type': 'weighted', 'symbol_type': 'crypto'}
+2025-06-02 19:26:31,910 - indicators.manager - INFO - Added indicator: TMA_Main (TMA)
+2025-06-02 19:26:31,910 - indicators.base - INFO - Initialized indicator: CCI_Arrows_Main
+2025-06-02 19:26:31,910 - indicators.cci_arrows - INFO - CCI Arrows Indicator created: {'cci_period': 14, 'overbought_level': 100, 'oversold_level': -100, 'extreme_level': 200, 'arrow_sensitivity': 'medium', 'use_divergence': True, 'min_bars_between_signals': 3, 'price_type': 'typical'}
+2025-06-02 19:26:31,911 - indicators.manager - INFO - Added indicator: CCI_Arrows_Main (CCI_Arrows)
+2025-06-02 19:26:31,911 - indicators.base - INFO - Initialized indicator: EMA_Crossover_Main
+2025-06-02 19:26:31,911 - indicators.ema_crossover - INFO - EMA Crossover Indicator created: {'fast_ema_period': 12, 'slow_ema_period': 26, 'signal_ema_period': 9, 'min_separation': 0.0005, 'use_signal_line': True, 'trend_strength_bars': 5, 'crossover_confirmation': 2, 'price_type': 'close'}
+2025-06-02 19:26:31,911 - indicators.manager - INFO - Added indicator: EMA_Crossover_Main (EMA_Crossover)
+2025-06-02 19:26:31,911 - indicators.base - INFO - Initialized indicator: SMI_Arrows_Main
+2025-06-02 19:26:31,911 - indicators.smi_arrows - INFO - SMI Arrows Indicator created: {'smi_period': 10, 'first_smoothing': 3, 'second_smoothing': 3, 'signal_smoothing': 3, 'overbought_level': 40, 'oversold_level': -40, 'extreme_level': 60, 'arrow_sensitivity': 'medium', 'use_divergence': True, 'min_bars_between_signals': 3, 'price_type': 'close'}
+2025-06-02 19:26:31,911 - indicators.manager - INFO - Added indicator: SMI_Arrows_Main (SMI_Arrows)
+2025-06-02 19:26:31,911 - indicators.base - INFO - Initialized indicator: RSI_Professional_Main
+2025-06-02 19:26:31,911 - indicators.rsi_professional - INFO - RSI Professional Indicator created: {'rsi_period': 14, 'overbought_level': 70, 'oversold_level': 30, 'extreme_overbought': 80, 'extreme_oversold': 20, 'signal_sensitivity': 'medium', 'use_divergence': True, 'min_bars_between_signals': 3, 'price_type': 'close', 'smoothing_method': 'wilder', 'precision_digits': 6}
+2025-06-02 19:26:31,911 - indicators.manager - INFO - Added indicator: RSI_Professional_Main (RSI_Professional)
+2025-06-02 19:26:31,911 - indicators.base - INFO - Initialized indicator: Bollinger_Professional_Main
+2025-06-02 19:26:31,911 - indicators.bollinger_professional - INFO - Using custom implementation for Bollinger Bands calculation
+2025-06-02 19:26:31,911 - indicators.bollinger_professional - INFO - Bollinger Bands Professional created: {'bb_period': 20, 'bb_std_dev': 2.0, 'ma_type': 'sma', 'calculation_method': 'auto', 'price_type': 'close', 'squeeze_threshold': 0.1, 'expansion_threshold': 0.25, 'touch_sensitivity': 0.02, 'breakout_confirmation': 2, 'use_percent_b': True, 'dynamic_periods': False, 'min_periods': 10, 'max_periods': 50, 'precision_digits': 6}, Method: custom
+2025-06-02 19:26:31,911 - indicators.manager - INFO - Added indicator: Bollinger_Professional_Main (Bollinger_Professional)
+2025-06-02 19:26:31,911 - app.main - INFO - Indicators setup completed - TMA + CCI + EMA + SMI + RSI + Bollinger
+2025-06-02 19:26:35,509 - app.data.exchange_manager - INFO - Connected to Binance (3693 markets)
+2025-06-02 19:26:35,509 - app.main - INFO - Connected to default exchange: Binance
+2025-06-02 19:26:35,509 - app.main - INFO - TradingPlatform initialized
+2025-06-02 19:26:36,065 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:26:36,075 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:26:36,078 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:26:36,087 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 5 buy signals, 1 sell signals
+2025-06-02 19:26:36,101 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:26:36,108 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:26:36,493 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:26:36,764 - app.main - INFO - Auto-refresh started
+2025-06-02 19:26:37,420 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:26:37,432 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:26:37,435 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:26:37,444 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 5 buy signals, 1 sell signals
+2025-06-02 19:26:37,461 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:26:37,469 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:26:37,964 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:26:43,754 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:26:43,765 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:26:43,768 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:26:43,776 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 5 buy signals, 1 sell signals
+2025-06-02 19:26:43,791 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:26:43,797 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:26:44,137 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:26:49,628 - app.main - INFO - Auto-refresh stopped
+2025-06-02 19:26:50,075 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:26:50,086 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:26:50,088 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:26:50,096 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 5 buy signals, 1 sell signals
+2025-06-02 19:26:50,111 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:26:50,116 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:26:50,447 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:26:51,718 - app.main - INFO - Application closed
+2025-06-02 19:28:08,816 - root - WARNING - TA-Lib not available. Using custom implementation.
+2025-06-02 19:28:08,816 - root - WARNING - pandas-ta not available. Using custom implementation.
+2025-06-02 19:28:08,836 - indicators.manager - INFO - IndicatorManager initialized
+2025-06-02 19:28:09,307 - app.gui.control_panel - INFO - Enhanced ControlPanel initialized
+2025-06-02 19:28:09,346 - app.gui.info_panel - INFO - InfoPanel initialized
+2025-06-02 19:28:09,357 - app.gui.simple_chart_widget - INFO - Simple chart setup completed
+2025-06-02 19:28:09,357 - app.gui.simple_chart_widget - INFO - SimpleChartWidget initialized
+2025-06-02 19:28:09,375 - app.gui.main_window - INFO - EnhancedMainWindow initialized
+2025-06-02 19:28:09,375 - indicators.manager - INFO - Registered indicator class: TMA
+2025-06-02 19:28:09,375 - indicators.manager - INFO - Registered indicator class: CCI_Arrows
+2025-06-02 19:28:09,375 - indicators.manager - INFO - Registered indicator class: EMA_Crossover
+2025-06-02 19:28:09,375 - indicators.manager - INFO - Registered indicator class: SMI_Arrows
+2025-06-02 19:28:09,375 - indicators.manager - INFO - Registered indicator class: RSI_Professional
+2025-06-02 19:28:09,375 - indicators.manager - INFO - Registered indicator class: Bollinger_Professional
+2025-06-02 19:28:09,375 - indicators.base - INFO - Initialized indicator: TMA_Main
+2025-06-02 19:28:09,375 - indicators.tma - INFO - TMA Indicator created: {'half_length': 12, 'atr_period': 100, 'atr_multiplier': 2.0, 'angle_threshold': 4, 'price_type': 'weighted', 'symbol_type': 'crypto'}
+2025-06-02 19:28:09,375 - indicators.manager - INFO - Added indicator: TMA_Main (TMA)
+2025-06-02 19:28:09,375 - indicators.base - INFO - Initialized indicator: CCI_Arrows_Main
+2025-06-02 19:28:09,375 - indicators.cci_arrows - INFO - CCI Arrows Indicator created: {'cci_period': 14, 'overbought_level': 100, 'oversold_level': -100, 'extreme_level': 200, 'arrow_sensitivity': 'medium', 'use_divergence': True, 'min_bars_between_signals': 3, 'price_type': 'typical'}
+2025-06-02 19:28:09,375 - indicators.manager - INFO - Added indicator: CCI_Arrows_Main (CCI_Arrows)
+2025-06-02 19:28:09,375 - indicators.base - INFO - Initialized indicator: EMA_Crossover_Main
+2025-06-02 19:28:09,375 - indicators.ema_crossover - INFO - EMA Crossover Indicator created: {'fast_ema_period': 12, 'slow_ema_period': 26, 'signal_ema_period': 9, 'min_separation': 0.0005, 'use_signal_line': True, 'trend_strength_bars': 5, 'crossover_confirmation': 2, 'price_type': 'close'}
+2025-06-02 19:28:09,375 - indicators.manager - INFO - Added indicator: EMA_Crossover_Main (EMA_Crossover)
+2025-06-02 19:28:09,375 - indicators.base - INFO - Initialized indicator: SMI_Arrows_Main
+2025-06-02 19:28:09,376 - indicators.smi_arrows - INFO - SMI Arrows Indicator created: {'smi_period': 10, 'first_smoothing': 3, 'second_smoothing': 3, 'signal_smoothing': 3, 'overbought_level': 40, 'oversold_level': -40, 'extreme_level': 60, 'arrow_sensitivity': 'medium', 'use_divergence': True, 'min_bars_between_signals': 3, 'price_type': 'close'}
+2025-06-02 19:28:09,376 - indicators.manager - INFO - Added indicator: SMI_Arrows_Main (SMI_Arrows)
+2025-06-02 19:28:09,376 - indicators.base - INFO - Initialized indicator: RSI_Professional_Main
+2025-06-02 19:28:09,376 - indicators.rsi_professional - INFO - RSI Professional Indicator created: {'rsi_period': 14, 'overbought_level': 70, 'oversold_level': 30, 'extreme_overbought': 80, 'extreme_oversold': 20, 'signal_sensitivity': 'medium', 'use_divergence': True, 'min_bars_between_signals': 3, 'price_type': 'close', 'smoothing_method': 'wilder', 'precision_digits': 6}
+2025-06-02 19:28:09,376 - indicators.manager - INFO - Added indicator: RSI_Professional_Main (RSI_Professional)
+2025-06-02 19:28:09,376 - indicators.base - INFO - Initialized indicator: Bollinger_Professional_Main
+2025-06-02 19:28:09,376 - indicators.bollinger_professional - INFO - Using custom implementation for Bollinger Bands calculation
+2025-06-02 19:28:09,376 - indicators.bollinger_professional - INFO - Bollinger Bands Professional created: {'bb_period': 20, 'bb_std_dev': 2.0, 'ma_type': 'sma', 'calculation_method': 'auto', 'price_type': 'close', 'squeeze_threshold': 0.1, 'expansion_threshold': 0.25, 'touch_sensitivity': 0.02, 'breakout_confirmation': 2, 'use_percent_b': True, 'dynamic_periods': False, 'min_periods': 10, 'max_periods': 50, 'precision_digits': 6}, Method: custom
+2025-06-02 19:28:09,376 - indicators.manager - INFO - Added indicator: Bollinger_Professional_Main (Bollinger_Professional)
+2025-06-02 19:28:09,376 - app.main - INFO - Indicators setup completed - TMA + CCI + EMA + SMI + RSI + Bollinger
+2025-06-02 19:28:11,838 - app.data.exchange_manager - INFO - Connected to Binance (3693 markets)
+2025-06-02 19:28:11,838 - app.main - INFO - Connected to default exchange: Binance
+2025-06-02 19:28:11,838 - app.main - INFO - TradingPlatform initialized
+2025-06-02 19:28:12,392 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:28:12,401 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:28:12,405 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:28:12,413 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 5 buy signals, 1 sell signals
+2025-06-02 19:28:12,427 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:28:12,434 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:28:12,830 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:28:13,097 - app.main - INFO - Auto-refresh started
+2025-06-02 19:28:13,776 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:28:13,788 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:28:13,791 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:28:13,800 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 5 buy signals, 1 sell signals
+2025-06-02 19:28:13,815 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:28:13,823 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:28:14,262 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:28:16,426 - app.main - INFO - Auto-refresh stopped
+2025-06-02 19:28:18,519 - app.main - INFO - Application closed
+2025-06-02 19:29:23,035 - root - WARNING - TA-Lib not available. Using custom implementation.
+2025-06-02 19:29:23,035 - root - WARNING - pandas-ta not available. Using custom implementation.
+2025-06-02 19:29:23,063 - indicators.manager - INFO - IndicatorManager initialized
+2025-06-02 19:29:23,539 - app.gui.control_panel - INFO - Enhanced ControlPanel initialized
+2025-06-02 19:29:23,579 - app.gui.info_panel - INFO - InfoPanel initialized
+2025-06-02 19:29:23,589 - app.gui.simple_chart_widget - INFO - Simple chart setup completed
+2025-06-02 19:29:23,589 - app.gui.simple_chart_widget - INFO - SimpleChartWidget initialized
+2025-06-02 19:29:23,606 - app.gui.main_window - INFO - EnhancedMainWindow initialized
+2025-06-02 19:29:23,606 - indicators.manager - INFO - Registered indicator class: TMA
+2025-06-02 19:29:23,606 - indicators.manager - INFO - Registered indicator class: CCI_Arrows
+2025-06-02 19:29:23,606 - indicators.manager - INFO - Registered indicator class: EMA_Crossover
+2025-06-02 19:29:23,606 - indicators.manager - INFO - Registered indicator class: SMI_Arrows
+2025-06-02 19:29:23,606 - indicators.manager - INFO - Registered indicator class: RSI_Professional
+2025-06-02 19:29:23,606 - indicators.manager - INFO - Registered indicator class: Bollinger_Professional
+2025-06-02 19:29:23,606 - indicators.base - INFO - Initialized indicator: TMA_Main
+2025-06-02 19:29:23,606 - indicators.tma - INFO - TMA Indicator created: {'half_length': 12, 'atr_period': 100, 'atr_multiplier': 2.0, 'angle_threshold': 4, 'price_type': 'weighted', 'symbol_type': 'crypto'}
+2025-06-02 19:29:23,606 - indicators.manager - INFO - Added indicator: TMA_Main (TMA)
+2025-06-02 19:29:23,606 - indicators.base - INFO - Initialized indicator: CCI_Arrows_Main
+2025-06-02 19:29:23,607 - indicators.cci_arrows - INFO - CCI Arrows Indicator created: {'cci_period': 14, 'overbought_level': 100, 'oversold_level': -100, 'extreme_level': 200, 'arrow_sensitivity': 'medium', 'use_divergence': True, 'min_bars_between_signals': 3, 'price_type': 'typical'}
+2025-06-02 19:29:23,607 - indicators.manager - INFO - Added indicator: CCI_Arrows_Main (CCI_Arrows)
+2025-06-02 19:29:23,607 - indicators.base - INFO - Initialized indicator: EMA_Crossover_Main
+2025-06-02 19:29:23,607 - indicators.ema_crossover - INFO - EMA Crossover Indicator created: {'fast_ema_period': 12, 'slow_ema_period': 26, 'signal_ema_period': 9, 'min_separation': 0.0005, 'use_signal_line': True, 'trend_strength_bars': 5, 'crossover_confirmation': 2, 'price_type': 'close'}
+2025-06-02 19:29:23,607 - indicators.manager - INFO - Added indicator: EMA_Crossover_Main (EMA_Crossover)
+2025-06-02 19:29:23,607 - indicators.base - INFO - Initialized indicator: SMI_Arrows_Main
+2025-06-02 19:29:23,607 - indicators.smi_arrows - INFO - SMI Arrows Indicator created: {'smi_period': 10, 'first_smoothing': 3, 'second_smoothing': 3, 'signal_smoothing': 3, 'overbought_level': 40, 'oversold_level': -40, 'extreme_level': 60, 'arrow_sensitivity': 'medium', 'use_divergence': True, 'min_bars_between_signals': 3, 'price_type': 'close'}
+2025-06-02 19:29:23,607 - indicators.manager - INFO - Added indicator: SMI_Arrows_Main (SMI_Arrows)
+2025-06-02 19:29:23,607 - indicators.base - INFO - Initialized indicator: RSI_Professional_Main
+2025-06-02 19:29:23,607 - indicators.rsi_professional - INFO - RSI Professional Indicator created: {'rsi_period': 14, 'overbought_level': 70, 'oversold_level': 30, 'extreme_overbought': 80, 'extreme_oversold': 20, 'signal_sensitivity': 'medium', 'use_divergence': True, 'min_bars_between_signals': 3, 'price_type': 'close', 'smoothing_method': 'wilder', 'precision_digits': 6}
+2025-06-02 19:29:23,607 - indicators.manager - INFO - Added indicator: RSI_Professional_Main (RSI_Professional)
+2025-06-02 19:29:23,607 - indicators.base - INFO - Initialized indicator: Bollinger_Professional_Main
+2025-06-02 19:29:23,607 - indicators.bollinger_professional - INFO - Using custom implementation for Bollinger Bands calculation
+2025-06-02 19:29:23,607 - indicators.bollinger_professional - INFO - Bollinger Bands Professional created: {'bb_period': 20, 'bb_std_dev': 2.0, 'ma_type': 'sma', 'calculation_method': 'auto', 'price_type': 'close', 'squeeze_threshold': 0.1, 'expansion_threshold': 0.25, 'touch_sensitivity': 0.02, 'breakout_confirmation': 2, 'use_percent_b': True, 'dynamic_periods': False, 'min_periods': 10, 'max_periods': 50, 'precision_digits': 6}, Method: custom
+2025-06-02 19:29:23,607 - indicators.manager - INFO - Added indicator: Bollinger_Professional_Main (Bollinger_Professional)
+2025-06-02 19:29:23,607 - app.main - INFO - Indicators setup completed - TMA + CCI + EMA + SMI + RSI + Bollinger
+2025-06-02 19:29:26,884 - app.data.exchange_manager - INFO - Connected to Binance (3693 markets)
+2025-06-02 19:29:26,885 - app.main - INFO - Connected to default exchange: Binance
+2025-06-02 19:29:26,885 - app.main - INFO - TradingPlatform initialized
+2025-06-02 19:29:27,435 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:29:27,446 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:29:27,448 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:29:27,457 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 5 buy signals, 1 sell signals
+2025-06-02 19:29:27,471 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:29:27,478 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:29:27,879 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:29:28,164 - app.main - INFO - Auto-refresh started
+2025-06-02 19:29:28,819 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:29:28,830 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:29:28,833 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:29:28,841 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 5 buy signals, 1 sell signals
+2025-06-02 19:29:28,859 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:29:28,867 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:29:29,363 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:29:35,155 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:29:35,166 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:29:35,169 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:29:35,177 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 5 buy signals, 1 sell signals
+2025-06-02 19:29:35,193 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:29:35,199 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:29:35,579 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:29:41,498 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:29:41,509 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:29:41,511 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:29:41,521 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 5 buy signals, 1 sell signals
+2025-06-02 19:29:41,538 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:29:41,544 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:29:41,906 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:29:47,710 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:29:47,725 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:29:47,729 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:29:47,739 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 5 buy signals, 1 sell signals
+2025-06-02 19:29:47,758 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:29:47,769 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:29:48,380 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:29:54,216 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:29:54,226 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:29:54,228 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:29:54,237 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:29:54,253 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:29:54,259 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:29:54,716 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:30:00,500 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:30:00,511 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:30:00,514 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:30:00,522 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:30:00,538 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:30:00,544 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:30:01,004 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:30:06,817 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:30:06,827 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:30:06,830 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:30:06,839 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:30:06,855 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:30:06,862 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:30:07,239 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:30:13,121 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:30:13,132 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:30:13,134 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:30:13,141 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:30:13,156 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:30:13,163 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:30:13,483 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:30:19,258 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:30:19,269 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:30:19,271 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:30:19,279 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:30:19,296 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:30:19,302 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:30:19,785 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:30:25,569 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:30:25,580 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:30:25,583 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:30:25,592 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:30:25,609 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:30:25,615 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:30:26,103 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:30:31,883 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:30:31,894 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:30:31,897 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:30:31,906 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:30:31,920 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:30:31,927 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:30:32,283 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:30:38,153 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:30:38,165 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:30:38,168 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:30:38,175 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:30:38,193 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:30:38,200 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:30:38,553 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:30:44,317 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:30:44,327 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:30:44,330 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:30:44,339 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:30:44,353 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:30:44,360 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:30:44,848 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:30:50,615 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:30:50,627 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:30:50,630 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:30:50,638 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:30:50,653 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:30:50,660 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:30:51,123 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:30:56,921 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:30:56,935 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:30:56,938 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:30:56,948 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:30:56,965 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:30:56,972 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:30:57,727 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:31:03,653 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:31:03,663 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:31:03,666 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:31:03,673 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:31:03,690 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:31:03,696 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:31:04,055 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:31:09,818 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:31:09,829 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:31:09,832 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:31:09,839 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:31:09,855 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:31:09,861 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:31:10,369 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:31:16,167 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:31:16,177 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:31:16,180 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:31:16,189 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:31:16,206 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:31:16,212 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:31:16,673 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:31:22,442 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:31:22,453 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:31:22,455 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:31:22,464 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:31:22,480 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:31:22,489 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:31:22,950 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:31:28,728 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:31:28,739 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:31:28,743 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:31:28,751 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:31:28,767 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:31:28,773 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:31:29,134 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:31:34,916 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:31:34,925 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:31:34,928 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:31:34,936 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:31:34,952 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:31:34,958 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:31:35,423 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:31:41,225 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:31:41,237 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:31:41,240 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:31:41,249 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:31:41,266 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:31:41,273 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:31:41,856 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:31:47,662 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:31:47,671 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:31:47,675 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:31:47,683 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:31:47,701 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:31:47,707 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:31:48,197 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:31:54,009 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:31:54,021 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:31:54,023 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:31:54,033 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:31:54,049 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:31:54,056 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:31:54,411 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:32:00,298 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:32:00,309 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:32:00,312 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:32:00,320 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:32:00,337 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:32:00,343 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:32:00,704 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:32:06,479 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:32:06,490 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:32:06,493 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:32:06,501 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:32:06,517 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:32:06,523 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:32:07,014 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:32:12,814 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:32:12,826 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:32:12,828 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:32:12,836 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:32:12,853 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:32:12,859 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:32:13,325 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:32:19,097 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:32:19,107 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:32:19,110 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:32:19,117 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:32:19,133 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:32:19,141 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:32:19,486 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:32:25,369 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:32:25,379 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:32:25,381 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:32:25,391 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:32:25,406 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:32:25,413 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:32:25,761 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:32:31,546 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:32:31,556 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:32:31,559 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:32:31,568 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:32:31,585 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:32:31,591 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:32:32,078 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:32:37,853 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:32:37,864 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:32:37,867 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:32:37,875 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:32:37,893 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:32:37,900 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:32:38,358 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:32:44,124 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:32:44,136 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:32:44,139 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:32:44,148 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:32:44,166 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:32:44,173 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:32:44,543 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:32:50,438 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:32:50,448 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:32:50,451 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:32:50,459 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:32:50,474 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:32:50,481 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:32:50,821 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:32:56,597 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:32:56,607 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:32:56,610 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:32:56,618 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:32:56,633 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:32:56,640 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:32:57,111 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:33:02,873 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:33:02,884 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:33:02,887 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:33:02,895 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:33:02,911 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:33:02,918 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:33:03,376 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:33:09,140 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:33:09,150 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:33:09,154 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:33:09,161 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:33:09,178 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:33:09,184 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:33:09,866 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:33:13,617 - root - WARNING - TA-Lib not available. Using custom implementation.
+2025-06-02 19:33:13,617 - root - WARNING - pandas-ta not available. Using custom implementation.
+2025-06-02 19:33:13,647 - indicators.manager - INFO - IndicatorManager initialized
+2025-06-02 19:33:14,125 - app.gui.control_panel - INFO - Enhanced ControlPanel initialized
+2025-06-02 19:33:14,168 - app.gui.info_panel - INFO - InfoPanel initialized
+2025-06-02 19:33:14,177 - app.gui.simple_chart_widget - INFO - Simple chart setup completed
+2025-06-02 19:33:14,177 - app.gui.simple_chart_widget - INFO - SimpleChartWidget initialized
+2025-06-02 19:33:14,195 - app.gui.main_window - INFO - EnhancedMainWindow initialized
+2025-06-02 19:33:14,195 - indicators.manager - INFO - Registered indicator class: TMA
+2025-06-02 19:33:14,195 - indicators.manager - INFO - Registered indicator class: CCI_Arrows
+2025-06-02 19:33:14,195 - indicators.manager - INFO - Registered indicator class: EMA_Crossover
+2025-06-02 19:33:14,195 - indicators.manager - INFO - Registered indicator class: SMI_Arrows
+2025-06-02 19:33:14,195 - indicators.manager - INFO - Registered indicator class: RSI_Professional
+2025-06-02 19:33:14,195 - indicators.manager - INFO - Registered indicator class: Bollinger_Professional
+2025-06-02 19:33:14,195 - indicators.base - INFO - Initialized indicator: TMA_Main
+2025-06-02 19:33:14,195 - indicators.tma - INFO - TMA Indicator created: {'half_length': 12, 'atr_period': 100, 'atr_multiplier': 2.0, 'angle_threshold': 4, 'price_type': 'weighted', 'symbol_type': 'crypto'}
+2025-06-02 19:33:14,195 - indicators.manager - INFO - Added indicator: TMA_Main (TMA)
+2025-06-02 19:33:14,195 - indicators.base - INFO - Initialized indicator: CCI_Arrows_Main
+2025-06-02 19:33:14,195 - indicators.cci_arrows - INFO - CCI Arrows Indicator created: {'cci_period': 14, 'overbought_level': 100, 'oversold_level': -100, 'extreme_level': 200, 'arrow_sensitivity': 'medium', 'use_divergence': True, 'min_bars_between_signals': 3, 'price_type': 'typical'}
+2025-06-02 19:33:14,195 - indicators.manager - INFO - Added indicator: CCI_Arrows_Main (CCI_Arrows)
+2025-06-02 19:33:14,195 - indicators.base - INFO - Initialized indicator: EMA_Crossover_Main
+2025-06-02 19:33:14,195 - indicators.ema_crossover - INFO - EMA Crossover Indicator created: {'fast_ema_period': 12, 'slow_ema_period': 26, 'signal_ema_period': 9, 'min_separation': 0.0005, 'use_signal_line': True, 'trend_strength_bars': 5, 'crossover_confirmation': 2, 'price_type': 'close'}
+2025-06-02 19:33:14,195 - indicators.manager - INFO - Added indicator: EMA_Crossover_Main (EMA_Crossover)
+2025-06-02 19:33:14,195 - indicators.base - INFO - Initialized indicator: SMI_Arrows_Main
+2025-06-02 19:33:14,195 - indicators.smi_arrows - INFO - SMI Arrows Indicator created: {'smi_period': 10, 'first_smoothing': 3, 'second_smoothing': 3, 'signal_smoothing': 3, 'overbought_level': 40, 'oversold_level': -40, 'extreme_level': 60, 'arrow_sensitivity': 'medium', 'use_divergence': True, 'min_bars_between_signals': 3, 'price_type': 'close'}
+2025-06-02 19:33:14,195 - indicators.manager - INFO - Added indicator: SMI_Arrows_Main (SMI_Arrows)
+2025-06-02 19:33:14,196 - indicators.base - INFO - Initialized indicator: RSI_Professional_Main
+2025-06-02 19:33:14,196 - indicators.rsi_professional - INFO - RSI Professional Indicator created: {'rsi_period': 14, 'overbought_level': 70, 'oversold_level': 30, 'extreme_overbought': 80, 'extreme_oversold': 20, 'signal_sensitivity': 'medium', 'use_divergence': True, 'min_bars_between_signals': 3, 'price_type': 'close', 'smoothing_method': 'wilder', 'precision_digits': 6}
+2025-06-02 19:33:14,196 - indicators.manager - INFO - Added indicator: RSI_Professional_Main (RSI_Professional)
+2025-06-02 19:33:14,196 - indicators.base - INFO - Initialized indicator: Bollinger_Professional_Main
+2025-06-02 19:33:14,196 - indicators.bollinger_professional - INFO - Using custom implementation for Bollinger Bands calculation
+2025-06-02 19:33:14,196 - indicators.bollinger_professional - INFO - Bollinger Bands Professional created: {'bb_period': 20, 'bb_std_dev': 2.0, 'ma_type': 'sma', 'calculation_method': 'auto', 'price_type': 'close', 'squeeze_threshold': 0.1, 'expansion_threshold': 0.25, 'touch_sensitivity': 0.02, 'breakout_confirmation': 2, 'use_percent_b': True, 'dynamic_periods': False, 'min_periods': 10, 'max_periods': 50, 'precision_digits': 6}, Method: custom
+2025-06-02 19:33:14,196 - indicators.manager - INFO - Added indicator: Bollinger_Professional_Main (Bollinger_Professional)
+2025-06-02 19:33:14,196 - app.main - INFO - Indicators setup completed - TMA + CCI + EMA + SMI + RSI + Bollinger
+2025-06-02 19:33:17,331 - app.data.exchange_manager - INFO - Connected to Binance (3693 markets)
+2025-06-02 19:33:17,331 - app.main - INFO - Connected to default exchange: Binance
+2025-06-02 19:33:17,331 - app.main - INFO - TradingPlatform initialized
+2025-06-02 19:33:17,903 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:33:17,914 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:33:17,916 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:33:17,924 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:33:17,938 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:33:17,946 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:33:18,326 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:33:18,584 - app.main - INFO - Auto-refresh started
+2025-06-02 19:33:19,268 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:33:19,287 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:33:19,292 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:33:19,306 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:33:19,324 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:33:19,334 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:33:19,803 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:33:25,558 - app.main - INFO - Auto-refresh stopped
+2025-06-02 19:33:25,654 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:33:25,663 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:33:25,666 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:33:25,675 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:33:25,689 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:33:25,696 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:33:26,019 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:33:27,645 - app.main - INFO - Application closed
+2025-06-02 19:33:37,257 - root - WARNING - TA-Lib not available. Using custom implementation.
+2025-06-02 19:33:37,257 - root - WARNING - pandas-ta not available. Using custom implementation.
+2025-06-02 19:33:37,279 - indicators.manager - INFO - IndicatorManager initialized
+2025-06-02 19:33:37,758 - app.gui.control_panel - INFO - Enhanced ControlPanel initialized
+2025-06-02 19:33:37,796 - app.gui.info_panel - INFO - InfoPanel initialized
+2025-06-02 19:33:37,806 - app.gui.simple_chart_widget - INFO - Simple chart setup completed
+2025-06-02 19:33:37,806 - app.gui.simple_chart_widget - INFO - SimpleChartWidget initialized
+2025-06-02 19:33:37,824 - app.gui.main_window - INFO - EnhancedMainWindow initialized
+2025-06-02 19:33:37,824 - indicators.manager - INFO - Registered indicator class: TMA
+2025-06-02 19:33:37,824 - indicators.manager - INFO - Registered indicator class: CCI_Arrows
+2025-06-02 19:33:37,824 - indicators.manager - INFO - Registered indicator class: EMA_Crossover
+2025-06-02 19:33:37,824 - indicators.manager - INFO - Registered indicator class: SMI_Arrows
+2025-06-02 19:33:37,824 - indicators.manager - INFO - Registered indicator class: RSI_Professional
+2025-06-02 19:33:37,824 - indicators.manager - INFO - Registered indicator class: Bollinger_Professional
+2025-06-02 19:33:37,824 - indicators.base - INFO - Initialized indicator: TMA_Main
+2025-06-02 19:33:37,824 - indicators.tma - INFO - TMA Indicator created: {'half_length': 12, 'atr_period': 100, 'atr_multiplier': 2.0, 'angle_threshold': 4, 'price_type': 'weighted', 'symbol_type': 'crypto'}
+2025-06-02 19:33:37,824 - indicators.manager - INFO - Added indicator: TMA_Main (TMA)
+2025-06-02 19:33:37,824 - indicators.base - INFO - Initialized indicator: CCI_Arrows_Main
+2025-06-02 19:33:37,824 - indicators.cci_arrows - INFO - CCI Arrows Indicator created: {'cci_period': 14, 'overbought_level': 100, 'oversold_level': -100, 'extreme_level': 200, 'arrow_sensitivity': 'medium', 'use_divergence': True, 'min_bars_between_signals': 3, 'price_type': 'typical'}
+2025-06-02 19:33:37,824 - indicators.manager - INFO - Added indicator: CCI_Arrows_Main (CCI_Arrows)
+2025-06-02 19:33:37,825 - indicators.base - INFO - Initialized indicator: EMA_Crossover_Main
+2025-06-02 19:33:37,825 - indicators.ema_crossover - INFO - EMA Crossover Indicator created: {'fast_ema_period': 12, 'slow_ema_period': 26, 'signal_ema_period': 9, 'min_separation': 0.0005, 'use_signal_line': True, 'trend_strength_bars': 5, 'crossover_confirmation': 2, 'price_type': 'close'}
+2025-06-02 19:33:37,825 - indicators.manager - INFO - Added indicator: EMA_Crossover_Main (EMA_Crossover)
+2025-06-02 19:33:37,825 - indicators.base - INFO - Initialized indicator: SMI_Arrows_Main
+2025-06-02 19:33:37,825 - indicators.smi_arrows - INFO - SMI Arrows Indicator created: {'smi_period': 10, 'first_smoothing': 3, 'second_smoothing': 3, 'signal_smoothing': 3, 'overbought_level': 40, 'oversold_level': -40, 'extreme_level': 60, 'arrow_sensitivity': 'medium', 'use_divergence': True, 'min_bars_between_signals': 3, 'price_type': 'close'}
+2025-06-02 19:33:37,825 - indicators.manager - INFO - Added indicator: SMI_Arrows_Main (SMI_Arrows)
+2025-06-02 19:33:37,825 - indicators.base - INFO - Initialized indicator: RSI_Professional_Main
+2025-06-02 19:33:37,825 - indicators.rsi_professional - INFO - RSI Professional Indicator created: {'rsi_period': 14, 'overbought_level': 70, 'oversold_level': 30, 'extreme_overbought': 80, 'extreme_oversold': 20, 'signal_sensitivity': 'medium', 'use_divergence': True, 'min_bars_between_signals': 3, 'price_type': 'close', 'smoothing_method': 'wilder', 'precision_digits': 6}
+2025-06-02 19:33:37,825 - indicators.manager - INFO - Added indicator: RSI_Professional_Main (RSI_Professional)
+2025-06-02 19:33:37,825 - indicators.base - INFO - Initialized indicator: Bollinger_Professional_Main
+2025-06-02 19:33:37,825 - indicators.bollinger_professional - INFO - Using custom implementation for Bollinger Bands calculation
+2025-06-02 19:33:37,825 - indicators.bollinger_professional - INFO - Bollinger Bands Professional created: {'bb_period': 20, 'bb_std_dev': 2.0, 'ma_type': 'sma', 'calculation_method': 'auto', 'price_type': 'close', 'squeeze_threshold': 0.1, 'expansion_threshold': 0.25, 'touch_sensitivity': 0.02, 'breakout_confirmation': 2, 'use_percent_b': True, 'dynamic_periods': False, 'min_periods': 10, 'max_periods': 50, 'precision_digits': 6}, Method: custom
+2025-06-02 19:33:37,825 - indicators.manager - INFO - Added indicator: Bollinger_Professional_Main (Bollinger_Professional)
+2025-06-02 19:33:37,825 - app.main - INFO - Indicators setup completed - TMA + CCI + EMA + SMI + RSI + Bollinger
+2025-06-02 19:33:40,868 - app.data.exchange_manager - INFO - Connected to Binance (3693 markets)
+2025-06-02 19:33:40,868 - app.main - INFO - Connected to default exchange: Binance
+2025-06-02 19:33:40,868 - app.main - INFO - TradingPlatform initialized
+2025-06-02 19:33:41,426 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:33:41,437 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:33:41,440 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:33:41,448 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:33:41,463 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:33:41,470 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:33:41,855 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:33:42,117 - app.main - INFO - Auto-refresh started
+2025-06-02 19:33:42,780 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:33:42,791 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 4 sell signals
+2025-06-02 19:33:42,794 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:33:42,803 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:33:42,817 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:33:42,824 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:33:43,256 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:33:48,405 - app.main - INFO - Auto-refresh stopped
+2025-06-02 19:33:48,566 - app.main - INFO - Application closed
+2025-06-02 19:37:06,597 - root - WARNING - TA-Lib not available. Using custom implementation.
+2025-06-02 19:37:06,598 - root - WARNING - pandas-ta not available. Using custom implementation.
+2025-06-02 19:37:06,620 - indicators.manager - INFO - IndicatorManager initialized
+2025-06-02 19:37:07,146 - app.gui.control_panel - INFO - Enhanced ControlPanel initialized
+2025-06-02 19:37:07,194 - app.gui.info_panel - INFO - InfoPanel initialized
+2025-06-02 19:37:07,207 - app.gui.simple_chart_widget - INFO - Simple chart setup completed
+2025-06-02 19:37:07,207 - app.gui.simple_chart_widget - INFO - SimpleChartWidget initialized
+2025-06-02 19:37:07,227 - app.gui.main_window - INFO - EnhancedMainWindow initialized
+2025-06-02 19:37:07,227 - indicators.manager - INFO - Registered indicator class: TMA
+2025-06-02 19:37:07,227 - indicators.manager - INFO - Registered indicator class: CCI_Arrows
+2025-06-02 19:37:07,227 - indicators.manager - INFO - Registered indicator class: EMA_Crossover
+2025-06-02 19:37:07,227 - indicators.manager - INFO - Registered indicator class: SMI_Arrows
+2025-06-02 19:37:07,227 - indicators.manager - INFO - Registered indicator class: RSI_Professional
+2025-06-02 19:37:07,227 - indicators.manager - INFO - Registered indicator class: Bollinger_Professional
+2025-06-02 19:37:07,228 - indicators.base - INFO - Initialized indicator: TMA_Main
+2025-06-02 19:37:07,228 - indicators.tma - INFO - TMA Indicator created: {'half_length': 12, 'atr_period': 100, 'atr_multiplier': 2.0, 'angle_threshold': 4, 'price_type': 'weighted', 'symbol_type': 'crypto'}
+2025-06-02 19:37:07,228 - indicators.manager - INFO - Added indicator: TMA_Main (TMA)
+2025-06-02 19:37:07,228 - indicators.base - INFO - Initialized indicator: CCI_Arrows_Main
+2025-06-02 19:37:07,228 - indicators.cci_arrows - INFO - CCI Arrows Indicator created: {'cci_period': 14, 'overbought_level': 100, 'oversold_level': -100, 'extreme_level': 200, 'arrow_sensitivity': 'medium', 'use_divergence': True, 'min_bars_between_signals': 3, 'price_type': 'typical'}
+2025-06-02 19:37:07,228 - indicators.manager - INFO - Added indicator: CCI_Arrows_Main (CCI_Arrows)
+2025-06-02 19:37:07,228 - indicators.base - INFO - Initialized indicator: EMA_Crossover_Main
+2025-06-02 19:37:07,228 - indicators.ema_crossover - INFO - EMA Crossover Indicator created: {'fast_ema_period': 12, 'slow_ema_period': 26, 'signal_ema_period': 9, 'min_separation': 0.0005, 'use_signal_line': True, 'trend_strength_bars': 5, 'crossover_confirmation': 2, 'price_type': 'close'}
+2025-06-02 19:37:07,228 - indicators.manager - INFO - Added indicator: EMA_Crossover_Main (EMA_Crossover)
+2025-06-02 19:37:07,228 - indicators.base - INFO - Initialized indicator: SMI_Arrows_Main
+2025-06-02 19:37:07,228 - indicators.smi_arrows - INFO - SMI Arrows Indicator created: {'smi_period': 10, 'first_smoothing': 3, 'second_smoothing': 3, 'signal_smoothing': 3, 'overbought_level': 40, 'oversold_level': -40, 'extreme_level': 60, 'arrow_sensitivity': 'medium', 'use_divergence': True, 'min_bars_between_signals': 3, 'price_type': 'close'}
+2025-06-02 19:37:07,228 - indicators.manager - INFO - Added indicator: SMI_Arrows_Main (SMI_Arrows)
+2025-06-02 19:37:07,228 - indicators.base - INFO - Initialized indicator: RSI_Professional_Main
+2025-06-02 19:37:07,228 - indicators.rsi_professional - INFO - RSI Professional Indicator created: {'rsi_period': 14, 'overbought_level': 70, 'oversold_level': 30, 'extreme_overbought': 80, 'extreme_oversold': 20, 'signal_sensitivity': 'medium', 'use_divergence': True, 'min_bars_between_signals': 3, 'price_type': 'close', 'smoothing_method': 'wilder', 'precision_digits': 6}
+2025-06-02 19:37:07,228 - indicators.manager - INFO - Added indicator: RSI_Professional_Main (RSI_Professional)
+2025-06-02 19:37:07,228 - indicators.base - INFO - Initialized indicator: Bollinger_Professional_Main
+2025-06-02 19:37:07,228 - indicators.bollinger_professional - INFO - Using custom implementation for Bollinger Bands calculation
+2025-06-02 19:37:07,229 - indicators.bollinger_professional - INFO - Bollinger Bands Professional created: {'bb_period': 20, 'bb_std_dev': 2.0, 'ma_type': 'sma', 'calculation_method': 'auto', 'price_type': 'close', 'squeeze_threshold': 0.1, 'expansion_threshold': 0.25, 'touch_sensitivity': 0.02, 'breakout_confirmation': 2, 'use_percent_b': True, 'dynamic_periods': False, 'min_periods': 10, 'max_periods': 50, 'precision_digits': 6}, Method: custom
+2025-06-02 19:37:07,229 - indicators.manager - INFO - Added indicator: Bollinger_Professional_Main (Bollinger_Professional)
+2025-06-02 19:37:07,229 - app.main - INFO - Indicators setup completed - TMA + CCI + EMA + SMI + RSI + Bollinger
+2025-06-02 19:37:09,634 - app.data.exchange_manager - INFO - Connected to Binance (3693 markets)
+2025-06-02 19:37:09,634 - app.main - INFO - Connected to default exchange: Binance
+2025-06-02 19:37:09,634 - app.main - INFO - TradingPlatform initialized
+2025-06-02 19:37:10,173 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:37:10,185 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 5 sell signals
+2025-06-02 19:37:10,188 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:37:10,196 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:37:10,210 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:37:10,217 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:37:10,623 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:37:10,913 - app.main - INFO - Auto-refresh started
+2025-06-02 19:37:11,659 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:37:11,670 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 5 sell signals
+2025-06-02 19:37:11,673 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:37:11,681 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:37:11,697 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:37:11,705 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:37:12,183 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:37:14,731 - app.main - INFO - Auto-refresh stopped
+2025-06-02 19:37:16,820 - app.main - INFO - Application closed
+2025-06-02 19:37:30,833 - root - WARNING - TA-Lib not available. Using custom implementation.
+2025-06-02 19:37:30,833 - root - WARNING - pandas-ta not available. Using custom implementation.
+2025-06-02 19:37:30,851 - indicators.manager - INFO - IndicatorManager initialized
+2025-06-02 19:37:31,329 - app.gui.control_panel - INFO - Enhanced ControlPanel initialized
+2025-06-02 19:37:31,370 - app.gui.info_panel - INFO - InfoPanel initialized
+2025-06-02 19:37:31,379 - app.gui.simple_chart_widget - INFO - Simple chart setup completed
+2025-06-02 19:37:31,379 - app.gui.simple_chart_widget - INFO - SimpleChartWidget initialized
+2025-06-02 19:37:31,395 - app.gui.main_window - INFO - EnhancedMainWindow initialized
+2025-06-02 19:37:31,395 - indicators.manager - INFO - Registered indicator class: TMA
+2025-06-02 19:37:31,395 - indicators.manager - INFO - Registered indicator class: CCI_Arrows
+2025-06-02 19:37:31,395 - indicators.manager - INFO - Registered indicator class: EMA_Crossover
+2025-06-02 19:37:31,395 - indicators.manager - INFO - Registered indicator class: SMI_Arrows
+2025-06-02 19:37:31,395 - indicators.manager - INFO - Registered indicator class: RSI_Professional
+2025-06-02 19:37:31,395 - indicators.manager - INFO - Registered indicator class: Bollinger_Professional
+2025-06-02 19:37:31,395 - indicators.base - INFO - Initialized indicator: TMA_Main
+2025-06-02 19:37:31,395 - indicators.tma - INFO - TMA Indicator created: {'half_length': 12, 'atr_period': 100, 'atr_multiplier': 2.0, 'angle_threshold': 4, 'price_type': 'weighted', 'symbol_type': 'crypto'}
+2025-06-02 19:37:31,395 - indicators.manager - INFO - Added indicator: TMA_Main (TMA)
+2025-06-02 19:37:31,396 - indicators.base - INFO - Initialized indicator: CCI_Arrows_Main
+2025-06-02 19:37:31,396 - indicators.cci_arrows - INFO - CCI Arrows Indicator created: {'cci_period': 14, 'overbought_level': 100, 'oversold_level': -100, 'extreme_level': 200, 'arrow_sensitivity': 'medium', 'use_divergence': True, 'min_bars_between_signals': 3, 'price_type': 'typical'}
+2025-06-02 19:37:31,396 - indicators.manager - INFO - Added indicator: CCI_Arrows_Main (CCI_Arrows)
+2025-06-02 19:37:31,396 - indicators.base - INFO - Initialized indicator: EMA_Crossover_Main
+2025-06-02 19:37:31,396 - indicators.ema_crossover - INFO - EMA Crossover Indicator created: {'fast_ema_period': 12, 'slow_ema_period': 26, 'signal_ema_period': 9, 'min_separation': 0.0005, 'use_signal_line': True, 'trend_strength_bars': 5, 'crossover_confirmation': 2, 'price_type': 'close'}
+2025-06-02 19:37:31,396 - indicators.manager - INFO - Added indicator: EMA_Crossover_Main (EMA_Crossover)
+2025-06-02 19:37:31,396 - indicators.base - INFO - Initialized indicator: SMI_Arrows_Main
+2025-06-02 19:37:31,396 - indicators.smi_arrows - INFO - SMI Arrows Indicator created: {'smi_period': 10, 'first_smoothing': 3, 'second_smoothing': 3, 'signal_smoothing': 3, 'overbought_level': 40, 'oversold_level': -40, 'extreme_level': 60, 'arrow_sensitivity': 'medium', 'use_divergence': True, 'min_bars_between_signals': 3, 'price_type': 'close'}
+2025-06-02 19:37:31,396 - indicators.manager - INFO - Added indicator: SMI_Arrows_Main (SMI_Arrows)
+2025-06-02 19:37:31,396 - indicators.base - INFO - Initialized indicator: RSI_Professional_Main
+2025-06-02 19:37:31,396 - indicators.rsi_professional - INFO - RSI Professional Indicator created: {'rsi_period': 14, 'overbought_level': 70, 'oversold_level': 30, 'extreme_overbought': 80, 'extreme_oversold': 20, 'signal_sensitivity': 'medium', 'use_divergence': True, 'min_bars_between_signals': 3, 'price_type': 'close', 'smoothing_method': 'wilder', 'precision_digits': 6}
+2025-06-02 19:37:31,396 - indicators.manager - INFO - Added indicator: RSI_Professional_Main (RSI_Professional)
+2025-06-02 19:37:31,396 - indicators.base - INFO - Initialized indicator: Bollinger_Professional_Main
+2025-06-02 19:37:31,396 - indicators.bollinger_professional - INFO - Using custom implementation for Bollinger Bands calculation
+2025-06-02 19:37:31,396 - indicators.bollinger_professional - INFO - Bollinger Bands Professional created: {'bb_period': 20, 'bb_std_dev': 2.0, 'ma_type': 'sma', 'calculation_method': 'auto', 'price_type': 'close', 'squeeze_threshold': 0.1, 'expansion_threshold': 0.25, 'touch_sensitivity': 0.02, 'breakout_confirmation': 2, 'use_percent_b': True, 'dynamic_periods': False, 'min_periods': 10, 'max_periods': 50, 'precision_digits': 6}, Method: custom
+2025-06-02 19:37:31,396 - indicators.manager - INFO - Added indicator: Bollinger_Professional_Main (Bollinger_Professional)
+2025-06-02 19:37:31,396 - app.main - INFO - Indicators setup completed - TMA + CCI + EMA + SMI + RSI + Bollinger
+2025-06-02 19:37:33,589 - app.data.exchange_manager - INFO - Connected to Binance (3693 markets)
+2025-06-02 19:37:33,589 - app.main - INFO - Connected to default exchange: Binance
+2025-06-02 19:37:33,589 - app.main - INFO - TradingPlatform initialized
+2025-06-02 19:37:34,126 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:37:34,137 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 5 sell signals
+2025-06-02 19:37:34,140 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:37:34,148 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:37:34,163 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:37:34,169 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:37:34,565 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:37:34,840 - app.main - INFO - Auto-refresh started
+2025-06-02 19:37:35,505 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:37:35,516 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 5 sell signals
+2025-06-02 19:37:35,519 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:37:35,528 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:37:35,543 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:37:35,550 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:37:36,004 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:37:37,302 - app.main - INFO - Auto-refresh stopped
+2025-06-02 19:37:39,395 - app.main - INFO - Application closed
+2025-06-02 19:37:50,925 - root - WARNING - TA-Lib not available. Using custom implementation.
+2025-06-02 19:37:50,925 - root - WARNING - pandas-ta not available. Using custom implementation.
+2025-06-02 19:37:50,945 - indicators.manager - INFO - IndicatorManager initialized
+2025-06-02 19:37:51,499 - app.gui.control_panel - INFO - Enhanced ControlPanel initialized
+2025-06-02 19:37:51,543 - app.gui.info_panel - INFO - InfoPanel initialized
+2025-06-02 19:37:51,554 - app.gui.simple_chart_widget - INFO - Simple chart setup completed
+2025-06-02 19:37:51,554 - app.gui.simple_chart_widget - INFO - SimpleChartWidget initialized
+2025-06-02 19:37:51,575 - app.gui.main_window - INFO - EnhancedMainWindow initialized
+2025-06-02 19:37:51,575 - indicators.manager - INFO - Registered indicator class: TMA
+2025-06-02 19:37:51,575 - indicators.manager - INFO - Registered indicator class: CCI_Arrows
+2025-06-02 19:37:51,575 - indicators.manager - INFO - Registered indicator class: EMA_Crossover
+2025-06-02 19:37:51,575 - indicators.manager - INFO - Registered indicator class: SMI_Arrows
+2025-06-02 19:37:51,575 - indicators.manager - INFO - Registered indicator class: RSI_Professional
+2025-06-02 19:37:51,575 - indicators.manager - INFO - Registered indicator class: Bollinger_Professional
+2025-06-02 19:37:51,575 - indicators.base - INFO - Initialized indicator: TMA_Main
+2025-06-02 19:37:51,575 - indicators.tma - INFO - TMA Indicator created: {'half_length': 12, 'atr_period': 100, 'atr_multiplier': 2.0, 'angle_threshold': 4, 'price_type': 'weighted', 'symbol_type': 'crypto'}
+2025-06-02 19:37:51,575 - indicators.manager - INFO - Added indicator: TMA_Main (TMA)
+2025-06-02 19:37:51,575 - indicators.base - INFO - Initialized indicator: CCI_Arrows_Main
+2025-06-02 19:37:51,575 - indicators.cci_arrows - INFO - CCI Arrows Indicator created: {'cci_period': 14, 'overbought_level': 100, 'oversold_level': -100, 'extreme_level': 200, 'arrow_sensitivity': 'medium', 'use_divergence': True, 'min_bars_between_signals': 3, 'price_type': 'typical'}
+2025-06-02 19:37:51,575 - indicators.manager - INFO - Added indicator: CCI_Arrows_Main (CCI_Arrows)
+2025-06-02 19:37:51,575 - indicators.base - INFO - Initialized indicator: EMA_Crossover_Main
+2025-06-02 19:37:51,575 - indicators.ema_crossover - INFO - EMA Crossover Indicator created: {'fast_ema_period': 12, 'slow_ema_period': 26, 'signal_ema_period': 9, 'min_separation': 0.0005, 'use_signal_line': True, 'trend_strength_bars': 5, 'crossover_confirmation': 2, 'price_type': 'close'}
+2025-06-02 19:37:51,575 - indicators.manager - INFO - Added indicator: EMA_Crossover_Main (EMA_Crossover)
+2025-06-02 19:37:51,575 - indicators.base - INFO - Initialized indicator: SMI_Arrows_Main
+2025-06-02 19:37:51,575 - indicators.smi_arrows - INFO - SMI Arrows Indicator created: {'smi_period': 10, 'first_smoothing': 3, 'second_smoothing': 3, 'signal_smoothing': 3, 'overbought_level': 40, 'oversold_level': -40, 'extreme_level': 60, 'arrow_sensitivity': 'medium', 'use_divergence': True, 'min_bars_between_signals': 3, 'price_type': 'close'}
+2025-06-02 19:37:51,575 - indicators.manager - INFO - Added indicator: SMI_Arrows_Main (SMI_Arrows)
+2025-06-02 19:37:51,576 - indicators.base - INFO - Initialized indicator: RSI_Professional_Main
+2025-06-02 19:37:51,576 - indicators.rsi_professional - INFO - RSI Professional Indicator created: {'rsi_period': 14, 'overbought_level': 70, 'oversold_level': 30, 'extreme_overbought': 80, 'extreme_oversold': 20, 'signal_sensitivity': 'medium', 'use_divergence': True, 'min_bars_between_signals': 3, 'price_type': 'close', 'smoothing_method': 'wilder', 'precision_digits': 6}
+2025-06-02 19:37:51,576 - indicators.manager - INFO - Added indicator: RSI_Professional_Main (RSI_Professional)
+2025-06-02 19:37:51,576 - indicators.base - INFO - Initialized indicator: Bollinger_Professional_Main
+2025-06-02 19:37:51,576 - indicators.bollinger_professional - INFO - Using custom implementation for Bollinger Bands calculation
+2025-06-02 19:37:51,576 - indicators.bollinger_professional - INFO - Bollinger Bands Professional created: {'bb_period': 20, 'bb_std_dev': 2.0, 'ma_type': 'sma', 'calculation_method': 'auto', 'price_type': 'close', 'squeeze_threshold': 0.1, 'expansion_threshold': 0.25, 'touch_sensitivity': 0.02, 'breakout_confirmation': 2, 'use_percent_b': True, 'dynamic_periods': False, 'min_periods': 10, 'max_periods': 50, 'precision_digits': 6}, Method: custom
+2025-06-02 19:37:51,576 - indicators.manager - INFO - Added indicator: Bollinger_Professional_Main (Bollinger_Professional)
+2025-06-02 19:37:51,576 - app.main - INFO - Indicators setup completed - TMA + CCI + EMA + SMI + RSI + Bollinger
+2025-06-02 19:37:53,783 - app.data.exchange_manager - INFO - Connected to Binance (3693 markets)
+2025-06-02 19:37:53,784 - app.main - INFO - Connected to default exchange: Binance
+2025-06-02 19:37:53,784 - app.main - INFO - TradingPlatform initialized
+2025-06-02 19:37:54,330 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:37:54,340 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 5 sell signals
+2025-06-02 19:37:54,343 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:37:54,351 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:37:54,366 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:37:54,373 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:37:54,766 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:37:55,043 - app.main - INFO - Auto-refresh started
+2025-06-02 19:37:55,997 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:37:56,008 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 5 sell signals
+2025-06-02 19:37:56,011 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:37:56,019 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:37:56,035 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 1 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:37:56,043 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:37:56,522 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:38:01,118 - app.main - INFO - Auto-refresh stopped
+2025-06-02 19:38:01,859 - app.main - INFO - Application closed
+2025-06-02 19:39:48,100 - root - WARNING - TA-Lib not available. Using custom implementation.
+2025-06-02 19:39:48,100 - root - WARNING - pandas-ta not available. Using custom implementation.
+2025-06-02 19:39:48,119 - indicators.manager - INFO - IndicatorManager initialized
+2025-06-02 19:39:48,720 - app.gui.control_panel - INFO - Enhanced ControlPanel initialized
+2025-06-02 19:39:48,764 - app.gui.info_panel - INFO - InfoPanel initialized
+2025-06-02 19:39:48,774 - app.gui.simple_chart_widget - INFO - Simple chart setup completed
+2025-06-02 19:39:48,774 - app.gui.simple_chart_widget - INFO - SimpleChartWidget initialized
+2025-06-02 19:39:48,795 - app.gui.main_window - INFO - EnhancedMainWindow initialized
+2025-06-02 19:39:48,795 - indicators.manager - INFO - Registered indicator class: TMA
+2025-06-02 19:39:48,795 - indicators.manager - INFO - Registered indicator class: CCI_Arrows
+2025-06-02 19:39:48,795 - indicators.manager - INFO - Registered indicator class: EMA_Crossover
+2025-06-02 19:39:48,795 - indicators.manager - INFO - Registered indicator class: SMI_Arrows
+2025-06-02 19:39:48,795 - indicators.manager - INFO - Registered indicator class: RSI_Professional
+2025-06-02 19:39:48,795 - indicators.manager - INFO - Registered indicator class: Bollinger_Professional
+2025-06-02 19:39:48,795 - indicators.base - INFO - Initialized indicator: TMA_Main
+2025-06-02 19:39:48,795 - indicators.tma - INFO - TMA Indicator created: {'half_length': 12, 'atr_period': 100, 'atr_multiplier': 2.0, 'angle_threshold': 4, 'price_type': 'weighted', 'symbol_type': 'crypto'}
+2025-06-02 19:39:48,795 - indicators.manager - INFO - Added indicator: TMA_Main (TMA)
+2025-06-02 19:39:48,795 - indicators.base - INFO - Initialized indicator: CCI_Arrows_Main
+2025-06-02 19:39:48,795 - indicators.cci_arrows - INFO - CCI Arrows Indicator created: {'cci_period': 14, 'overbought_level': 100, 'oversold_level': -100, 'extreme_level': 200, 'arrow_sensitivity': 'medium', 'use_divergence': True, 'min_bars_between_signals': 3, 'price_type': 'typical'}
+2025-06-02 19:39:48,796 - indicators.manager - INFO - Added indicator: CCI_Arrows_Main (CCI_Arrows)
+2025-06-02 19:39:48,796 - indicators.base - INFO - Initialized indicator: EMA_Crossover_Main
+2025-06-02 19:39:48,796 - indicators.ema_crossover - INFO - EMA Crossover Indicator created: {'fast_ema_period': 12, 'slow_ema_period': 26, 'signal_ema_period': 9, 'min_separation': 0.0005, 'use_signal_line': True, 'trend_strength_bars': 5, 'crossover_confirmation': 2, 'price_type': 'close'}
+2025-06-02 19:39:48,796 - indicators.manager - INFO - Added indicator: EMA_Crossover_Main (EMA_Crossover)
+2025-06-02 19:39:48,796 - indicators.base - INFO - Initialized indicator: SMI_Arrows_Main
+2025-06-02 19:39:48,796 - indicators.smi_arrows - INFO - SMI Arrows Indicator created: {'smi_period': 10, 'first_smoothing': 3, 'second_smoothing': 3, 'signal_smoothing': 3, 'overbought_level': 40, 'oversold_level': -40, 'extreme_level': 60, 'arrow_sensitivity': 'medium', 'use_divergence': True, 'min_bars_between_signals': 3, 'price_type': 'close'}
+2025-06-02 19:39:48,796 - indicators.manager - INFO - Added indicator: SMI_Arrows_Main (SMI_Arrows)
+2025-06-02 19:39:48,796 - indicators.base - INFO - Initialized indicator: RSI_Professional_Main
+2025-06-02 19:39:48,796 - indicators.rsi_professional - INFO - RSI Professional Indicator created: {'rsi_period': 14, 'overbought_level': 70, 'oversold_level': 30, 'extreme_overbought': 80, 'extreme_oversold': 20, 'signal_sensitivity': 'medium', 'use_divergence': True, 'min_bars_between_signals': 3, 'price_type': 'close', 'smoothing_method': 'wilder', 'precision_digits': 6}
+2025-06-02 19:39:48,796 - indicators.manager - INFO - Added indicator: RSI_Professional_Main (RSI_Professional)
+2025-06-02 19:39:48,796 - indicators.base - INFO - Initialized indicator: Bollinger_Professional_Main
+2025-06-02 19:39:48,796 - indicators.bollinger_professional - INFO - Using custom implementation for Bollinger Bands calculation
+2025-06-02 19:39:48,796 - indicators.bollinger_professional - INFO - Bollinger Bands Professional created: {'bb_period': 20, 'bb_std_dev': 2.0, 'ma_type': 'sma', 'calculation_method': 'auto', 'price_type': 'close', 'squeeze_threshold': 0.1, 'expansion_threshold': 0.25, 'touch_sensitivity': 0.02, 'breakout_confirmation': 2, 'use_percent_b': True, 'dynamic_periods': False, 'min_periods': 10, 'max_periods': 50, 'precision_digits': 6}, Method: custom
+2025-06-02 19:39:48,796 - indicators.manager - INFO - Added indicator: Bollinger_Professional_Main (Bollinger_Professional)
+2025-06-02 19:39:48,796 - app.main - INFO - Indicators setup completed - TMA + CCI + EMA + SMI + RSI + Bollinger
+2025-06-02 19:39:51,885 - app.data.exchange_manager - INFO - Connected to Binance (3693 markets)
+2025-06-02 19:39:51,885 - app.main - INFO - Connected to default exchange: Binance
+2025-06-02 19:39:51,885 - app.main - INFO - TradingPlatform initialized
+2025-06-02 19:39:52,449 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:39:52,460 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 5 sell signals
+2025-06-02 19:39:52,463 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:39:52,471 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:39:52,486 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 2 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:39:52,493 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:39:52,887 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:39:53,169 - app.main - INFO - Auto-refresh started
+2025-06-02 19:39:54,087 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:39:54,098 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 5 sell signals
+2025-06-02 19:39:54,101 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:39:54,109 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:39:54,127 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 2 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:39:54,133 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:39:54,589 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:40:00,762 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:40:00,771 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 5 sell signals
+2025-06-02 19:40:00,775 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:40:00,783 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:40:00,797 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 2 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:40:00,803 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:40:01,123 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:40:02,970 - app.main - INFO - Auto-refresh stopped
+2025-06-02 19:40:05,058 - app.main - INFO - Application closed
+2025-06-02 19:40:26,112 - root - WARNING - TA-Lib not available. Using custom implementation.
+2025-06-02 19:40:26,113 - root - WARNING - pandas-ta not available. Using custom implementation.
+2025-06-02 19:40:26,131 - indicators.manager - INFO - IndicatorManager initialized
+2025-06-02 19:40:26,685 - app.gui.control_panel - INFO - Enhanced ControlPanel initialized
+2025-06-02 19:40:26,727 - app.gui.info_panel - INFO - InfoPanel initialized
+2025-06-02 19:40:26,738 - app.gui.simple_chart_widget - INFO - Simple chart setup completed
+2025-06-02 19:40:26,738 - app.gui.simple_chart_widget - INFO - SimpleChartWidget initialized
+2025-06-02 19:40:26,756 - app.gui.main_window - INFO - EnhancedMainWindow initialized
+2025-06-02 19:40:26,756 - indicators.manager - INFO - Registered indicator class: TMA
+2025-06-02 19:40:26,756 - indicators.manager - INFO - Registered indicator class: CCI_Arrows
+2025-06-02 19:40:26,756 - indicators.manager - INFO - Registered indicator class: EMA_Crossover
+2025-06-02 19:40:26,756 - indicators.manager - INFO - Registered indicator class: SMI_Arrows
+2025-06-02 19:40:26,756 - indicators.manager - INFO - Registered indicator class: RSI_Professional
+2025-06-02 19:40:26,756 - indicators.manager - INFO - Registered indicator class: Bollinger_Professional
+2025-06-02 19:40:26,756 - indicators.base - INFO - Initialized indicator: TMA_Main
+2025-06-02 19:40:26,757 - indicators.tma - INFO - TMA Indicator created: {'half_length': 12, 'atr_period': 100, 'atr_multiplier': 2.0, 'angle_threshold': 4, 'price_type': 'weighted', 'symbol_type': 'crypto'}
+2025-06-02 19:40:26,757 - indicators.manager - INFO - Added indicator: TMA_Main (TMA)
+2025-06-02 19:40:26,757 - indicators.base - INFO - Initialized indicator: CCI_Arrows_Main
+2025-06-02 19:40:26,757 - indicators.cci_arrows - INFO - CCI Arrows Indicator created: {'cci_period': 14, 'overbought_level': 100, 'oversold_level': -100, 'extreme_level': 200, 'arrow_sensitivity': 'medium', 'use_divergence': True, 'min_bars_between_signals': 3, 'price_type': 'typical'}
+2025-06-02 19:40:26,757 - indicators.manager - INFO - Added indicator: CCI_Arrows_Main (CCI_Arrows)
+2025-06-02 19:40:26,757 - indicators.base - INFO - Initialized indicator: EMA_Crossover_Main
+2025-06-02 19:40:26,757 - indicators.ema_crossover - INFO - EMA Crossover Indicator created: {'fast_ema_period': 12, 'slow_ema_period': 26, 'signal_ema_period': 9, 'min_separation': 0.0005, 'use_signal_line': True, 'trend_strength_bars': 5, 'crossover_confirmation': 2, 'price_type': 'close'}
+2025-06-02 19:40:26,757 - indicators.manager - INFO - Added indicator: EMA_Crossover_Main (EMA_Crossover)
+2025-06-02 19:40:26,757 - indicators.base - INFO - Initialized indicator: SMI_Arrows_Main
+2025-06-02 19:40:26,757 - indicators.smi_arrows - INFO - SMI Arrows Indicator created: {'smi_period': 10, 'first_smoothing': 3, 'second_smoothing': 3, 'signal_smoothing': 3, 'overbought_level': 40, 'oversold_level': -40, 'extreme_level': 60, 'arrow_sensitivity': 'medium', 'use_divergence': True, 'min_bars_between_signals': 3, 'price_type': 'close'}
+2025-06-02 19:40:26,757 - indicators.manager - INFO - Added indicator: SMI_Arrows_Main (SMI_Arrows)
+2025-06-02 19:40:26,757 - indicators.base - INFO - Initialized indicator: RSI_Professional_Main
+2025-06-02 19:40:26,757 - indicators.rsi_professional - INFO - RSI Professional Indicator created: {'rsi_period': 14, 'overbought_level': 70, 'oversold_level': 30, 'extreme_overbought': 80, 'extreme_oversold': 20, 'signal_sensitivity': 'medium', 'use_divergence': True, 'min_bars_between_signals': 3, 'price_type': 'close', 'smoothing_method': 'wilder', 'precision_digits': 6}
+2025-06-02 19:40:26,757 - indicators.manager - INFO - Added indicator: RSI_Professional_Main (RSI_Professional)
+2025-06-02 19:40:26,757 - indicators.base - INFO - Initialized indicator: Bollinger_Professional_Main
+2025-06-02 19:40:26,757 - indicators.bollinger_professional - INFO - Using custom implementation for Bollinger Bands calculation
+2025-06-02 19:40:26,757 - indicators.bollinger_professional - INFO - Bollinger Bands Professional created: {'bb_period': 20, 'bb_std_dev': 2.0, 'ma_type': 'sma', 'calculation_method': 'auto', 'price_type': 'close', 'squeeze_threshold': 0.1, 'expansion_threshold': 0.25, 'touch_sensitivity': 0.02, 'breakout_confirmation': 2, 'use_percent_b': True, 'dynamic_periods': False, 'min_periods': 10, 'max_periods': 50, 'precision_digits': 6}, Method: custom
+2025-06-02 19:40:26,757 - indicators.manager - INFO - Added indicator: Bollinger_Professional_Main (Bollinger_Professional)
+2025-06-02 19:40:26,757 - app.main - INFO - Indicators setup completed - TMA + CCI + EMA + SMI + RSI + Bollinger
+2025-06-02 19:40:29,728 - app.data.exchange_manager - INFO - Connected to Binance (3693 markets)
+2025-06-02 19:40:29,728 - app.main - INFO - Connected to default exchange: Binance
+2025-06-02 19:40:29,728 - app.main - INFO - TradingPlatform initialized
+2025-06-02 19:40:30,272 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:40:30,283 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 5 sell signals
+2025-06-02 19:40:30,285 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:40:30,294 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:40:30,309 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 2 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:40:30,315 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:40:30,703 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:40:30,983 - app.main - INFO - Auto-refresh started
+2025-06-02 19:40:31,904 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:40:31,914 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 5 sell signals
+2025-06-02 19:40:31,917 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:40:31,925 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:40:31,940 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 2 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:40:31,946 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:40:32,427 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:40:38,211 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:40:38,223 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 5 sell signals
+2025-06-02 19:40:38,226 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:40:38,234 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:40:38,252 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 2 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:40:38,259 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:40:38,597 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:40:44,464 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:40:44,474 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 5 sell signals
+2025-06-02 19:40:44,477 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:40:44,486 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:40:44,503 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 2 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:40:44,509 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:40:44,850 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:40:50,653 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:40:50,678 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 5 sell signals
+2025-06-02 19:40:50,687 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:40:50,711 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:40:50,782 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 2 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:40:50,806 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:40:51,427 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:40:57,236 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:40:57,246 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 5 sell signals
+2025-06-02 19:40:57,250 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:40:57,258 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:40:57,275 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 2 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:40:57,282 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:40:57,751 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:41:03,531 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:41:03,542 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 5 sell signals
+2025-06-02 19:41:03,544 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:41:03,554 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:41:03,570 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 2 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:41:03,577 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:41:04,033 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:41:09,803 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:41:09,814 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 5 sell signals
+2025-06-02 19:41:09,817 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:41:09,825 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:41:09,841 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 2 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:41:09,848 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:41:10,206 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:41:15,976 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:41:15,987 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 5 sell signals
+2025-06-02 19:41:15,990 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:41:15,999 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:41:16,015 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 2 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:41:16,023 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:41:16,493 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:41:22,286 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:41:22,298 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 5 sell signals
+2025-06-02 19:41:22,301 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:41:22,309 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:41:22,324 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 2 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:41:22,331 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:41:22,793 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:41:28,806 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:41:28,816 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 5 sell signals
+2025-06-02 19:41:28,818 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:41:28,826 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:41:28,841 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 2 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:41:28,847 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:41:29,289 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:41:35,057 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:41:35,069 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 5 sell signals
+2025-06-02 19:41:35,071 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:41:35,079 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:41:35,094 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 2 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:41:35,101 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:41:35,573 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:41:43,258 - root - WARNING - TA-Lib not available. Using custom implementation.
+2025-06-02 19:41:43,259 - root - WARNING - pandas-ta not available. Using custom implementation.
+2025-06-02 19:41:43,282 - indicators.manager - INFO - IndicatorManager initialized
+2025-06-02 19:41:43,823 - app.gui.control_panel - INFO - Enhanced ControlPanel initialized
+2025-06-02 19:44:14,351 - root - WARNING - TA-Lib not available. Using custom implementation.
+2025-06-02 19:44:14,351 - root - WARNING - pandas-ta not available. Using custom implementation.
+2025-06-02 19:44:14,377 - indicators.manager - INFO - IndicatorManager initialized
+2025-06-02 19:44:14,942 - app.gui.control_panel - INFO - Enhanced ControlPanel initialized
+2025-06-02 19:44:23,166 - root - WARNING - TA-Lib not available. Using custom implementation.
+2025-06-02 19:44:23,167 - root - WARNING - pandas-ta not available. Using custom implementation.
+2025-06-02 19:44:23,190 - indicators.manager - INFO - IndicatorManager initialized
+2025-06-02 19:44:23,760 - app.gui.control_panel - INFO - Enhanced ControlPanel initialized
+2025-06-02 19:44:59,395 - root - WARNING - TA-Lib not available. Using custom implementation.
+2025-06-02 19:44:59,396 - root - WARNING - pandas-ta not available. Using custom implementation.
+2025-06-02 19:44:59,419 - indicators.manager - INFO - IndicatorManager initialized
+2025-06-02 19:44:59,966 - app.gui.control_panel - INFO - Enhanced ControlPanel initialized
+2025-06-02 19:45:00,010 - app.gui.info_panel - INFO - InfoPanel initialized
+2025-06-02 19:45:00,021 - app.gui.simple_chart_widget - INFO - Simple chart setup completed
+2025-06-02 19:45:00,021 - app.gui.simple_chart_widget - INFO - SimpleChartWidget initialized
+2025-06-02 19:45:00,041 - app.gui.main_window - INFO - EnhancedMainWindow initialized
+2025-06-02 19:45:00,041 - indicators.manager - INFO - Registered indicator class: TMA
+2025-06-02 19:45:00,041 - indicators.manager - INFO - Registered indicator class: CCI_Arrows
+2025-06-02 19:45:00,041 - indicators.manager - INFO - Registered indicator class: EMA_Crossover
+2025-06-02 19:45:00,041 - indicators.manager - INFO - Registered indicator class: SMI_Arrows
+2025-06-02 19:45:00,042 - indicators.manager - INFO - Registered indicator class: RSI_Professional
+2025-06-02 19:45:00,042 - indicators.manager - INFO - Registered indicator class: Bollinger_Professional
+2025-06-02 19:45:00,042 - indicators.base - INFO - Initialized indicator: TMA_Main
+2025-06-02 19:45:00,042 - indicators.tma - INFO - TMA Indicator created: {'half_length': 12, 'atr_period': 100, 'atr_multiplier': 2.0, 'angle_threshold': 4, 'price_type': 'weighted', 'symbol_type': 'crypto'}
+2025-06-02 19:45:00,042 - indicators.manager - INFO - Added indicator: TMA_Main (TMA)
+2025-06-02 19:45:00,042 - indicators.base - INFO - Initialized indicator: CCI_Arrows_Main
+2025-06-02 19:45:00,042 - indicators.cci_arrows - INFO - CCI Arrows Indicator created: {'cci_period': 14, 'overbought_level': 100, 'oversold_level': -100, 'extreme_level': 200, 'arrow_sensitivity': 'medium', 'use_divergence': True, 'min_bars_between_signals': 3, 'price_type': 'typical'}
+2025-06-02 19:45:00,042 - indicators.manager - INFO - Added indicator: CCI_Arrows_Main (CCI_Arrows)
+2025-06-02 19:45:00,042 - indicators.base - INFO - Initialized indicator: EMA_Crossover_Main
+2025-06-02 19:45:00,042 - indicators.ema_crossover - INFO - EMA Crossover Indicator created: {'fast_ema_period': 12, 'slow_ema_period': 26, 'signal_ema_period': 9, 'min_separation': 0.0005, 'use_signal_line': True, 'trend_strength_bars': 5, 'crossover_confirmation': 2, 'price_type': 'close'}
+2025-06-02 19:45:00,042 - indicators.manager - INFO - Added indicator: EMA_Crossover_Main (EMA_Crossover)
+2025-06-02 19:45:00,042 - indicators.base - INFO - Initialized indicator: SMI_Arrows_Main
+2025-06-02 19:45:00,042 - indicators.smi_arrows - INFO - SMI Arrows Indicator created: {'smi_period': 10, 'first_smoothing': 3, 'second_smoothing': 3, 'signal_smoothing': 3, 'overbought_level': 40, 'oversold_level': -40, 'extreme_level': 60, 'arrow_sensitivity': 'medium', 'use_divergence': True, 'min_bars_between_signals': 3, 'price_type': 'close'}
+2025-06-02 19:45:00,043 - indicators.manager - INFO - Added indicator: SMI_Arrows_Main (SMI_Arrows)
+2025-06-02 19:45:00,043 - indicators.base - INFO - Initialized indicator: RSI_Professional_Main
+2025-06-02 19:45:00,043 - indicators.rsi_professional - INFO - RSI Professional Indicator created: {'rsi_period': 14, 'overbought_level': 70, 'oversold_level': 30, 'extreme_overbought': 80, 'extreme_oversold': 20, 'signal_sensitivity': 'medium', 'use_divergence': True, 'min_bars_between_signals': 3, 'price_type': 'close', 'smoothing_method': 'wilder', 'precision_digits': 6}
+2025-06-02 19:45:00,043 - indicators.manager - INFO - Added indicator: RSI_Professional_Main (RSI_Professional)
+2025-06-02 19:45:00,043 - indicators.base - INFO - Initialized indicator: Bollinger_Professional_Main
+2025-06-02 19:45:00,043 - indicators.bollinger_professional - INFO - Using custom implementation for Bollinger Bands calculation
+2025-06-02 19:45:00,043 - indicators.bollinger_professional - INFO - Bollinger Bands Professional created: {'bb_period': 20, 'bb_std_dev': 2.0, 'ma_type': 'sma', 'calculation_method': 'auto', 'price_type': 'close', 'squeeze_threshold': 0.1, 'expansion_threshold': 0.25, 'touch_sensitivity': 0.02, 'breakout_confirmation': 2, 'use_percent_b': True, 'dynamic_periods': False, 'min_periods': 10, 'max_periods': 50, 'precision_digits': 6}, Method: custom
+2025-06-02 19:45:00,043 - indicators.manager - INFO - Added indicator: Bollinger_Professional_Main (Bollinger_Professional)
+2025-06-02 19:45:00,043 - app.main - INFO - Indicators setup completed - TMA + CCI + EMA + SMI + RSI + Bollinger
+2025-06-02 19:45:02,375 - app.data.exchange_manager - INFO - Connected to Binance (3693 markets)
+2025-06-02 19:45:02,376 - app.main - INFO - Connected to default exchange: Binance
+2025-06-02 19:45:02,376 - app.main - INFO - TradingPlatform initialized
+2025-06-02 19:45:02,917 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:45:02,928 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 5 sell signals
+2025-06-02 19:45:02,931 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:45:02,939 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:45:02,954 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 3 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:45:02,960 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:45:03,356 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:45:03,638 - app.main - INFO - Auto-refresh started
+2025-06-02 19:45:04,568 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:45:04,579 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 5 sell signals
+2025-06-02 19:45:04,582 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:45:04,590 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:45:04,604 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 3 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:45:04,611 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:45:05,041 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:45:10,799 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:45:10,811 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 5 sell signals
+2025-06-02 19:45:10,813 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:45:10,821 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:45:10,837 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 3 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:45:10,844 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:45:11,186 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:45:17,053 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:45:17,063 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 5 sell signals
+2025-06-02 19:45:17,066 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:45:17,073 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:45:17,088 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 3 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:45:17,094 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:45:17,419 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:45:23,176 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:45:23,188 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 5 sell signals
+2025-06-02 19:45:23,191 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:45:23,199 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:45:23,216 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 3 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:45:23,225 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:45:23,717 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:45:29,499 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:45:29,510 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 5 sell signals
+2025-06-02 19:45:29,512 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:45:29,520 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:45:29,535 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 3 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:45:29,542 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:45:29,961 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:45:37,298 - root - WARNING - TA-Lib not available. Using custom implementation.
+2025-06-02 19:45:37,298 - root - WARNING - pandas-ta not available. Using custom implementation.
+2025-06-02 19:45:37,322 - indicators.manager - INFO - IndicatorManager initialized
+2025-06-02 19:45:37,863 - app.gui.control_panel - INFO - Enhanced ControlPanel initialized
+2025-06-02 19:45:54,081 - root - WARNING - TA-Lib not available. Using custom implementation.
+2025-06-02 19:45:54,082 - root - WARNING - pandas-ta not available. Using custom implementation.
+2025-06-02 19:45:54,106 - indicators.manager - INFO - IndicatorManager initialized
+2025-06-02 19:45:54,656 - app.gui.control_panel - INFO - Enhanced ControlPanel initialized
+2025-06-02 19:45:54,699 - app.gui.info_panel - INFO - InfoPanel initialized
+2025-06-02 19:45:54,709 - app.gui.simple_chart_widget - INFO - Simple chart setup completed
+2025-06-02 19:45:54,709 - app.gui.simple_chart_widget - INFO - SimpleChartWidget initialized
+2025-06-02 19:45:54,728 - app.gui.main_window - INFO - EnhancedMainWindow initialized
+2025-06-02 19:45:54,728 - indicators.manager - INFO - Registered indicator class: TMA
+2025-06-02 19:45:54,728 - indicators.manager - INFO - Registered indicator class: CCI_Arrows
+2025-06-02 19:45:54,728 - indicators.manager - INFO - Registered indicator class: EMA_Crossover
+2025-06-02 19:45:54,728 - indicators.manager - INFO - Registered indicator class: SMI_Arrows
+2025-06-02 19:45:54,728 - indicators.manager - INFO - Registered indicator class: RSI_Professional
+2025-06-02 19:45:54,728 - indicators.manager - INFO - Registered indicator class: Bollinger_Professional
+2025-06-02 19:45:54,728 - indicators.base - INFO - Initialized indicator: TMA_Main
+2025-06-02 19:45:54,728 - indicators.tma - INFO - TMA Indicator created: {'half_length': 12, 'atr_period': 100, 'atr_multiplier': 2.0, 'angle_threshold': 4, 'price_type': 'weighted', 'symbol_type': 'crypto'}
+2025-06-02 19:45:54,728 - indicators.manager - INFO - Added indicator: TMA_Main (TMA)
+2025-06-02 19:45:54,728 - indicators.base - INFO - Initialized indicator: CCI_Arrows_Main
+2025-06-02 19:45:54,728 - indicators.cci_arrows - INFO - CCI Arrows Indicator created: {'cci_period': 14, 'overbought_level': 100, 'oversold_level': -100, 'extreme_level': 200, 'arrow_sensitivity': 'medium', 'use_divergence': True, 'min_bars_between_signals': 3, 'price_type': 'typical'}
+2025-06-02 19:45:54,728 - indicators.manager - INFO - Added indicator: CCI_Arrows_Main (CCI_Arrows)
+2025-06-02 19:45:54,728 - indicators.base - INFO - Initialized indicator: EMA_Crossover_Main
+2025-06-02 19:45:54,729 - indicators.ema_crossover - INFO - EMA Crossover Indicator created: {'fast_ema_period': 12, 'slow_ema_period': 26, 'signal_ema_period': 9, 'min_separation': 0.0005, 'use_signal_line': True, 'trend_strength_bars': 5, 'crossover_confirmation': 2, 'price_type': 'close'}
+2025-06-02 19:45:54,729 - indicators.manager - INFO - Added indicator: EMA_Crossover_Main (EMA_Crossover)
+2025-06-02 19:45:54,729 - indicators.base - INFO - Initialized indicator: SMI_Arrows_Main
+2025-06-02 19:45:54,729 - indicators.smi_arrows - INFO - SMI Arrows Indicator created: {'smi_period': 10, 'first_smoothing': 3, 'second_smoothing': 3, 'signal_smoothing': 3, 'overbought_level': 40, 'oversold_level': -40, 'extreme_level': 60, 'arrow_sensitivity': 'medium', 'use_divergence': True, 'min_bars_between_signals': 3, 'price_type': 'close'}
+2025-06-02 19:45:54,729 - indicators.manager - INFO - Added indicator: SMI_Arrows_Main (SMI_Arrows)
+2025-06-02 19:45:54,729 - indicators.base - INFO - Initialized indicator: RSI_Professional_Main
+2025-06-02 19:45:54,729 - indicators.rsi_professional - INFO - RSI Professional Indicator created: {'rsi_period': 14, 'overbought_level': 70, 'oversold_level': 30, 'extreme_overbought': 80, 'extreme_oversold': 20, 'signal_sensitivity': 'medium', 'use_divergence': True, 'min_bars_between_signals': 3, 'price_type': 'close', 'smoothing_method': 'wilder', 'precision_digits': 6}
+2025-06-02 19:45:54,729 - indicators.manager - INFO - Added indicator: RSI_Professional_Main (RSI_Professional)
+2025-06-02 19:45:54,729 - indicators.base - INFO - Initialized indicator: Bollinger_Professional_Main
+2025-06-02 19:45:54,729 - indicators.bollinger_professional - INFO - Using custom implementation for Bollinger Bands calculation
+2025-06-02 19:45:54,729 - indicators.bollinger_professional - INFO - Bollinger Bands Professional created: {'bb_period': 20, 'bb_std_dev': 2.0, 'ma_type': 'sma', 'calculation_method': 'auto', 'price_type': 'close', 'squeeze_threshold': 0.1, 'expansion_threshold': 0.25, 'touch_sensitivity': 0.02, 'breakout_confirmation': 2, 'use_percent_b': True, 'dynamic_periods': False, 'min_periods': 10, 'max_periods': 50, 'precision_digits': 6}, Method: custom
+2025-06-02 19:45:54,729 - indicators.manager - INFO - Added indicator: Bollinger_Professional_Main (Bollinger_Professional)
+2025-06-02 19:45:54,729 - app.main - INFO - Indicators setup completed - TMA + CCI + EMA + SMI + RSI + Bollinger
+2025-06-02 19:45:57,119 - app.data.exchange_manager - INFO - Connected to Binance (3693 markets)
+2025-06-02 19:45:57,120 - app.main - INFO - Connected to default exchange: Binance
+2025-06-02 19:45:57,120 - app.main - INFO - TradingPlatform initialized
+2025-06-02 19:45:57,673 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:45:57,684 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 5 sell signals
+2025-06-02 19:45:57,687 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:45:57,695 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:45:57,711 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 3 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:45:57,717 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:45:58,111 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:45:58,401 - app.main - INFO - Auto-refresh started
+2025-06-02 19:45:59,342 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:45:59,353 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 5 sell signals
+2025-06-02 19:45:59,355 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:45:59,363 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:45:59,378 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 3 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:45:59,385 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:45:59,809 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:46:05,583 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:46:05,593 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 5 sell signals
+2025-06-02 19:46:05,596 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:46:05,603 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:46:05,618 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 3 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:46:05,624 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:46:05,978 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:46:11,876 - indicators.tma - INFO - TMA calculated: 200 candles, MQ5 compatible
+2025-06-02 19:46:11,886 - indicators.cci_arrows - INFO - CCI Arrows calculated: 200 candles, 8 buy signals, 5 sell signals
+2025-06-02 19:46:11,889 - indicators.ema_crossover - INFO - EMA Crossover calculated: 200 candles, 0 buy signals, 0 sell signals
+2025-06-02 19:46:11,898 - indicators.smi_arrows - INFO - SMI Arrows calculated: 200 candles, 4 buy signals, 1 sell signals
+2025-06-02 19:46:11,914 - indicators.rsi_professional - INFO - RSI Professional calculated: 200 candles, 186 valid RSI values, 3 buy signals, 2 sell signals, 0 divergences
+2025-06-02 19:46:11,920 - indicators.bollinger_professional - INFO - Bollinger Bands Professional calculated: 200 candles, 181 valid values, 346 touches, 2 breakouts, 181 squeeze periods
+2025-06-02 19:46:12,266 - app.gui.simple_chart_widget - ERROR - Error plotting Bollinger Bands: 'SimpleChartWidget' object has no attribute '_get_price_data'
+2025-06-02 19:46:15,286 - app.main - INFO - Auto-refresh stopped
+2025-06-02 19:46:17,363 - app.main - INFO - Application closed

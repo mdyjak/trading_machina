@@ -67,12 +67,11 @@ class EnhancedMainWindow:
         self.root.geometry(f"{self.settings.window_size[0]}x{self.settings.window_size[1]}")
         self.root.configure(bg=COLORS['bg_primary'])
 
-        # Window icon (jeśli dostępny)
         try:
-            # self.root.iconbitmap('icon.ico')  # Dodaj ikonę jeśli masz
-            pass
+            self.root.iconbitmap('assets/icon.ico')
         except:
             pass
+
 
         # Minimum size
         self.root.minsize(1200, 800)
